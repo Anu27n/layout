@@ -7,7 +7,7 @@ const PublicSpaces = ({ areas, updateAreas }) => {
       <div className="workspace-row">
         {["ups", "bms", "server"].map((type) => (
           <div key={type} className="workspace">
-            <img src={`/${type}.png`} alt={`${type} Room`} />
+            <img src={`/images/${type}.png`} alt={`${type} Room`} />
             <div className="control-btn-box">
               <button
                 className="control-btn"

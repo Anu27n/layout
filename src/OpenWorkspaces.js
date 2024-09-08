@@ -7,7 +7,7 @@ const OpenWorkspaces = ({ areas, updateAreas }) => {
       <div className="workspace-row">
         {["linear", "lType"].map((type) => (
           <div key={type} className="workspace">
-            <img src={`/${type}.png`} alt={`${type} Workstations`} />
+            <img src={`/images/${type}.png`} alt={`${type} Workstations`} />
             <div className="control-btn-box">
               <button
                 className="control-btn"

@@ -73,9 +73,11 @@ const AreaInput = ({ setTotalArea }) => {
       </div>
       <div className="flexbox-container">
         <div className="flexbox-item available">
+          <img src="/images/available-space.png" alt="Available Space" />
           Available Space: {isSquareFeet ? displayedArea.sqFt : displayedArea.sqIn} {isSquareFeet ? 'sq ft' : 'sq in'}
         </div>
         <div className="flexbox-item built">
+          <img src="/images/built-space.png" alt="Built Space" />
           Built Space: {isSquareFeet ? displayedArea.sqFt : displayedArea.sqIn} {isSquareFeet ? 'sq ft' : 'sq in'}
         </div>
       </div>

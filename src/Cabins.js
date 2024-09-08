@@ -7,7 +7,7 @@ const Cabins = ({ areas, updateAreas }) => {
       <div className="workspace-row">
         {["md", "manager", "small"].map((type) => (
           <div key={type} className="workspace">
-            <img src={`/${type}.png`} alt={`${type} Cabin`} />
+            <img src={`/images/${type}.png`} alt={`${type} Cabin`} />
             <div className="control-btn-box">
               <button
                 className="control-btn"
