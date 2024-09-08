@@ -185,7 +185,7 @@ body {
   .error-message {
     color: red;
     font-weight: bold;
-    margin-top: 10px;
+    margin-top: 1px;
     display: flex;
     align-items: center;
   }
@@ -360,4 +360,34 @@ body {
     .toggle-unit-button:hover {
       background-color: #cc0000; /* Darker red on hover */
     }
+    /* styles.css */
+.button-container {
+    display: flex;
+    gap: 10px; /* Adjust the gap as needed */
+  }
+  
+  .set-area-input {
+    margin-bottom: 10px; /* Adjust as needed */
+  }
+  
+  .control-btn,
+  .toggle-unit-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .error {
+    border-color: red;
+  }
+  
+  .error-message {
+    color: red;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  .warning-icon {
+    margin-right: 5px;
+  }
   }

@@ -6,6 +6,7 @@ const AreaInput = ({ setTotalArea }) => {
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState(false);
   const [isSquareFeet, setIsSquareFeet] = useState(true);
+  const [displayedArea, setDisplayedArea] = useState({ sqFt: null, sqIn: null });
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
@@ -17,6 +18,10 @@ const AreaInput = ({ setTotalArea }) => {
     if (!isNaN(area)) {
       const convertedArea = isSquareFeet ? area : area / 144; // Convert inches to square feet
       setTotalArea(convertedArea);
+      setDisplayedArea({
+        sqFt: isSquareFeet ? area : area / 144,
+        sqIn: isSquareFeet ? area * 144 : area
+      });
     } else {
       setError(true); // Set error state if input is invalid
     }
@@ -28,16 +33,24 @@ const AreaInput = ({ setTotalArea }) => {
 
   return (
     <div className="area-input">
-      <input 
-        type="number" 
-        value={inputValue} 
-        onChange={handleInputChange} 
-        placeholder={`Enter total area (${isSquareFeet ? 'sq ft' : 'sq in'})`}
-        title="Set the area value here"
-        className={`set-area-input ${error ? 'error' : ''}`}
-        aria-label="Total Area Input"
-        data-tip={`Enter the total area in ${isSquareFeet ? 'square feet' : 'square inches'}`}
-      />
+      <div className="input-container">
+        <input 
+          type="number" 
+          value={inputValue} 
+          onChange={handleInputChange} 
+          placeholder={`Enter total area (${isSquareFeet ? 'sq ft' : 'sq in'})`}
+          title="Set the area value here"
+          className={`set-area-input ${error ? 'error' : ''}`}
+          aria-label="Total Area Input"
+          data-tip={`Enter the total area in ${isSquareFeet ? 'square feet' : 'square inches'}`}
+        />
+        {error && (
+          <div className="error-message" aria-live="polite">
+            <span className="warning-icon">⚠️</span>
+            Invalid area value
+          </div>
+        )}
+      </div>
       <div className="button-container">
         <button 
           onClick={handleSubmit} 
@@ -58,12 +71,14 @@ const AreaInput = ({ setTotalArea }) => {
           {isSquareFeet ? 'Switch to Square Inches' : 'Switch to Square Feet'}
         </button>
       </div>
-      {error && (
-        <div className="error-message" aria-live="polite">
-          <span className="warning-icon">⚠️</span>
-          Invalid area value
+      <div className="flexbox-container">
+        <div className="flexbox-item available">
+          Available Space: {isSquareFeet ? displayedArea.sqFt : displayedArea.sqIn} {isSquareFeet ? 'sq ft' : 'sq in'}
         </div>
-      )}
+        <div className="flexbox-item built">
+          Built Space: {isSquareFeet ? displayedArea.sqFt : displayedArea.sqIn} {isSquareFeet ? 'sq ft' : 'sq in'}
+        </div>
+      </div>
       <Tooltip />
     </div>
   );
