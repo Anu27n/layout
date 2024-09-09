@@ -74,11 +74,6 @@ const App = () => {
           availableArea={availableArea}
         />
       </div>
-      {error && (
-        <div className="error-message">
-          Error: The total built area exceeds the available area! Please adjust the values.
-        </div>
-      )}
       <Tooltip />
     </div>
   );

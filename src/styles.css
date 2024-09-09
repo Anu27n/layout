@@ -1,88 +1,390 @@
 /* General Styles */
 body {
-    font-family: Arial, sans-serif;
-  }
+  font-family: Arial, sans-serif;
+}
+.button-container {
+  display: flex;       
+}
+
+.control-btn, .toggle-unit-button {
+  padding: 10px 20px;  
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 10px; /* Adjust this value as needed */
+}
+
+/* Section Styles */
+.section-heading {
+  background-color: rgba(220, 31, 31, 0.5); /* Grey with 50% transparency */
+  padding: 10px;
+  border-radius: 25px;
+  color: white; /* Optional: to make the text more readable */
+}
+
+.sections {
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Hide overflow */
+  margin-left: 600px; /* Increased margin-left to create more space on the left */
+  height: calc(100vh - 30px); /* Full height minus padding */
+  box-sizing: border-box; /* Ensure padding is included in the width */
+}
+
+.sections-inner {
+  overflow: hidden; /* Hide both vertical and horizontal scrollbars */
+  padding-right: 30px; /* Added right padding to create space for scrollbar */
+  white-space: nowrap;  /* Prevent line breaks */
+}
+
+.section {
+  margin-bottom: 20px; /* Increased margin for more distinct sections */
+  padding: 10px 0; /* Adjusted padding */
+  border-bottom: 1px solid #ddd; /* Added bottom border */
+  background-color: transparent; /* Removed background color */
+}
+
+.section h3 {
+  margin-bottom: 10px; /* Adjusted margin */
+  font-size: 16px; /* Adjusted font size */
+  padding-bottom: 5px;
+}
+
+/* Workspace Styles */
+.workspace-row {
+  display: flex;
+  flex-wrap: nowrap; /* Prevent wrapping */
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+/* Workspace Styles */
+.workspace-row {
+  display: flex;
+  flex-wrap: nowrap; /* Prevent wrapping */
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+/* Workspace Styles */
+.workspace-row {
+  display: flex;
+  flex-wrap: nowrap; /* Prevent wrapping */
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+/* Workspace Styles */
+.workspace-row {
+  display: flex;
+  flex-wrap: nowrap; /* Prevent wrapping */
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+/* Workspace Styles */
+.workspace-row {
+  display: flex;
+  flex-wrap: nowrap; /* Prevent wrapping */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  padding-left: 20px; /* Add padding to shift workspaces to the right */
+}
+
+.workspace {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  flex: 0 0 auto; /* Ensure items don't shrink */
+}
+
+.workspace img {
+  width: 120px; /* Increased size */
+  height: 120px; /* Increased size */
+  margin-right: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+/* Control Button Styles */
+.control-btn-box {
+  display: flex;
+  align-items: center;
+  background-color: #f9f9f9;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.control-btn {
+  padding: 5px 10px; /* Adjusted size */
+  font-size: 16px; /* Adjusted size */
+  font-weight: bold;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background-color 0.3s;
+}
+
+.control-btn:hover {
+  background-color: #e0e0e0;
+}
+
+span {
+  font-size: 18px;
+  margin: 0 5px;
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
+/* Flexbox Container Styles */
+.flexbox-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 50%;
+  height: 300px; /* Adjusted height */
+  background: white; /* Set to white */
+  padding: 10px;
+  border: 1px solid #ccc; /* Added border */
+  border-radius: 8px; /* Added border radius */
+  position: fixed; /* Fixed position */
+  top: 172px; /* Adjusted top to create space above */
+  left: 20px; /* Adjust as needed */
+  box-sizing: border-box; /* Ensure padding and border are included in the width and height */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 100; /* Subtle shadow */
+}
+
+.flexbox-item {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Ensure vertical alignment */
+  font-size: 12px;
+  color: black;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 1px solid #ccc; /* Thin border between flexboxes */
+  box-sizing: border-box;
+  position: relative;
+  background: linear-gradient(135deg, #e0f7fa, #80deea); /* Gradient background */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.flexbox-item:hover {
+  transform: scale(1.05); /* Slight zoom effect */
+  background-color: #f0f0f0; /* Light grey background on hover */
+}
+
+.flexbox-item.available {
+  background: linear-gradient(135deg, #e0f7fa, #80deea); /* Gradient background */
+}
+
+.flexbox-item.linear { background: linear-gradient(135deg, #a5d6a7, #66bb6a); }
+.flexbox-item.lType { background: linear-gradient(135deg, #90caf9, #42a5f5); }
+.flexbox-item.md { background: linear-gradient(135deg, #ffcc80, #ffa726); }
+.flexbox-item.manager { background: linear-gradient(135deg, #ef9a9a, #e57373); }
+.flexbox-item.small { background: linear-gradient(135deg, #ce93d8, #ab47bc); }
+.flexbox-item.ups { background: linear-gradient(135deg, #7986cb, #5c6bc0); }
+.flexbox-item.bms { background: linear-gradient(135deg, #80deea, #26c6da); }
+.flexbox-item.server { background: linear-gradient(135deg, #aed581, #8bc34a); }
+
+.flexbox-container.error {
+  background-color: #ffcccc; /* Light red background */
+  border: 1px solid red; /* Red border */
+}
+
+/* Built Available Area Styles */
+.built-available-area {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  position: fixed; /* Fixed position */
+  top: 420px; /* Adjust based on the height of your flexbox container */
+  left: 20px; /* Align with the flexbox container */
+  width: 50%; /* Same width as the flexbox container */
+  background-color: white; /* Background color */
+  padding: 10px; /* Padding */
+  border: 1px solid #ccc; /* Border */
+  border-radius: 8px; /* Border radius */
+  box-sizing: border-box; /* Ensure padding and border are included in the width */
+}
+
+/* Error Message Styles */
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin-top: 1px;
+  display: flex;
+  align-items: center;
   
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+
+
+.error-message .warning-icon {
+  margin-right: 5px;
+}
+
+/* Dynamic Text Styles */
+.dynamic-text {
+  margin-top: 20px; /* Adjust based on the height of your flexbox container */
+  padding: 10px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  position: fixed; /* Set to fixed position */
+  top: 500px; /* Adjust as needed */
+  left: 20px; /* Adjust as needed */
+  width: 50%; /* Adjust width as needed */
+  background-color: white; /* Optional: background color */
+  border: 1px solid #ccc; /* Optional: border */
+  border-radius: 8px; /* Optional: border radius */
+  box-sizing: border-box; /* Ensure padding and border are included in the width */
+}
+
+.dynamic-text div {
+  margin: 100px 0;
+}
+
+/* Scrollbar Styles */
+.sections-inner::-webkit-scrollbar {
+  width: 8px; /* Custom scrollbar width */
+}
+
+.sections-inner::-webkit-scrollbar-thumb {
+  background-color: #888; /* Custom scrollbar color */
+  border-radius: 4px; /* Rounded corners */
+}
+
+.sections-inner::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Darker color on hover */
+}
+
+.sections-inner {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: thin;  /* Firefox */
+  scrollbar-color: #888 #f0f0f0; /* Custom scrollbar color for Firefox */
+}
+
+/* Set Area Input Box Styles */
+.set-area-input {
+  width: 100%; /* Full width */
+  padding: 10px; /* Increased padding */
+  font-size: 16px; /* Larger font size */
+  border: 1px solid #ccc; /* Border */
+  border-radius: 5px; /* Rounded corners */
+  box-sizing: border-box; /* Include padding and border in width */
+  margin-bottom: 10px; /* Space below the input box */
+}
+
+.set-area-input.error {
+  border: 1px solid red; /* Red border for error state */
+  animation: shake 0.3s; /* Shake animation */
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+/* Button Styles */
+.area-input button {
+  padding: 10px 20px; /* Increased padding */
+  font-size: 16px; /* Larger font size */
+  background-color: #4caf50; /* Green background */
+  color: white; /* White text */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Smooth transition */
+}
+
+.area-input button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+/* New Button Styles */
+.set-area-button, .toggle-unit-button {
+  background-color: #ff0000; /* Red background for toggle button */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.set-area-button:hover, .toggle-unit-button:hover {
+  background-color: #cc0000; /* Darker red on hover */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
   .container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 20px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-top: 10px; /* Adjust this value as needed */
-  }
-  
-  /* Section Styles */
-  .section-heading {
-    background-color: rgba(220, 31, 31, 0.5); /* Grey with 50% transparency */
-    padding: 10px;
-    border-radius: 25px;
-    color: white; /* Optional: to make the text more readable */
-  }
-  
-  .sections {
-    width: 75%;
-    display: flex;
     flex-direction: column;
-    overflow: hidden; /* Hide overflow */
-    margin-left: 50%; /* Adjusted to move left */
-    height: calc(100vh - 30px); /* Full height minus padding */
-    box-sizing: border-box; /* Ensure padding is included in the width */
-  }
-  
-  .sections-inner {
-    overflow-y: scroll; /* Enable vertical scrolling */
-    padding-right: 30px; /* Added right padding to create space for scrollbar */
-    overflow-x: auto;  /* Enable horizontal scrolling */
-    white-space: nowrap;  /* Prevent line breaks */
-  }
-  
-  .section {
-    margin-bottom: 20px; /* Increased margin for more distinct sections */
-    padding: 10px 0; /* Adjusted padding */
-    border-bottom: 1px solid #ddd; /* Added bottom border */
-    background-color: transparent; /* Removed background color */
-  }
-  
-  .section h3 {
-    margin-bottom: 10px; /* Adjusted margin */
-    font-size: 16px; /* Adjusted font size */
-    padding-bottom: 5px;
-  }
-  
-  /* Workspace Styles */
-  .workspace-row {
-    display: flex;
-    flex-wrap: nowrap; /* Prevent wrapping */
-    overflow-x: auto; /* Enable horizontal scrolling */
-  }
-  
-  .workspace {
-    display: flex;
     align-items: center;
-    margin-bottom: 10px;
-    flex: 0 0 auto; /* Ensure items don't shrink */
+  }
+
+  .sections {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .flexbox-container {
+    width: 90%;
+    left: 5%;
+    top: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+
+  .built-available-area, .dynamic-text {
+    width: 90%;
+    left: 5%;
+    top: auto;
+    position: static;
+    margin-top: 20px;
+  }
+  .set-area-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
   }
   
-  .workspace img {
-    width: 120px; /* Increased size */
-    height: 120px; /* Increased size */
-    margin-right: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+  .set-area-button:hover {
+    background-color: #0056b3;
   }
   
-  /* Control Button Styles */
-  .control-btn-box {
-    display: flex;
-    align-items: center;
-    background-color: #f9f9f9;
-    padding: 5px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  .unit-toggle {
+    margin-top: 10px;
   }
   
+  .unit-toggle label {
+    cursor: pointer;
+  }
   .control-btn {
     padding: 5px 10px; /* Adjusted size */
     font-size: 16px; /* Adjusted size */
@@ -95,189 +397,7 @@ body {
     transition: background-color 0.3s;
   }
   
-  .control-btn:hover {
-    background-color: #e0e0e0;
-  }
-  
-  span {
-    font-size: 18px;
-    margin: 0 5px;
-  }
-  
-  .bold-text {
-    font-weight: bold;
-  }
-  
-  /* Flexbox Container Styles */
-  .flexbox-container {
-    display: flex;
-    flex-wrap: wrap;
-    width: 50%;
-    height: 300px; /* Adjusted height */
-    background: white; /* Set to white */
-    padding: 10px;
-    border: 1px solid #ccc; /* Added border */
-    border-radius: 8px; /* Added border radius */
-    position: fixed; /* Fixed position */
-    top: 172px; /* Adjusted top to create space above */
-    left: 20px; /* Adjust as needed */
-    box-sizing: border-box; /* Ensure padding and border are included in the width and height */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 100; /* Subtle shadow */
-  }
-  
-  .flexbox-item {
-    display: flex;
-    justify-content: center;
-    align-items: center; /* Ensure vertical alignment */
-    font-size: 12px;
-    color: black;
-    text-align: center;
-    transition: all 0.3s ease;
-    border: 1px solid #ccc; /* Thin border between flexboxes */
-    box-sizing: border-box;
-    position: relative;
-    background: linear-gradient(135deg, #e0f7fa, #80deea); /* Gradient background */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  }
-  
-  .flexbox-item:hover {
-    transform: scale(1.05); /* Slight zoom effect */
-    background-color: #f0f0f0; /* Light grey background on hover */
-  }
-  
-  .flexbox-item.available {
-    background: linear-gradient(135deg, #e0f7fa, #80deea); /* Gradient background */
-  }
-  
-  .flexbox-item.linear { background: linear-gradient(135deg, #a5d6a7, #66bb6a); }
-  .flexbox-item.lType { background: linear-gradient(135deg, #90caf9, #42a5f5); }
-  .flexbox-item.md { background: linear-gradient(135deg, #ffcc80, #ffa726); }
-  .flexbox-item.manager { background: linear-gradient(135deg, #ef9a9a, #e57373); }
-  .flexbox-item.small { background: linear-gradient(135deg, #ce93d8, #ab47bc); }
-  .flexbox-item.ups { background: linear-gradient(135deg, #7986cb, #5c6bc0); }
-  .flexbox-item.bms { background: linear-gradient(135deg, #80deea, #26c6da); }
-  .flexbox-item.server { background: linear-gradient(135deg, #aed581, #8bc34a); }
-  
-  .flexbox-container.error {
-    background-color: #ffcccc; /* Light red background */
-    border: 1px solid red; /* Red border */
-  }
-  
-  /* Built Available Area Styles */
-  .built-available-area {
-    margin-top: 20px;
-    text-align: center;
-    font-size: 14px;
-    font-weight: bold;
-    position: fixed; /* Fixed position */
-    top: 420px; /* Adjust based on the height of your flexbox container */
-    left: 20px; /* Align with the flexbox container */
-    width: 50%; /* Same width as the flexbox container */
-    background-color: white; /* Background color */
-    padding: 10px; /* Padding */
-    border: 1px solid #ccc; /* Border */
-    border-radius: 8px; /* Border radius */
-    box-sizing: border-box; /* Ensure padding and border are included in the width */
-  }
-  
-  /* Error Message Styles */
-  .error-message {
-    color: red;
-    font-weight: bold;
-    margin-top: 1px;
-    display: flex;
-    align-items: center;
-  }
-  
-  .error-message .warning-icon {
-    margin-right: 5px;
-  }
-  
-  /* Dynamic Text Styles */
-  .dynamic-text {
-    margin-top: 20px; /* Adjust based on the height of your flexbox container */
-    padding: 10px;
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-    position: fixed; /* Set to fixed position */
-    top: 500px; /* Adjust as needed */
-    left: 20px; /* Adjust as needed */
-    width: 50%; /* Adjust width as needed */
-    background-color: white; /* Optional: background color */
-    border: 1px solid #ccc; /* Optional: border */
-    border-radius: 8px; /* Optional: border radius */
-    box-sizing: border-box; /* Ensure padding and border are included in the width */
-  }
-  
-  .dynamic-text div {
-    margin: 100px 0;
-  }
-  
-  /* Scrollbar Styles */
-  .sections-inner::-webkit-scrollbar {
-    width: 8px; /* Custom scrollbar width */
-  }
-  
-  .sections-inner::-webkit-scrollbar-thumb {
-    background-color: #888; /* Custom scrollbar color */
-    border-radius: 4px; /* Rounded corners */
-  }
-  
-  .sections-inner::-webkit-scrollbar-thumb:hover {
-    background-color: #555; /* Darker color on hover */
-  }
-  
-  .sections-inner {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: thin;  /* Firefox */
-    scrollbar-color: #888 #f0f0f0; /* Custom scrollbar color for Firefox */
-  }
-  
-  /* Set Area Input Box Styles */
-  .set-area-input {
-    width: 100%; /* Full width */
-    padding: 10px; /* Increased padding */
-    font-size: 16px; /* Larger font size */
-    border: 1px solid #ccc; /* Border */
-    border-radius: 5px; /* Rounded corners */
-    box-sizing: border-box; /* Include padding and border in width */
-    margin-bottom: 10px; /* Space below the input box */
-  }
-  
-  .set-area-input.error {
-    border: 1px solid red; /* Red border for error state */
-    animation: shake 0.3s; /* Shake animation */
-  }
-  
-  @keyframes shake {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    50% { transform: translateX(5px); }
-    75% { transform: translateX(-5px); }
-    100% { transform: translateX(0); }
-  }
-  
-  /* Button Styles */
-  .area-input button {
-    padding: 10px 20px; /* Increased padding */
-    font-size: 16px; /* Larger font size */
-    background-color: #4caf50; /* Green background */
-    color: white; /* White text */
-    border: none; /* Remove border */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition: background-color 0.3s; /* Smooth transition */
-  }
-  
-  .area-input button:hover {
-    background-color: #45a049; /* Darker green on hover */
-  }
-  
-  /* New Button Styles */
-  .set-area-button, .toggle-unit-button {
+  .toggle-unit-button {
     background-color: #ff0000; /* Red background for toggle button */
     color: white;
     border: none;
@@ -286,108 +406,37 @@ body {
     transition: background-color 0.3s ease;
   }
   
-  .set-area-button:hover, .toggle-unit-button:hover {
+  .toggle-unit-button:hover {
     background-color: #cc0000; /* Darker red on hover */
   }
-  
-  /* Media Queries for Responsiveness */
-  @media (max-width: 768px) {
-    .container {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .sections {
-      width: 100%;
-      margin-left: 0;
-    }
-  
-    .flexbox-container {
-      width: 90%;
-      left: 5%;
-      top: 50px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    }
-  
-    .built-available-area, .dynamic-text {
-      width: 90%;
-      left: 5%;
-      top: auto;
-      position: static;
-      margin-top: 20px;
-    }
-    .set-area-button {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    
-    .set-area-button:hover {
-      background-color: #0056b3;
-    }
-    
-    .unit-toggle {
-      margin-top: 10px;
-    }
-    
-    .unit-toggle label {
-      cursor: pointer;
-    }
-    .control-btn {
-      padding: 5px 10px; /* Adjusted size */
-      font-size: 16px; /* Adjusted size */
-      font-weight: bold;
-      background-color: #fff;
-      border: 1px solid #ccc;
-      margin: 0 5px;
-      cursor: pointer;
-      border-radius: 3px;
-      transition: background-color 0.3s;
-    }
-    
-    .toggle-unit-button {
-      background-color: #ff0000; /* Red background for toggle button */
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    
-    .toggle-unit-button:hover {
-      background-color: #cc0000; /* Darker red on hover */
-    }
-    /* styles.css */
+  /* styles.css */
 .button-container {
-    display: flex;
-    gap: 10px; /* Adjust the gap as needed */
-  }
-  
-  .set-area-input {
-    margin-bottom: 10px; /* Adjust as needed */
-  }
-  
-  .control-btn,
-  .toggle-unit-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  .error {
-    border-color: red;
-  }
-  
-  .error-message {
-    color: red;
-    margin-top: 10px;
-    font-weight: bold;
-  }
-  
-  .warning-icon {
-    margin-right: 5px;
-  }
-  }
+  display: flex;
+  gap: 10px; /* Adjust the gap as needed */
+}
+
+.set-area-input {
+  margin-bottom: 10px; /* Adjust as needed */
+}
+
+.control-btn,
+.toggle-unit-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.error {
+  border-color: red;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.warning-icon {
+  margin-right: 5px;
+}
+}
