@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import AreaInput from "./AreaInput";
-import FlexBoxDisplay from "./FlexBoxDisplay";
 import OpenWorkspaces from "./OpenWorkspaces";
 import Cabins from "./Cabins";
 import PublicSpaces from "./PublicSpaces";
 import { Tooltip } from "react-tooltip";
+import ChartComponent from "./ChartComponent"; // Import the ChartComponent
 import "./styles.css";
 
 const areaValues = {
@@ -29,6 +29,9 @@ const initialAreas = {
   server: 0,
 };
 
+const MAX_AREA = 25000;
+const MIN_AREA = 1500;
+
 const App = () => {
   const [totalArea, setTotalArea] = useState(2000);
   const [areas, setAreas] = useState(initialAreas);
@@ -51,6 +54,15 @@ const App = () => {
     }
   };
 
+  const handleSetTotalArea = (value) => {
+    if (value >= MIN_AREA && value <= MAX_AREA) {
+      setTotalArea(value);
+      setError(false);
+    } else {
+      setError(true);
+    }
+  };
+
   const builtArea = Object.keys(areas).reduce(
     (acc, key) => acc + areas[key] * areaValues[key],
     0
@@ -59,21 +71,20 @@ const App = () => {
 
   return (
     <div className="container">
-      <AreaInput setTotalArea={setTotalArea} />
+      <AreaInput 
+        setTotalArea={handleSetTotalArea} 
+        builtArea={builtArea} 
+        availableArea={availableArea} 
+      />
       <div className="content">
         <div className="sections">
           <OpenWorkspaces areas={areas} updateAreas={updateAreas} />
           <Cabins areas={areas} updateAreas={updateAreas} />
           <PublicSpaces areas={areas} updateAreas={updateAreas} />
         </div>
-        <FlexBoxDisplay
-          areas={areas}
-          areaValues={areaValues}
-          totalArea={totalArea}
-          builtArea={builtArea}
-          availableArea={availableArea}
-        />
+        <ChartComponent areas={areas} areaValues={areaValues} /> {/* Pass areas and areaValues as props */}
       </div>
+      {error && <div className="error">Total area must be between {MIN_AREA} and {MAX_AREA} square feet.</div>}
       <Tooltip />
     </div>
   );

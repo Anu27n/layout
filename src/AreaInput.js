@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { Tooltip } from 'react-tooltip';
 import './styles.css';
 
-const AreaInput = ({ setTotalArea }) => {
+const AreaInput = ({ setTotalArea, builtArea, availableArea }) => {
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState(false);
   const [isSquareFeet, setIsSquareFeet] = useState(true);
-  const [displayedArea, setDisplayedArea] = useState({ sqFt: null, sqIn: null });
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
@@ -17,11 +16,12 @@ const AreaInput = ({ setTotalArea }) => {
     const area = parseInt(inputValue, 10);
     if (!isNaN(area)) {
       const convertedArea = isSquareFeet ? area : area / 144; // Convert inches to square feet
-      setTotalArea(convertedArea);
-      setDisplayedArea({
-        sqFt: isSquareFeet ? area : area / 144,
-        sqIn: isSquareFeet ? area * 144 : area
-      });
+      if (convertedArea >= 1500 && convertedArea <= 25000) {
+        setTotalArea(convertedArea);
+        setError(false);
+      } else {
+        setError(true); // Set error state if area is out of range
+      }
     } else {
       setError(true); // Set error state if input is invalid
     }
@@ -47,7 +47,7 @@ const AreaInput = ({ setTotalArea }) => {
         {error && (
           <div className="error-message" aria-live="polite">
             <span className="warning-icon">⚠️</span>
-            Invalid area value
+            Invalid area value. Must be between 1500 and 25000 square feet.
           </div>
         )}
       </div>
@@ -73,12 +73,10 @@ const AreaInput = ({ setTotalArea }) => {
       </div>
       <div className="flexbox-container">
         <div className="flexbox-item available">
-          <img src="/images/available-space.png" alt="Available Space" />
-          Available Space: {isSquareFeet ? displayedArea.sqFt : displayedArea.sqIn} {isSquareFeet ? 'sq ft' : 'sq in'}
+          Available Space: {availableArea} sq ft
         </div>
         <div className="flexbox-item built">
-          <img src="/images/built-space.png" alt="Built Space" />
-          Built Space: {isSquareFeet ? displayedArea.sqFt : displayedArea.sqIn} {isSquareFeet ? 'sq ft' : 'sq in'}
+          Built Space: {builtArea} sq ft
         </div>
       </div>
       <Tooltip />

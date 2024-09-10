@@ -1,6 +1,10 @@
 import React from 'react';
 
 const PublicSpaces = ({ areas, updateAreas }) => {
+  const handleInputChange = (type, value) => {
+    updateAreas(type, value);
+  };
+
   return (
     <div className="section">
       <h3 className="section-heading">Public Spaces</h3>
@@ -9,19 +13,16 @@ const PublicSpaces = ({ areas, updateAreas }) => {
           <div key={type} className="workspace">
             <img src={`/images/${type}.png`} alt={`${type} Room`} />
             <div className="control-btn-box">
-              <button
-                className="control-btn"
-                onClick={() => updateAreas(type, Math.max(areas[type] - 1, 0))}
-              >
-                -
-              </button>
-              <span>{areas[type]}</span>
-              <button
-                className="control-btn"
-                onClick={() => updateAreas(type, areas[type] + 1)}
-              >
-                +
-              </button>
+              <input
+                type="number"
+                className="value-input"
+                placeholder="Enter value"
+                value={areas[type] || ''}
+                onChange={(e) => handleInputChange(type, e.target.value)}
+              />
+              <div className="value-display">
+                {type.charAt(0).toUpperCase() + type.slice(1)} Room: <span>{areas[type] || 0}</span>
+              </div>
             </div>
           </div>
         ))}

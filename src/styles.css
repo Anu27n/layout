@@ -22,39 +22,32 @@ body {
 
 /* Section Styles */
 .section-heading {
-  background-color: rgba(220, 31, 31, 0.5); /* Grey with 50% transparency */
+  background-color: rgba(192, 171, 171, 0.711); /* Grey with 50% transparency */
   padding: 10px;
   border-radius: 25px;
-  color: white; /* Optional: to make the text more readable */
-}
-
-.sections {
-  width: 75%;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden; /* Hide overflow */
-  margin-left: 600px; /* Increased margin-left to create more space on the left */
-  height: calc(100vh - 30px); /* Full height minus padding */
-  box-sizing: border-box; /* Ensure padding is included in the width */
+  color: rgba(18, 8, 8, 0.882); /* Optional: to make the text more readable */
 }
 
 .sections-inner {
   overflow: hidden; /* Hide both vertical and horizontal scrollbars */
   padding-right: 30px; /* Added right padding to create space for scrollbar */
-  white-space: nowrap;  /* Prevent line breaks */
+  white-space: normal;  /* Allow line breaks */
 }
 
-.section {
+section {
   margin-bottom: 20px; /* Increased margin for more distinct sections */
   padding: 10px 0; /* Adjusted padding */
   border-bottom: 1px solid #ddd; /* Added bottom border */
-  background-color: transparent; /* Removed background color */
+  background-color: #f0f0f0; /* Grey background for section boxes */
+  border-radius: 5px; /* Rounded corners for section boxes */
 }
 
-.section h3 {
+section h3 {
   margin-bottom: 10px; /* Adjusted margin */
   font-size: 16px; /* Adjusted font size */
   padding-bottom: 5px;
+  font-weight: bold; /* Make heading text bold */
+  color: black; /* Make heading text black */
 }
 
 /* Workspace Styles */
@@ -100,8 +93,8 @@ body {
 }
 
 .workspace img {
-  width: 120px; /* Increased size */
-  height: 120px; /* Increased size */
+  width: 170px; /* Increased size */
+  height: 170px; /* Increased size */
   margin-right: 10px;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -110,11 +103,27 @@ body {
 /* Control Button Styles */
 .control-btn-box {
   display: flex;
-  align-items: center;
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center children horizontally */
   background-color: #f9f9f9;
   padding: 5px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.value-input {
+  margin-top: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 80%; /* Adjust width as needed */
+  text-align: center;
+}
+
+.value-display {
+  margin-top: 10px;
+  font-weight: bold;
+  color: black;
 }
 
 .control-btn {
@@ -143,61 +152,71 @@ span {
 }
 
 /* Flexbox Container Styles */
+.container {
+  padding: 20px;
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto; /* Enable vertical scrollbar */
+  padding: 20px;
+  margin-left: 500px;
+  width:100%;
+}
+
+.sections {
+  height: calc(100vh - 40px); /* Adjust height to fit within the container */
+  overflow-y: auto; /* Enable vertical scrollbar */
+  overflow-x: hidden; /* Disable horizontal scrollbar */
+  margin-bottom: 20px;
+  width: 100%; /* Use 100% width to fit within the container */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+#chart {
+  width: 600px; /* Adjust width as needed */
+  height: 300px; /* Adjust height as needed */
+  position: absolute; /* Absolute position */
+  left: 75px; /* Align to the left */
+  bottom: 100; /* Align to the bottom */
+  padding: 20px; /* Add padding if needed */
+  box-sizing: border-box; /* Include padding in width/height */
+}
 .flexbox-container {
   display: flex;
-  flex-wrap: wrap;
-  width: 50%;
-  height: 300px; /* Adjusted height */
-  background: white; /* Set to white */
-  padding: 10px;
-  border: 1px solid #ccc; /* Added border */
-  border-radius: 8px; /* Added border radius */
-  position: fixed; /* Fixed position */
-  top: 172px; /* Adjusted top to create space above */
-  left: 20px; /* Adjust as needed */
-  box-sizing: border-box; /* Ensure padding and border are included in the width and height */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: 100; /* Subtle shadow */
+  justify-content: flex-start; /* Align items to the start */
+  align-items: center;
+  margin-top: 20px;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
 .flexbox-item {
+  flex: 0 0 auto; /* Prevent flex items from growing */
+  padding: 10px; /* Adjust padding for better spacing */
+  margin: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: left; /* Align text to the left */
+  background-color: #f9f9f9;
+  width: 200px; /* Set a fixed width */
   display: flex;
-  justify-content: center;
-  align-items: center; /* Ensure vertical alignment */
-  font-size: 12px;
-  color: black;
-  text-align: center;
-  transition: all 0.3s ease;
-  border: 1px solid #ccc; /* Thin border between flexboxes */
-  box-sizing: border-box;
-  position: relative;
-  background: linear-gradient(135deg, #e0f7fa, #80deea); /* Gradient background */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  align-items: center;
+  font-weight: bold; /* Make text bold */
 }
 
-.flexbox-item:hover {
-  transform: scale(1.05); /* Slight zoom effect */
-  background-color: #f0f0f0; /* Light grey background on hover */
+.flexbox-item img {
+  max-width: 30px; /* Smaller image */
+  margin-right: 10px; /* Space between image and text */
 }
 
 .flexbox-item.available {
-  background: linear-gradient(135deg, #e0f7fa, #80deea); /* Gradient background */
+  background-color: #e0f7fa; /* Light cyan */
 }
 
-.flexbox-item.linear { background: linear-gradient(135deg, #a5d6a7, #66bb6a); }
-.flexbox-item.lType { background: linear-gradient(135deg, #90caf9, #42a5f5); }
-.flexbox-item.md { background: linear-gradient(135deg, #ffcc80, #ffa726); }
-.flexbox-item.manager { background: linear-gradient(135deg, #ef9a9a, #e57373); }
-.flexbox-item.small { background: linear-gradient(135deg, #ce93d8, #ab47bc); }
-.flexbox-item.ups { background: linear-gradient(135deg, #7986cb, #5c6bc0); }
-.flexbox-item.bms { background: linear-gradient(135deg, #80deea, #26c6da); }
-.flexbox-item.server { background: linear-gradient(135deg, #aed581, #8bc34a); }
-
-.flexbox-container.error {
-  background-color: #ffcccc; /* Light red background */
-  border: 1px solid red; /* Red border */
+.flexbox-item.built {
+  background-color: #ffebee; /* Light pink */
 }
-
 /* Built Available Area Styles */
 .built-available-area {
   margin-top: 20px;
