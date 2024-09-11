@@ -40,6 +40,7 @@ const AreaInput = ({ setTotalArea, builtArea, availableArea, resetAll }) => {
   return (
     <div className="area-input">
       <div className="input-container">
+        <i className="fas fa-calculator calculator-icon" title="Calculator"></i>
         <input 
           type="number" 
           value={inputValue} 

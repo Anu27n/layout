@@ -315,6 +315,20 @@ span {
   margin-bottom: 10px; /* Space below the input box */
 }
 
+.calculator-icon {
+  margin-right: 20px;
+  margin-bottom:15px;
+  margin-left:-50px;
+  margin-bottom:-50px; /* Adjust the margin as needed */
+  font-size: 30px; /* Adjust the size as needed */
+  color: #333; /* Adjust the color as needed */
+  transition: transform 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.calculator-icon:hover {
+  transform: scale(1.1); /* Scale up the icon on hover */
+}
+
 .set-area-input.error {
   border: 1px solid red; /* Red border for error state */
   animation: shake 0.3s; /* Shake animation */
