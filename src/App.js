@@ -29,6 +29,17 @@ const initialAreas = {
   server: 0,
 };
 
+const fullNames = {
+  linear: "Linear Workspace",
+  lType: "L-Type Workspace",
+  md: "MD Cabin",
+  manager: "Manager Cabin",
+  small: "Small Cabin",
+  ups: "UPS Room",
+  bms: "BMS Room",
+  server: "Server Room",
+};
+
 const MAX_AREA = 25000;
 const MIN_AREA = 1500;
 
@@ -76,6 +87,11 @@ const App = () => {
   );
   const availableArea = totalArea - builtArea;
 
+  const transformedAreas = Object.keys(areas).map(key => ({
+    name: fullNames[key],
+    value: areas[key] * areaValues[key]
+  }));
+
   return (
     <div className="container">
       <AreaInput 
@@ -91,7 +107,7 @@ const App = () => {
           <PublicSpaces areas={areas} updateAreas={updateAreas} />
         </div>
         <ChartComponent 
-          areas={areas} 
+          areas={transformedAreas} // Pass transformed areas with full names
           areaValues={areaValues} 
           isOverCapacity={builtArea > totalArea} // Pass the overcapacity status
         />
