@@ -50,6 +50,7 @@ const App = () => {
       setAreas(newAreas);
       setError(false);
     } else {
+      alert("You have exceeded the available space!");
       setError(true);
     }
   };
@@ -89,7 +90,11 @@ const App = () => {
           <Cabins areas={areas} updateAreas={updateAreas} />
           <PublicSpaces areas={areas} updateAreas={updateAreas} />
         </div>
-        <ChartComponent areas={areas} areaValues={areaValues} /> {/* Pass areas and areaValues as props */}
+        <ChartComponent 
+          areas={areas} 
+          areaValues={areaValues} 
+          isOverCapacity={builtArea > totalArea} // Pass the overcapacity status
+        />
       </div>
       {error && <div className="error">Total area must be between {MIN_AREA} and {MAX_AREA} square feet.</div>}
       <Tooltip />
