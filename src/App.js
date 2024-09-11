@@ -33,7 +33,7 @@ const MAX_AREA = 25000;
 const MIN_AREA = 1500;
 
 const App = () => {
-  const [totalArea, setTotalArea] = useState(2000);
+  const [totalArea, setTotalArea] = useState(0); // Set initial totalArea to 0
   const [areas, setAreas] = useState(initialAreas);
   const [error, setError] = useState(false);
 
@@ -65,7 +65,7 @@ const App = () => {
   };
 
   const resetAll = () => {
-    setTotalArea(2000);
+    setTotalArea(0); // Reset totalArea to 0
     setAreas(initialAreas);
     setError(false);
   };
