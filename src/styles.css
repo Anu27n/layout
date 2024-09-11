@@ -93,8 +93,8 @@ section h3 {
 }
 
 .workspace img {
-  width: 170px; /* Increased size */
-  height: 170px; /* Increased size */
+  width: 220px; /* Increased size */
+  height: 190px; /* Increased size */
   margin-right: 10px;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -342,6 +342,22 @@ span {
 
 .area-input button:hover {
   background-color: #45a049; /* Darker green on hover */
+}
+.reset-btn {
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  margin-left:605px ;
+}
+
+.reset-btn:hover {
+  background-color: #e0e0e0;
 }
 
 /* New Button Styles */

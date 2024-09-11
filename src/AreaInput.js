@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Tooltip } from 'react-tooltip';
 import './styles.css';
 
-const AreaInput = ({ setTotalArea, builtArea, availableArea }) => {
+const AreaInput = ({ setTotalArea, builtArea, availableArea, resetAll }) => {
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState(false);
   const [isSquareFeet, setIsSquareFeet] = useState(true);
@@ -29,6 +29,12 @@ const AreaInput = ({ setTotalArea, builtArea, availableArea }) => {
 
   const toggleUnit = () => {
     setIsSquareFeet(!isSquareFeet);
+  };
+
+  const handleReset = () => {
+    setInputValue('');
+    setError(false);
+    resetAll(); // Call the resetAll function passed from the parent component
   };
 
   return (
@@ -69,6 +75,15 @@ const AreaInput = ({ setTotalArea, builtArea, availableArea }) => {
           className="toggle-unit-button"
         >
           {isSquareFeet ? 'Switch to Square Inches' : 'Switch to Square Feet'}
+        </button>
+        <button 
+          onClick={handleReset} 
+          title="Click to reset the area input"
+          aria-label="Reset Area Button"
+          data-tip="Click to reset the area input"
+          className="reset-btn"
+        >
+          Reset
         </button>
       </div>
       <div className="flexbox-container">

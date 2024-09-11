@@ -63,6 +63,12 @@ const App = () => {
     }
   };
 
+  const resetAll = () => {
+    setTotalArea(2000);
+    setAreas(initialAreas);
+    setError(false);
+  };
+
   const builtArea = Object.keys(areas).reduce(
     (acc, key) => acc + areas[key] * areaValues[key],
     0
@@ -75,6 +81,7 @@ const App = () => {
         setTotalArea={handleSetTotalArea} 
         builtArea={builtArea} 
         availableArea={availableArea} 
+        resetAll={resetAll}
       />
       <div className="content">
         <div className="sections">
