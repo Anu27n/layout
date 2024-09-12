@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactApexChart from 'react-apexcharts';
+import ReactApexChart from 'react-apexcharts'; // Ensure this import is correct
 import './styles.css';
 
 const fullNames = {
@@ -13,24 +13,27 @@ const fullNames = {
   server: "Server Room"
 };
 
-const Treemap = ({ totalArea, builtArea, availableArea, areas, areaValues }) => {
+const Treemap = ({ totalArea, areas, areaValues }) => {
   const colors = {
-    'Linear Workspace': '#6495ED', // Cornflower Blue
-    'L-Type Workspace': '#4169E1', // Royal Blue
-    'MD Cabin': '#FF6347', // Tomato Red
-    'Manager Cabin': '#FF7F50', // Coral
-    'Small Cabin': '#FFC0CB', // Light Pink
-    'UPS Room': '#20B2AA', // Light Sea Green
-    'BMS Room': '#008080', // Teal
-    'Server Room': '#40E0D0', // Turquoise
-    'Available Space': '#D3D3D3' // Light Grey
+    'Linear Workspace': '#6495ED',
+    'L-Type Workspace': '#4169E1',
+    'MD Cabin': '#FF6347',
+    'Manager Cabin': '#FF7F50',
+    'Small Cabin': '#FFC0CB',
+    'UPS Room': '#20B2AA',
+    'BMS Room': '#008080',
+    'Server Room': '#40E0D0',
+    'Available Space': '#D3D3D3'
   };
+
+  const builtArea = Object.keys(areas).reduce((acc, key) => acc + areas[key] * areaValues[key], 0);
+  const availableArea = totalArea - builtArea;
 
   const series = [
     ...Object.keys(areas).map(key => ({
-      x: fullNames[key],
+      x: fullNames[key] || key, // Fallback to key if fullNames[key] is undefined
       y: areas[key] * areaValues[key],
-      fillColor: colors[fullNames[key]]
+      fillColor: colors[fullNames[key]] || '#000000' // Fallback color
     })),
     {
       x: 'Available Space',
@@ -70,8 +73,11 @@ const Treemap = ({ totalArea, builtArea, availableArea, areas, areaValues }) => 
     tooltip: {
       y: {
         formatter: function (value) {
-          const percentage = ((value / totalArea) * 100).toFixed(2);
-          return `${percentage}% of total area`;
+          if (totalArea > 0) {
+            const percentage = ((value / totalArea) * 100).toFixed(2);
+            return `${percentage}% of total area`;
+          }
+          return 'N/A'; // or return '0% of total area' if you prefer
         }
       }
     },
