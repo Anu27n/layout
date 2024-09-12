@@ -26,7 +26,15 @@ body {
   padding: 10px;
   border-radius: 25px;
   color: rgba(18, 8, 8, 0.882); /* Optional: to make the text more readable */
+  background-color: #F5F5F5; /* Light grey background */
+  padding: 10px 15px;        /* Adjust padding as needed */
+  font-size: 1.2rem;         /* Customize font size */
+  font-weight: bold;         /* Bold text */
+  color: #333;               /* Dark grey text color */
+  border-radius: 4px;        /* Optional: Rounded corners */
+  margin-bottom: 20px;       /* Space below the heading */
 }
+
 
 .sections-inner {
   overflow: hidden; /* Hide both vertical and horizontal scrollbars */
