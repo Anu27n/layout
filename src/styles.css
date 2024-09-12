@@ -11,18 +11,18 @@ body {
 }
 
 .container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 20px;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-top: 10px; /* Adjust this value as needed */
+  flex-direction: column;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  overflow: hidden; /* Prevent main scrollbar */
+  padding: 20px; /* Add padding to the container */
+  box-sizing: border-box;
 }
 
 /* Section Styles */
 .section-heading {
-  background-color: rgba(192, 171, 171, 0.711); /* Grey with 50% transparency */
+ /* Grey with 50% transparency */
   padding: 10px;
   border-radius: 25px;
   color: rgba(18, 8, 8, 0.882); /* Optional: to make the text more readable */
@@ -57,12 +57,12 @@ section h3 {
   overflow-x: hidden; /* Hide horizontal scrollbar */
 }
 
+
 /* Workspace Styles */
 .workspace-row {
   display: flex;
   flex-wrap: nowrap; /* Prevent wrapping */
-  overflow-x: hidden; /* Hide horizontal scrollbar */
-}
+  overflow-x: hidden; /* Hide horizontal scrollbar */}
 
 /* Workspace Styles */
 .workspace-row {
@@ -85,17 +85,19 @@ section h3 {
   padding-left: 20px; /* Add padding to shift workspaces to the right */
 }
 
+
 .workspace {
   display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-  flex: 0 0 auto; /* Ensure items don't shrink */
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center children horizontally */
+  margin-bottom: 30px; 
+  margin-right: 20px; /* Adjust the margin as needed */
 }
 
 .workspace img {
   width: 220px; /* Increased size */
   height: 190px; /* Increased size */
-  margin-right: 10px;
+  margin-bottom: 10px; /* Space between image and control box */
   border: 1px solid #ddd;
   border-radius: 8px;
 }
@@ -160,18 +162,10 @@ span {
   flex: 1;
   overflow-y: auto; /* Enable vertical scrollbar */
   padding: 20px;
-  margin-left: 500px;
+  margin-left: 1750px;
   width:100%;
 }
 
-.sections {
-  height: calc(100vh - 40px); /* Adjust height to fit within the container */
-  overflow-y: auto; /* Enable vertical scrollbar */
-  overflow-x: hidden; /* Disable horizontal scrollbar */
-  margin-bottom: 20px;
-  width: 100%; /* Use 100% width to fit within the container */
-  box-sizing: border-box; /* Include padding and border in the element's total width and height */
-}
 
 #chart {
   width: 600px; /* Adjust width as needed */
@@ -388,6 +382,11 @@ span {
   background-color: #cc0000; /* Darker red on hover */
 }
 
+/* Subsection styling */
+.subsection {
+  margin-bottom: 20px; /* Space between subsections */
+}
+
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
   .container {
@@ -396,9 +395,16 @@ span {
   }
 
   .sections {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
-    margin-left: 0;
+    height: 100%; /* Full height of the content area */
+    overflow-y: auto; /* Enable vertical scrolling within sections */
+    padding: 10px; /* Add padding to sections */
+    box-sizing: border-box;
   }
+  
 
   .flexbox-container {
     width: 90%;

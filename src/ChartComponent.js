@@ -5,26 +5,25 @@ const ChartComponent = ({ areas, areaValues, isOverCapacity }) => {
   const totalArea = areas.reduce((acc, item) => acc + item.value, 0);
 
   const colors = {
-    'Linear Workspace': ['#008FFB', '#00A3FF'], // Shades of Blue
-    'L-Type Workspace': ['#FF4560', '#FF6F61'], // Shades of Red
-    'MD Cabin': ['#FEB019', '#FFC107'], // Shades of Yellow
-    'Manager Cabin': ['#775DD0', '#A597FF'], // Shades of Purple
-    'Small Cabin': ['#00E396', '#66DA26'], // Shades of Green
-    'UPS Room': ['#546E7A', '#758AA2'], // Shades of Gray
-    'BMS Room': ['#26A69A', '#33B2DF'], // Shades of Teal
-    'Server Room': ['#D4526E', '#F46036'] // Shades of Pink
+    'Linear Workspace': '#6495ED', // Cornflower Blue
+    'L-Type Workspace': '#4169E1', // Royal Blue
+    'MD Cabin': '#FF6347', // Tomato Red
+    'Manager Cabin': '#FF7F50', // Coral
+    'Small Cabin': '#FFC0CB', // Light Pink
+    'UPS Room': '#20B2AA', // Light Sea Green
+    'BMS Room': '#008080', // Teal
+    'Server Room': '#40E0D0' // Turquoise
   };
 
   const options = {
     series: [
       {
-        data: areas.map((item, index) => {
-          const colorArray = colors[item.name] || ['#00E396']; // Default color
-          const color = isOverCapacity ? '#FF0000' : colorArray[index % colorArray.length]; // Red if over capacity
+        data: areas.map((item) => {
+          const color = colors[item.name] || '#00E396'; // Default color if not specified
           return {
             x: item.name,
             y: item.value,
-            fillColor: color
+            fillColor: isOverCapacity ? '#FF0000' : color // Red if over capacity
           };
         })
       }
