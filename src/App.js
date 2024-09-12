@@ -4,12 +4,12 @@ import OpenWorkspaces from "./OpenWorkspaces";
 import Cabins from "./Cabins";
 import PublicSpaces from "./PublicSpaces";
 import { Tooltip } from "react-tooltip";
-import ChartComponent from "./ChartComponent"; // Import the ChartComponent
+import Treemap from "./Treemap"; // Import the Treemap component
 import "./styles.css";
 
 const areaValues = {
   linear: 23,
-  lType: 28.749,
+  lType: 28,
   md: 140,
   manager: 80,
   small: 80,
@@ -29,22 +29,11 @@ const initialAreas = {
   server: 0,
 };
 
-const fullNames = {
-  linear: "Linear Workspace",
-  lType: "L-Type Workspace",
-  md: "MD Cabin",
-  manager: "Manager Cabin",
-  small: "Small Cabin",
-  ups: "UPS Room",
-  bms: "BMS Room",
-  server: "Server Room",
-};
-
 const MAX_AREA = 25000;
 const MIN_AREA = 1500;
 
 const App = () => {
-  const [totalArea, setTotalArea] = useState(0); // Set initial totalArea to 0
+  const [totalArea, setTotalArea] = useState(0);
   const [areas, setAreas] = useState(initialAreas);
   const [error, setError] = useState(false);
 
@@ -76,7 +65,7 @@ const App = () => {
   };
 
   const resetAll = () => {
-    setTotalArea(0); // Reset totalArea to 0
+    setTotalArea(0);
     setAreas(initialAreas);
     setError(false);
   };
@@ -86,11 +75,6 @@ const App = () => {
     0
   );
   const availableArea = totalArea - builtArea;
-
-  const transformedAreas = Object.keys(areas).map(key => ({
-    name: fullNames[key],
-    value: areas[key] * areaValues[key]
-  }));
 
   return (
     <div className="container">
@@ -106,10 +90,12 @@ const App = () => {
           <Cabins areas={areas} updateAreas={updateAreas} />
           <PublicSpaces areas={areas} updateAreas={updateAreas} />
         </div>
-        <ChartComponent 
-          areas={transformedAreas} // Pass transformed areas with full names
-          areaValues={areaValues} 
-          isOverCapacity={builtArea > totalArea} // Pass the overcapacity status
+        <Treemap 
+          totalArea={totalArea}
+          builtArea={builtArea}
+          availableArea={availableArea}
+          areas={areas}
+          areaValues={areaValues}
         />
       </div>
       {error && <div className="error">Total area must be between {MIN_AREA} and {MAX_AREA} square feet.</div>}

@@ -2,7 +2,12 @@ import React from 'react';
 
 const PublicSpaces = ({ areas, updateAreas }) => {
   const handleInputChange = (type, value) => {
-    updateAreas(type, value);
+    const parsedValue = parseInt(value, 10);
+    if (parsedValue >= 0) {
+      updateAreas(type, parsedValue);
+    } else {
+      alert("Negative values are not allowed.");
+    }
   };
 
   return (

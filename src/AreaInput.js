@@ -5,7 +5,6 @@ import './styles.css';
 const AreaInput = ({ setTotalArea, builtArea, availableArea, resetAll }) => {
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState(false);
-  const [isSquareFeet, setIsSquareFeet] = useState(true);
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
@@ -15,9 +14,8 @@ const AreaInput = ({ setTotalArea, builtArea, availableArea, resetAll }) => {
   const handleSubmit = () => {
     const area = parseInt(inputValue, 10);
     if (!isNaN(area)) {
-      const convertedArea = isSquareFeet ? area : area / 144; // Convert inches to square feet
-      if (convertedArea >= 1500 && convertedArea <= 25000) {
-        setTotalArea(convertedArea);
+      if (area >= 1500 && area <= 25000) {
+        setTotalArea(area);
         setError(false);
       } else {
         setError(true); // Set error state if area is out of range
@@ -25,10 +23,6 @@ const AreaInput = ({ setTotalArea, builtArea, availableArea, resetAll }) => {
     } else {
       setError(true); // Set error state if input is invalid
     }
-  };
-
-  const toggleUnit = () => {
-    setIsSquareFeet(!isSquareFeet);
   };
 
   const handleReset = () => {
@@ -45,11 +39,11 @@ const AreaInput = ({ setTotalArea, builtArea, availableArea, resetAll }) => {
           type="number" 
           value={inputValue} 
           onChange={handleInputChange} 
-          placeholder={`Enter total area (${isSquareFeet ? 'sq ft' : 'sq in'})`}
+          placeholder="Enter total area (sq ft)"
           title="Set the area value here"
           className={`set-area-input ${error ? 'error' : ''}`}
           aria-label="Total Area Input"
-          data-tip={`Enter the total area in ${isSquareFeet ? 'square feet' : 'square inches'}`}
+          data-tip="Enter the total area in square feet"
         />
         {error && (
           <div className="error-message" aria-live="polite">
@@ -67,15 +61,6 @@ const AreaInput = ({ setTotalArea, builtArea, availableArea, resetAll }) => {
           className="control-btn"
         >
           Set Area
-        </button>
-        <button 
-          onClick={toggleUnit} 
-          title="Toggle between square feet and square inches"
-          aria-label="Toggle Unit Button"
-          data-tip="Click to toggle between square feet and square inches"
-          className="toggle-unit-button"
-        >
-          {isSquareFeet ? 'Switch to Square Inches' : 'Switch to Square Feet'}
         </button>
         <button 
           onClick={handleReset} 
