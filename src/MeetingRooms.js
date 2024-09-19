@@ -1,6 +1,21 @@
 import React from 'react';
+import Counter from './Counter'; // Ensure the correct path to Counter.js
 
 const MeetingRooms = ({ areas, updateAreas }) => {
+  const handleIncrement = (type) => {
+    const newValue = (areas[type] || 0) + 1;
+    updateAreas(type, newValue);
+  };
+
+  const handleDecrement = (type) => {
+    const newValue = (areas[type] || 0) - 1;
+    if (newValue >= 0) {
+      updateAreas(type, newValue);
+    } else {
+      alert("Negative values are not allowed.");
+    }
+  };
+
   const handleInputChange = (type, value) => {
     const parsedValue = parseInt(value, 10);
     if (parsedValue >= 0) {
@@ -27,12 +42,11 @@ const MeetingRooms = ({ areas, updateAreas }) => {
           <div key={type} className="workspace">
             <img src={`/images/${type}.png`} alt={`${type} Room`} />
             <div className="control-btn-box">
-              <input
-                type="number"
-                className="value-input"
-                placeholder="Enter value"
-                value={areas[type] || ''}
-                onChange={(e) => handleInputChange(type, e.target.value)}
+              <Counter
+                value={areas[type] || 0}
+                onIncrement={() => handleIncrement(type)}
+                onDecrement={() => handleDecrement(type)}
+                onChange={(value) => handleInputChange(type, value)}
               />
               <div className="value-display">
                 {type.charAt(0).toUpperCase() + type.slice(1).replace(/([A-Z])/g, ' $1')}: <span>{areas[type] || 0}</span>
