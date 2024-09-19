@@ -10,20 +10,46 @@ const fullNames = {
   small: "Small Cabin",
   ups: "UPS Room",
   bms: "BMS Room",
-  server: "Server Room"
+  server: "Server Room",
+  reception: "Reception",
+  lounge: "Lounge/Pantry",
+  fitness: "Fitness Zone",
+  sales: "Sales Team",
+  phoneBooth: "Phone Booth",
+  discussionRoom: "Discussion Room",
+  interviewRoom: "Interview Room",
+  conferenceRoom: "Conference Room",
+  boardRoom: "Board Room",
+  meetingRoom: "Meeting Room",
+  meetingRoomLarge: "Meeting Room (Large)",
+  hrRoom: "HR Room",
+  financeRoom: "Finance Room"
 };
 
 const Treemap = ({ totalArea, areas, areaValues }) => {
   const colors = {
-    'Linear Workspace': '#6495ED',
-    'L-Type Workspace': '#4169E1',
-    'MD Cabin': '#FF6347',
-    'Manager Cabin': '#FF7F50',
-    'Small Cabin': '#FFC0CB',
-    'UPS Room': '#20B2AA',
-    'BMS Room': '#008080',
-    'Server Room': '#40E0D0',
-    'Available Space': '#D3D3D3'
+    'Linear Workspace': '#6495ED', // Cornflower Blue
+    'L-Type Workspace': '#4169E1', // Royal Blue
+    'MD Cabin': '#FF6347', // Tomato Red
+    'Manager Cabin': '#FF7F50', // Coral
+    'Small Cabin': '#FFC0CB', // Light Pink
+    'UPS Room': '#20B2AA', // Light Sea Green
+    'BMS Room': '#008080', // Teal
+    'Server Room': '#40E0D0', // Turquoise
+    'Reception': '#ADD8E6', // Light Blue
+    'Lounge/Pantry': '#E6E6FA', // Lavender
+    'Fitness Zone': '#E6E6FA', // Lavender
+    'Sales Team': '#9370DB', // Medium Purple
+    'Phone Booth': '#BA55D3', // Orchid
+    'Discussion Room': '#3CB371', // Medium Sea Green
+    'Interview Room': '#32CD32', // Lime Green
+    'Conference Room': '#FFD700', // Gold
+    'Board Room': '#FFE4B5', // Moccasin
+    'Meeting Room': '#FFDAB9', // Peach Puff
+    'Meeting Room (Large)': '#FFDAB9', // Peach Puff
+    'HR Room': '#90EE90', // Light Green
+    'Finance Room': '#5F9EA0', // Cadet Blue
+    'Available Space': '#D3D3D3' // Light Grey
   };
 
   const builtArea = Object.keys(areas).reduce((acc, key) => acc + areas[key] * areaValues[key], 0);
@@ -75,7 +101,7 @@ const Treemap = ({ totalArea, areas, areaValues }) => {
         formatter: function (value) {
           if (totalArea > 0) {
             const percentage = ((value / totalArea) * 100).toFixed(2);
-            return `${percentage}% of total area`;
+            return `${percentage}% of total area`; // Fixed syntax for template literals
           }
           return 'N/A'; // or return '0% of total area' if you prefer
         }
@@ -89,7 +115,7 @@ const Treemap = ({ totalArea, areas, areaValues }) => {
         colors: ['#FFFFFF']
       },
       formatter: function (val, opts) {
-        return `${opts.w.globals.labels[opts.dataPointIndex]}: ${val}`;
+        return `${opts.w.globals.labels[opts.dataPointIndex]}: ${val}`; // Fixed syntax for template literals
       }
     }
   };

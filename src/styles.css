@@ -514,7 +514,7 @@ span {
 .treemap-container {
   display: flex;
   width: 100%;
-  height: 50px; /* Adjust height as needed */
+  height: 50%; /* Adjust height as needed */
   margin-top: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -541,4 +541,28 @@ span {
 
 .available-space {
   background-color: grey;
+}
+
+.public-spaces-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px; /* Adjust the gap as needed */
+}
+
+.public-spaces-grid .workspace {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.meeting-rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px; /* Adjust the gap as needed */
+}
+
+.meeting-rooms-grid .workspace {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

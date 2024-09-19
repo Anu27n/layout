@@ -14,7 +14,7 @@ const Cabins = ({ areas, updateAreas }) => {
     <div className="section">
       <h3 className="section-heading">Cabins</h3>
       <div className="workspace-row">
-        {["md", "manager"].map((type) => (
+        {["md", "manager", "small"].map((type) => (
           <div key={type} className="workspace">
             <img src={`/images/${type}.png`} alt={`${type} Cabins`} />
             <div className="control-btn-box">
