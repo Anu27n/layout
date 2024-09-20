@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactApexChart from 'react-apexcharts'; // Ensure this import is correct
+import ReactApexChart from 'react-apexcharts';
 import './styles.css';
 
 const fullNames = {
@@ -99,11 +99,12 @@ const Treemap = ({ totalArea, areas, areaValues }) => {
     tooltip: {
       y: {
         formatter: function (value) {
+          console.log("hello")
           if (totalArea > 0) {
             const percentage = ((value / totalArea) * 100).toFixed(2);
             return `${percentage}% of total area`; // Fixed syntax for template literals
           }
-          return 'N/A'; // or return '0% of total area' if you prefer
+          return '100'; // or return '0% of total area' if you prefer
         }
       }
     },
@@ -122,7 +123,7 @@ const Treemap = ({ totalArea, areas, areaValues }) => {
 
   return (
     <div id="chart">
-      <ReactApexChart options={options} series={[{ data: series }]} type="treemap" height={350} />
+      <ReactApexChart options={options} series={[{ data: series }]} type="treemap" height={550} />
     </div>
   );
 };

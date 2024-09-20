@@ -1,7 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Counter from './Counter'; // Ensure the correct path to Counter.js
+import Radio from './Radio'; // Ensure the correct path to Radio.js
+import './styles.css'; // Import the updated CSS file
+
+const workspaceDescriptions = {
+  linear: "This is a linear workspace, designed for open collaboration.",
+  lType: "This is an L-type workspace, providing a semi-private environment.",
+};
 
 const OpenWorkspaces = ({ areas, updateAreas, variant, onVariantChange }) => {
+  const [selectedSize, setSelectedSize] = useState(variant);
+
+  useEffect(() => {
+    setSelectedSize(variant);
+  }, [variant]);
+
+  const handleSizeChange = (e) => {
+    const newSize = e.target.value;
+    setSelectedSize(newSize);
+    onVariantChange(newSize);
+  };
+
   const handleIncrement = (type) => {
     const newValue = (areas[type] || 0) + 1;
     updateAreas(type, newValue);
@@ -28,17 +47,16 @@ const OpenWorkspaces = ({ areas, updateAreas, variant, onVariantChange }) => {
   return (
     <div className="section">
       <h3 className="section-heading">Open Workspaces</h3>
-      <div className="workspace-row">
+      <div className="open-workspaces-grid">
         {["linear", "lType"].map((type) => (
           <div key={type} className="workspace">
-            <img src={`/images/${type}.png`} alt={`${type} Workstations`} />
+            <div className="workspace-image-container">
+              <img src={`/images/${type}.png`} alt={`${type} Workstations`} className="workspace-image" />
+              <div className="workspace-description">{workspaceDescriptions[type]}</div>
+            </div>
             <div className="control-btn-box">
               {type === "linear" && (
-                <select value={variant} onChange={(e) => onVariantChange(e.target.value)}>
-                  <option value="medium">Medium (20 sq feet)</option>
-                  <option value="large">Large (25 sq feet)</option>
-                  <option value="xl">XL (30 sq feet)</option>
-                </select>
+                <Radio selectedValue={selectedSize} onChange={handleSizeChange} />
               )}
               <Counter
                 value={areas[type] || 0}

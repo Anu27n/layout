@@ -1,5 +1,12 @@
 import React from 'react';
 import Counter from './Counter'; // Ensure the correct path to Counter.js
+import './styles.css'; // Import the updated CSS file
+
+const workspaceDescriptions = {
+  md: "This is the MD's cabin, designed for maximum comfort and productivity.",
+  manager: "This is the Manager's cabin, equipped with all necessary amenities.",
+  small: "This is a small cabin, suitable for individual work.",
+};
 
 const Cabins = ({ areas, updateAreas }) => {
   const handleIncrement = (type) => {
@@ -31,7 +38,10 @@ const Cabins = ({ areas, updateAreas }) => {
       <div className="cabins-grid">
         {["md", "manager", "small"].map((type) => (
           <div key={type} className="workspace">
-            <img src={`/images/${type}.png`} alt={`${type} Cabin`} />
+            <div className="workspace-image-container">
+              <img src={`/images/${type}.png`} alt={`${type} Cabin`} className="workspace-image" />
+              <div className="workspace-description">{workspaceDescriptions[type]}</div>
+            </div>
             <div className="control-btn-box">
               <Counter
                 value={areas[type] || 0}

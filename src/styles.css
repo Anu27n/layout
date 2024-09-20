@@ -19,7 +19,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh; /* Full viewport height */
+  height: 150dvh; /* Full viewport height */
+  width:50% ;
   overflow: hidden; /* Prevent main scrollbar */
   padding: 20px; /* Add padding to the container */
   box-sizing: border-box;
@@ -178,8 +179,8 @@ span {
 
 
 #chart {
-  width: 600px; /* Adjust width as needed */
-  height: 300px; /* Adjust height as needed */
+  width:35%; /* Adjust width as needed */ 
+  aspect-ratio: 1;
   position: absolute; /* Absolute position */
   left: 75px; /* Align to the left */
   bottom: 100; /* Align to the bottom */
@@ -190,10 +191,13 @@ span {
   display: flex;
   justify-content: flex-start; /* Align items to the start */
   align-items: center;
-  margin-top: 20px;
-  padding: 0 20px;
+  position: absolute; /* Absolute position */
+  left: 75px; /* Align to the left */
+  bottom: 0; /* Align to the bottom of the parent container */
+  margin-bottom: 200px;
   box-sizing: border-box;
 }
+
 
 .flexbox-item {
   flex: 0 0 auto; /* Prevent flex items from growing */
@@ -346,6 +350,7 @@ span {
   100% { transform: translateX(0); }
 }
 
+
 /* Button Styles */
 .area-input button {
   padding: 10px 20px; /* Increased padding */
@@ -361,21 +366,106 @@ span {
 .area-input button:hover {
   background-color: #45a049; /* Darker green on hover */
 }
+
+/* Updated Reset Button Styles */
 .reset-btn {
-  margin-top: 10px;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  background-color: #fff;
-  border: 1px solid #ccc;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1em 0em 1em 1em;
+  background-color: yellow;
   cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-  margin-left:605px ;
+  box-shadow: 4px 6px 0px black;
+  border: 4px solid;
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+  z-index: 100;
+  transition: box-shadow 250ms, transform 250ms, filter 50ms;
+  margin-left: 605px;
 }
 
 .reset-btn:hover {
-  background-color: #e0e0e0;
+  transform: translate(2px, 2px);
+  box-shadow: 2px 3px 0px black;
+}
+
+.reset-btn:active {
+  filter: saturate(0.75);
+}
+
+.reset-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: pink;
+  z-index: -1;
+  transform: translateX(-100%);
+  transition: transform 250ms;
+}
+
+.reset-btn:hover::after {
+  transform: translateX(0);
+}
+
+.bgContainer {
+  position: relative;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  overflow: hidden;
+  max-width: 35%; /* adjust this if the button text is not proper */
+  font-size: 2em;
+  font-weight: 600;
+}
+
+.bgContainer span {
+  position: relative;
+  transform: translateX(-100%);
+  transition: all 250ms;
+}
+
+.reset-btn:hover .bgContainer > span {
+  transform: translateX(0);
+}
+
+.arrowContainer {
+  padding: 1em;
+  margin-inline-end: 1em;
+  border: 4px solid;
+  border-radius: 50%;
+  background-color: pink;
+  position: relative;
+  overflow: hidden;
+  transition: transform 250ms, background-color 250ms;
+  z-index: 100;
+}
+
+.arrowContainer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: yellow;
+  transform: translateX(-100%);
+  z-index: -1;
+  transition: transform 250ms ease-in-out;
+}
+
+.reset-btn:hover .arrowContainer::after {
+  transform: translateX(0);
+}
+
+.reset-btn:hover .arrowContainer {
+  transform: translateX(5px);
+}
+
+.reset-btn:active .arrowContainer {
+  transform: translateX(8px);
+}
+
+.arrowContainer svg {
+  vertical-align: middle;
 }
 
 /* New Button Styles */
@@ -390,6 +480,108 @@ span {
 
 .set-area-button:hover, .toggle-unit-button:hover {
   background-color: #cc0000; /* Darker red on hover */
+}
+
+/* From Uiverse.io by Subaashbala */
+.set-area-button {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1em 0em 1em 1em;
+  background-color: yellow;
+  color: black; /* Ensure text color is visible */
+  cursor: pointer;
+  box-shadow: 4px 6px 0px black;
+  border: 4px solid;
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+  z-index: 100;
+  transition: box-shadow 250ms, transform 250ms, filter 50ms;
+}
+
+.set-area-button:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 3px 0px black;
+}
+
+.set-area-button:active {
+  filter: saturate(0.75);
+}
+
+.set-area-button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: pink;
+  z-index: -1;
+  transform: translateX(-100%);
+  transition: transform 250ms;
+}
+
+.set-area-button:hover::after {
+  transform: translateX(0);
+}
+
+.bgContainer {
+  position: relative;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  overflow: hidden;
+  max-width: 35%; /* adjust this if the button text is not proper */
+  font-size: 2em;
+  font-weight: 600;
+  color: black; /* Ensure text color is visible */
+}
+
+.bgContainer span {
+  position: relative;
+  transform: translateX(0); /* Ensure text is always visible */
+  transition: all 250ms;
+}
+
+.set-area-button:hover .bgContainer > span {
+  transform: translateX(0); /* Ensure text is always visible */
+}
+
+.arrowContainer {
+  padding: 1em;
+  margin-inline-end: 1em;
+  border: 4px solid;
+  border-radius: 50%;
+  background-color: pink;
+  position: relative;
+  overflow: hidden;
+  transition: transform 250ms, background-color 250ms;
+  z-index: 100;
+}
+
+.arrowContainer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: yellow;
+  transform: translateX(-100%);
+  z-index: -1;
+  transition: transform 250ms ease-in-out;
+}
+
+.set-area-button:hover .arrowContainer::after {
+  transform: translateX(0);
+}
+
+.set-area-button:hover .arrowContainer {
+  transform: translateX(5px);
+}
+
+.set-area-button:active .arrowContainer {
+  transform: translateX(8px);
+}
+
+.arrowContainer svg {
+  vertical-align: middle;
 }
 
 /* Subsection styling */
@@ -408,11 +600,12 @@ span {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 500%;
+    width: 100%;
     height: 500%; /* Full height of the content area */
     overflow-y: auto; /* Enable vertical scrolling within sections */
     padding: 10px; /* Add padding to sections */
     box-sizing: border-box;
+    aspect-ratio: 16/9;
   }
   
 
@@ -630,4 +823,43 @@ span {
   flex-direction: column;
   align-items: center; /* Center horizontally */
   text-align: center;
+}
+
+.workspace-image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.workspace-image {
+  width: 220px; /* Adjust size as needed */
+  height: 190px; /* Adjust size as needed */
+  margin-bottom: 10px; /* Space between image and other elements */
+}
+
+.workspace-description {
+  visibility: hidden;
+  width: 220px; /* Match the width of the image */
+  background-color: rgba(0, 0, 0, 0.75); /* Semi-transparent background */
+  color: #fff; /* White text */
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 100%; /* Position above the image */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.workspace-image-container:hover .workspace-description {
+  visibility: visible;
+  opacity: 1;
+}
+
+.open-workspaces-grid {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping to the next line */
+  gap: 16px; /* Adjust the gap between items as needed */
 }

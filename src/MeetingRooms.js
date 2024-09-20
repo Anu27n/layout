@@ -1,5 +1,17 @@
 import React from 'react';
 import Counter from './Counter'; // Ensure the correct path to Counter.js
+import './styles.css'; // Import the updated CSS file
+
+const meetingRoomDescriptions = {
+  discussionRoom: "This is the discussion room, ideal for small group discussions.",
+  interviewRoom: "This is the interview room, designed for conducting interviews.",
+  conferenceRoom: "This is the conference room, suitable for large meetings.",
+  boardRoom: "This is the board room, equipped for executive meetings.",
+  meetingRoom: "This is the meeting room, perfect for team meetings.",
+  meetingRoomLarge: "This is the large meeting room, accommodating larger groups.",
+  hrRoom: "This is the HR room, designated for HR activities.",
+  financeRoom: "This is the finance room, used for financial discussions.",
+};
 
 const MeetingRooms = ({ areas, updateAreas }) => {
   const handleIncrement = (type) => {
@@ -40,7 +52,10 @@ const MeetingRooms = ({ areas, updateAreas }) => {
           "financeRoom"
         ].map((type) => (
           <div key={type} className="workspace">
-            <img src={`/images/${type}.png`} alt={`${type} Room`} />
+            <div className="workspace-image-container">
+              <img src={`/images/${type}.png`} alt={`${type} Room`} className="workspace-image" />
+              <div className="workspace-description">{meetingRoomDescriptions[type]}</div>
+            </div>
             <div className="control-btn-box">
               <Counter
                 value={areas[type] || 0}

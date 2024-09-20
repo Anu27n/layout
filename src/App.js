@@ -7,6 +7,8 @@ import PublicSpaces from "./PublicSpaces"; // Import PublicSpaces component
 import MeetingRooms from "./MeetingRooms"; // Import MeetingRooms component
 import { Tooltip } from "react-tooltip";
 import Treemap from "./Treemap"; // Import the Treemap component
+import Card from "./Card"; // Import the Card component
+import Modal from "./Modal"; // Import the Modal component
 import "./styles.css";
 
 const initialAreaValues = {
@@ -66,6 +68,7 @@ const App = () => {
   const [areaValues, setAreaValues] = useState(initialAreaValues);
   const [variant, setVariant] = useState('medium');
   const [error, setError] = useState(false);
+  const [showCard, setShowCard] = useState(false); // State for displaying the card
 
   const updateAreas = (type, value) => {
     const newAreas = {
@@ -89,8 +92,14 @@ const App = () => {
     if (value >= MIN_AREA && value <= MAX_AREA) {
       setTotalArea(value);
       setError(false);
+      setShowCard(false); // Hide card if area is within valid range
+    } else if (value > MAX_AREA) {
+      setTotalArea(value);
+      setError(true);
+      setShowCard(true); // Show card if area exceeds 25,000 sq feet
     } else {
       setError(true);
+      setShowCard(false); // Hide card if area is invalid
     }
   };
 
@@ -98,6 +107,7 @@ const App = () => {
     setTotalArea(0);
     setAreas(initialAreas);
     setError(false);
+    setShowCard(false); // Hide card on reset
   };
 
   const handleVariantChange = (newVariant) => {
@@ -153,6 +163,9 @@ const App = () => {
           areaValues={areaValues}
         />
       </div>
+      <Modal show={showCard} onClose={() => setShowCard(false)}>
+        <Card />
+      </Modal>
       {error && <div className="error">Total area must be between {MIN_AREA} and {MAX_AREA} square feet.</div>}
       <Tooltip />
     </div>

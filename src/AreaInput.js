@@ -58,9 +58,14 @@ const AreaInput = ({ setTotalArea, builtArea, availableArea, resetAll }) => {
           title="Click to set the area"
           aria-label="Set Area Button"
           data-tip="Click to set the total area"
-          className="control-btn"
+          className="set-area-button"
         >
-          Set Area
+          <div className="bgContainer">
+            <span>Set Area</span>
+          </div>
+          <div className="arrowContainer">
+            {/* Add your SVG or arrow icon here */}
+          </div>
         </button>
         <button 
           onClick={handleReset} 
