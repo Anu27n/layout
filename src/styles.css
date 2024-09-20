@@ -199,34 +199,50 @@ span {
   bottom: 0; /* Align to the bottom of the parent container */
   margin-bottom: 200px;
   box-sizing: border-box;
+  gap: 1rem; 
 }
 
 
 .flexbox-item {
-  flex: 0 0 auto; /* Prevent flex items from growing */
-  padding: 10px; /* Adjust padding for better spacing */
-  margin: 0 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  text-align: left; /* Align text to the left */
-  background-color: #f9f9f9;
-  width: 200px; /* Set a fixed width */
-  display: flex;
+  outline: 0;
+  display: inline-flex;
   align-items: center;
-  font-weight: bold; /* Make text bold */
+  justify-content: center; /* Center text horizontally */
+  background: #40B3A2;
+  min-width: 200px;
+  border: 0;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .1);
+  box-sizing: border-box;
+  padding: 16px 20px;
+  color: #000; /* Change text color to black */
+  font-size: 16px; /* Increase font size for better readability */
+  font-weight: 700; /* Make text bold */
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  overflow: hidden;
+  cursor: pointer;
+  text-align: center; /* Center text */
+  transition: background-color 0.3s ease; /* Smooth transition for background color */
 }
 
-.flexbox-item img {
-  max-width: 30px; /* Smaller image */
-  margin-right: 10px; /* Space between image and text */
+.flexbox-item:hover {
+  opacity: .95;
 }
 
-.flexbox-item.available {
-  background-color: #e0f7fa; /* Light cyan */
+.flexbox-item .animation {
+  border-radius: 100%;
+  animation: ripple 0.6s linear infinite;
 }
 
-.flexbox-item.built {
-  background-color: #ffebee; /* Light pink */
+@keyframes ripple {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.1), 0 0 0 20px rgba(255, 255, 255, 0.1), 0 0 0 40px rgba(255, 255, 255, 0.1), 0 0 0 60px rgba(255, 255, 255, 0.1);
+  }
+
+  100% {
+    box-shadow: 0 0 0 20px rgba(255, 255, 255, 0.1), 0 0 0 40px rgba(255, 255, 255, 0.1), 0 0 0 60px rgba(255, 255, 255, 0.1), 0 0 0 80px rgba(255, 255, 255, 0);
+  }
 }
 /* Built Available Area Styles */
 .built-available-area {
