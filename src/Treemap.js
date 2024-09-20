@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; 
 import ReactApexChart from 'react-apexcharts';
 import './styles.css';
 
@@ -26,7 +26,7 @@ const fullNames = {
   financeRoom: "Finance Room"
 };
 
-const Treemap = ({ totalArea, areas, areaValues }) => {
+const Treemap = ({ totalArea = 4000, areas, areaValues }) => {
   const colors = {
     'Linear Workspace': '#6495ED', // Cornflower Blue
     'L-Type Workspace': '#4169E1', // Royal Blue
@@ -52,8 +52,12 @@ const Treemap = ({ totalArea, areas, areaValues }) => {
     'Available Space': '#D3D3D3' // Light Grey
   };
 
+  // Ensure totalArea is greater than zero to prevent division by zero
+  const validTotalArea = totalArea > 0 ? totalArea : 4000; // Set default to 4000 sq ft
+
+  // Calculate the built area and available area
   const builtArea = Object.keys(areas).reduce((acc, key) => acc + areas[key] * areaValues[key], 0);
-  const availableArea = totalArea - builtArea;
+  const availableArea = validTotalArea - builtArea;
 
   const series = [
     ...Object.keys(areas).map(key => ({
@@ -99,12 +103,8 @@ const Treemap = ({ totalArea, areas, areaValues }) => {
     tooltip: {
       y: {
         formatter: function (value) {
-          console.log("hello")
-          if (totalArea > 0) {
-            const percentage = ((value / totalArea) * 100).toFixed(2);
-            return `${percentage}% of total area`; // Fixed syntax for template literals
-          }
-          return '100'; // or return '0% of total area' if you prefer
+          const percentage = ((value / validTotalArea) * 100).toFixed(2);
+          return `${percentage}% of total area`;
         }
       }
     },
@@ -116,7 +116,12 @@ const Treemap = ({ totalArea, areas, areaValues }) => {
         colors: ['#FFFFFF']
       },
       formatter: function (val, opts) {
-        return `${opts.w.globals.labels[opts.dataPointIndex]}: ${val}`; // Fixed syntax for template literals
+        // Check if the value is a number before applying toFixed
+        if (typeof val === 'number') {
+          const percentage = ((val / validTotalArea) * 100).toFixed(2);
+          return `${opts.w.globals.labels[opts.dataPointIndex]}: ${percentage}%`;
+        }
+        return `${opts.w.globals.labels[opts.dataPointIndex]}: ${val}`; // Return raw value if not a number
       }
     }
   };
@@ -129,3 +134,4 @@ const Treemap = ({ totalArea, areas, areaValues }) => {
 };
 
 export default Treemap;
+
