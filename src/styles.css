@@ -169,23 +169,26 @@ span {
   padding: 20px;
 }
 
+/* Add flexbox properties to the content class */
 .content {
-  flex: 1;
-  overflow-y: auto; /* Enable vertical scrollbar */
-  padding: 20px;
-  margin-left: 1750px;
-  width:100%;
+  display: flex;
+  flex-wrap: wrap; /* Optional: allows children to wrap to the next line */
+  gap: 20px; /* Optional: adds space between children */
+}
+
+/* Specify width and height for the children of content */
+.content > * {
+  flex: 1 1 45%; /* Adjust the flex-grow, flex-shrink, and flex-basis properties as needed */
+  height: 300px; /* Specify the height of the children */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
 
 #chart {
-  width:35%; /* Adjust width as needed */ 
+  width: 40%; /* Adjust width as needed */
   aspect-ratio: 1;
-  position: absolute; /* Absolute position */
-  left: 75px; /* Align to the left */
-  bottom: 100; /* Align to the bottom */
   padding: 20px; /* Add padding if needed */
-  box-sizing: border-box; /* Include padding in width/height */
+  box-sizing: border-box; /* Include padding in width/height */
 }
 .flexbox-container {
   display: flex;

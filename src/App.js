@@ -10,6 +10,7 @@ import Treemap from "./Treemap"; // Import the Treemap component
 import Card from "./Card"; // Import the Card component
 import Modal from "./Modal"; // Import the Modal component
 import "./styles.css";
+import "./fixes.css";
 
 const initialAreaValues = {
   linear: 20, // Default to medium
@@ -66,7 +67,7 @@ const App = () => {
   const [totalArea, setTotalArea] = useState(0);
   const [areas, setAreas] = useState(initialAreas);
   const [areaValues, setAreaValues] = useState(initialAreaValues);
-  const [variant, setVariant] = useState('medium');
+  const [variant, setVariant] = useState("medium");
   const [error, setError] = useState(false);
   const [showCard, setShowCard] = useState(false); // State for displaying the card
 
@@ -114,13 +115,13 @@ const App = () => {
     setVariant(newVariant);
     const newAreaValues = { ...areaValues };
     switch (newVariant) {
-      case 'large':
+      case "large":
         newAreaValues.linear = 25;
         break;
-      case 'xl':
+      case "xl":
         newAreaValues.linear = 30;
         break;
-      case 'medium':
+      case "medium":
       default:
         newAreaValues.linear = 20;
         break;
@@ -136,37 +137,43 @@ const App = () => {
 
   return (
     <div className="container">
-      <AreaInput 
-        setTotalArea={handleSetTotalArea} 
-        builtArea={builtArea} 
-        availableArea={availableArea} 
+      <AreaInput
+        setTotalArea={handleSetTotalArea}
+        builtArea={builtArea}
+        availableArea={availableArea}
         resetAll={resetAll}
       />
-      <div className="content">
-        <div className="sections">
-          <OpenWorkspaces 
-            areas={areas} 
-            updateAreas={updateAreas} 
-            variant={variant} 
-            onVariantChange={handleVariantChange} 
-          />
-          <Cabins areas={areas} updateAreas={updateAreas} />
-          <SupportSpaces areas={areas} updateAreas={updateAreas} />
-          <PublicSpaces areas={areas} updateAreas={updateAreas} /> {/* Include PublicSpaces component */}
-          <MeetingRooms areas={areas} updateAreas={updateAreas} /> {/* Include MeetingRooms component */}
-        </div>
-        <Treemap 
+      <div className=" --content">
+        <Treemap
           totalArea={totalArea}
           builtArea={builtArea}
           availableArea={availableArea}
           areas={areas}
           areaValues={areaValues}
         />
+        <div className="--sections">
+          <OpenWorkspaces
+            areas={areas}
+            updateAreas={updateAreas}
+            variant={variant}
+            onVariantChange={handleVariantChange}
+          />
+          <Cabins areas={areas} updateAreas={updateAreas} />
+          <SupportSpaces areas={areas} updateAreas={updateAreas} />
+          <PublicSpaces areas={areas} updateAreas={updateAreas} />{" "}
+          {/* Include PublicSpaces component */}
+          <MeetingRooms areas={areas} updateAreas={updateAreas} />{" "}
+          {/* Include MeetingRooms component */}
+        </div>
       </div>
       <Modal show={showCard} onClose={() => setShowCard(false)}>
         <Card />
       </Modal>
-      {error && <div className="error">Total area must be between {MIN_AREA} and {MAX_AREA} square feet.</div>}
+      {error && (
+        <div className="error">
+          Total area must be between {MIN_AREA} and {MAX_AREA} square feet.
+        </div>
+      )}
       <Tooltip />
     </div>
   );
