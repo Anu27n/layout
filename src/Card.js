@@ -24,13 +24,13 @@ const Card = () => {
         <div className="brutalist-card__actions">
           <a
             className="brutalist-card__button brutalist-card__button--mark"
-            href="#"
+            href="https://www.603thecoworkingspace.com/contactus"
           >
             Contact us now
           </a>
           <a
             className="brutalist-card__button brutalist-card__button--read"
-            href="#"
+            href="https://www.603thecoworkingspace.com/contactus"
           >
             Email us now
           </a>
