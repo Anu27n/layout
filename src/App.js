@@ -3,17 +3,17 @@ import AreaInput from "./AreaInput";
 import OpenWorkspaces from "./OpenWorkspaces";
 import Cabins from "./Cabins";
 import SupportSpaces from "./SupportSpaces";
-import PublicSpaces from "./PublicSpaces"; // Import PublicSpaces component
-import MeetingRooms from "./MeetingRooms"; // Import MeetingRooms component
+import PublicSpaces from "./PublicSpaces";
+import MeetingRooms from "./MeetingRooms";
 import { Tooltip } from "react-tooltip";
-import Treemap from "./Treemap"; // Import the Treemap component
-import Card from "./Card"; // Import the Card component
-import Modal from "./Modal"; // Import the Modal component
+import Treemap from "./Treemap";
+import Modal from "./Modal"; // Ensure Modal is imported correctly
+import Card from "./Card";   // Ensure Card is imported correctly
 import "./styles.css";
 import "./fixes.css";
 
 const initialAreaValues = {
-  linear: 20, // Default to medium
+  linear: 20,
   lType: 28,
   md: 140,
   manager: 80,
@@ -21,12 +21,12 @@ const initialAreaValues = {
   ups: 90,
   bms: 90,
   server: 40,
-  reception: 160, // Add public spaces area values
+  reception: 160,
   lounge: 150,
   fitness: 250,
   sales: 80,
   phoneBooth: 250,
-  discussionRoom: 380, // Add meeting rooms area values
+  discussionRoom: 380,
   interviewRoom: 100,
   conferenceRoom: 250,
   boardRoom: 325,
@@ -45,12 +45,12 @@ const initialAreas = {
   ups: 0,
   bms: 0,
   server: 0,
-  reception: 0, // Add public spaces initial areas
+  reception: 0,
   lounge: 0,
   fitness: 0,
   sales: 0,
   phoneBooth: 0,
-  discussionRoom: 0, // Add meeting rooms initial areas
+  discussionRoom: 0,
   interviewRoom: 0,
   conferenceRoom: 0,
   boardRoom: 0,
@@ -69,7 +69,7 @@ const App = () => {
   const [areaValues, setAreaValues] = useState(initialAreaValues);
   const [variant, setVariant] = useState("medium");
   const [error, setError] = useState(false);
-  const [showCard, setShowCard] = useState(false); // State for displaying the card
+  const [showModal, setShowModal] = useState(false); // Modal visibility control
 
   const updateAreas = (type, value) => {
     const newAreas = {
@@ -80,12 +80,16 @@ const App = () => {
       (acc, key) => acc + newAreas[key] * areaValues[key],
       0
     );
+
+    // Check if built area exceeds total available area
     if (builtArea <= totalArea) {
       setAreas(newAreas);
       setError(false);
+      setShowModal(false); // Hide modal when within the limit
     } else {
-      alert("You have exceeded the available space!");
-      setError(true);
+      console.log("Built area exceeds the available space, showing modal");
+      setError(true); // Trigger error when area exceeds the limit
+      setShowModal(true); // Show modal if limit is exceeded
     }
   };
 
@@ -93,14 +97,15 @@ const App = () => {
     if (value >= MIN_AREA && value <= MAX_AREA) {
       setTotalArea(value);
       setError(false);
-      setShowCard(false); // Hide card if area is within valid range
+      setShowModal(false); // Hide modal if within valid area range
     } else if (value > MAX_AREA) {
-      setTotalArea(value);
-      setError(true);
-      setShowCard(true); // Show card if area exceeds 25,000 sq feet
+      console.log("Total area exceeds the max limit, showing modal");
+      setTotalArea(value); // Set the area even if it's beyond the limit
+      setError(true);      // Trigger error due to exceeding max limit
+      setShowModal(true);  // Show modal if area exceeds max limit
     } else {
-      setError(true);
-      setShowCard(false); // Hide card if area is invalid
+      setError(true);      // Trigger error for invalid area (too small)
+      setShowModal(true);  // Show modal for invalid area
     }
   };
 
@@ -108,7 +113,7 @@ const App = () => {
     setTotalArea(0);
     setAreas(initialAreas);
     setError(false);
-    setShowCard(false); // Hide card on reset
+    setShowModal(false); // Hide modal on reset
   };
 
   const handleVariantChange = (newVariant) => {
@@ -160,18 +165,18 @@ const App = () => {
           />
           <Cabins areas={areas} updateAreas={updateAreas} />
           <SupportSpaces areas={areas} updateAreas={updateAreas} />
-          <PublicSpaces areas={areas} updateAreas={updateAreas} />{" "}
-          {/* Include PublicSpaces component */}
-          <MeetingRooms areas={areas} updateAreas={updateAreas} />{" "}
-          {/* Include MeetingRooms component */}
+          <PublicSpaces areas={areas} updateAreas={updateAreas} />
+          <MeetingRooms areas={areas} updateAreas={updateAreas} />
         </div>
       </div>
-      <Modal show={showCard} onClose={() => setShowCard(false)}>
-        <Card />
-      </Modal>
+      {showModal && (
+        <Modal show={showModal} onClose={() => setShowModal(false)}>
+          <Card /> {/* Ensure this Card component is being displayed properly */}
+        </Modal>
+      )}
       {error && (
         <div className="error">
-          Total area must be between {MIN_AREA} and {MAX_AREA} square feet.
+            🚨 Oops! The area exceeded the allowed limits. Please check your input and try again!
         </div>
       )}
       <Tooltip />
