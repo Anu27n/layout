@@ -28,7 +28,9 @@ body {
 
 /* Section Styles */
 .section-heading {
- /* Grey with 50% transparency */
+  position: -webkit-sticky; /* For Safari */
+  position: sticky;
+  top: 0;/* Grey with 50% transparency */
   padding: 10px;
   border-radius: 25px;
   color: rgba(18, 8, 8, 0.882); /* Optional: to make the text more readable */
@@ -39,6 +41,7 @@ body {
   color: #333;               /* Dark grey text color */
   border-radius: 4px;        /* Optional: Rounded corners */
   margin-bottom: 20px;       /* Space below the heading */
+  z-index: 10;  
 }
 
 .sections-inner {
@@ -86,7 +89,6 @@ section h3 {
   overflow-x: hidden; /* Hide horizontal scrollbar */
 }
 
-/* Workspace Styles */
 
 /* Workspace Styles */
 .workspace-row {
@@ -106,8 +108,8 @@ section h3 {
 }
 
 .workspace img {
-  width: 220px; /* Increased size */
-  height: 190px; /* Increased size */
+  width: 250px; /* Increased size */
+  height: 200px; /* Increased size */
   margin-bottom: 10px; /* Space between image and control box */
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -313,6 +315,42 @@ span {
 }
 
 /* Scrollbar Styles */
+.relative {
+  position: relative;
+}
+
+.grow {
+  flex-grow: 1;
+}
+
+.overflow-y-scroll {
+  overflow-y: scroll;
+}
+
+.scroll-smooth {
+  scroll-behavior: smooth;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari, and Opera */
+}
+
+.snap-y {
+  scroll-snap-type: y mandatory;
+}
+
+.snap-mandatory {
+  scroll-snap-type: mandatory;
+}
+
+.snap-start {
+  scroll-snap-align: start;
+}
 .sections-inner::-webkit-scrollbar {
   width: 8px; /* Custom scrollbar width */
 }
@@ -865,8 +903,8 @@ span {
 }
 
 .workspace-image {
-  width: 220px; /* Adjust size as needed */
-  height: 190px; /* Adjust size as needed */
+  width: 335px; /* Adjust size as needed */
+  height: 220px; /* Adjust size as needed */
   margin-bottom: 10px; /* Space between image and other elements */
 }
 
@@ -882,7 +920,7 @@ span {
   bottom: 100%; /* Position above the image */
   left: 50%;
   transform: translateX(-50%);
-  z-index: 1;
+  z-index: 11;
   opacity: 0;
   transition: opacity 0.3s;
 }
