@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Tooltip } from 'react-tooltip';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalculator } from '@fortawesome/free-solid-svg-icons';
 import './styles.css';
 
 const AreaInput = ({ setTotalArea, builtArea, availableArea, resetAll }) => {
@@ -34,7 +36,13 @@ const AreaInput = ({ setTotalArea, builtArea, availableArea, resetAll }) => {
   return (
     <div className="area-input">
       <div className="input-container">
-        <i className="fas fa-calculator calculator-icon" title="Calculator"></i>
+        <FontAwesomeIcon 
+          icon={faCalculator} 
+          className="calculator-icon" 
+          title="Calculator" 
+          beatFade 
+          style={{ color: "#FFD43B" }}
+        />
         <input 
           type="number" 
           value={inputValue} 
