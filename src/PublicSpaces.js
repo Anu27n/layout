@@ -38,7 +38,7 @@ const PublicSpaces = ({ areas, updateAreas }) => {
     <div className="section">
       <h3 className="section-heading">Public Spaces</h3>
       <div className="public-spaces-grid">
-        {["reception", "lounge", "fitness", "sales", "phoneBooth"].map((type) => (
+        {["reception", "lounge", "sales", "phoneBooth"].map((type) => (
           <div key={type} className="workspace">
             <div className="workspace-image-container">
               <img src={`/images/${type}.png`} alt={`${type} Room`} className="workspace-image" />

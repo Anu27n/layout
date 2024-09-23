@@ -9,8 +9,8 @@ import { Tooltip } from "react-tooltip";
 import Treemap from "./Treemap";
 import Modal from "./Modal"; // Ensure Modal is imported correctly
 import Card from "./Card";   // Ensure Card is imported correctly
-import "./styles.css";
-import "./fixes.css";
+import "./styles.css"; // Ensure this path is correct
+import "./fixes.css";  // Ensure this path is correct
 
 const initialAreaValues = {
   linear: 20,
@@ -23,7 +23,6 @@ const initialAreaValues = {
   server: 40,
   reception: 160,
   lounge: 150,
-  fitness: 250,
   sales: 80,
   phoneBooth: 250,
   discussionRoom: 380,
@@ -47,7 +46,6 @@ const initialAreas = {
   server: 0,
   reception: 0,
   lounge: 0,
-  fitness: 0,
   sales: 0,
   phoneBooth: 0,
   discussionRoom: 0,
@@ -72,6 +70,11 @@ const App = () => {
   const [showModal, setShowModal] = useState(false); // Modal visibility control
 
   const updateAreas = (type, value) => {
+    if (value < 0) {
+      alert("Negative values are not allowed");
+      return;
+    }
+
     const newAreas = {
       ...areas,
       [type]: value,
@@ -94,6 +97,11 @@ const App = () => {
   };
 
   const handleSetTotalArea = (value) => {
+    if (value < 0) {
+      alert("Negative values are not allowed");
+      return;
+    }
+
     if (value >= MIN_AREA && value <= MAX_AREA) {
       setTotalArea(value);
       setError(false);
@@ -140,15 +148,58 @@ const App = () => {
   );
   const availableArea = totalArea - builtArea;
 
+  const handleGenerateBOQ = () => {
+    // Add your logic to generate BOQ here
+    alert("Generate BOQ button clicked!");
+  };
+
   return (
     <div className="container">
+      <style>
+        {`
+          /* Hide spinners in Chrome, Safari, Edge, and Opera */
+          input[type="number"]::-webkit-outer-spin-button,
+          input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
+
+          /* Hide spinners in Firefox */
+          input[type="number"] {
+            -moz-appearance: textfield;
+          }
+
+          /* Additional styles to ensure spinners are hidden */
+          input[type="number"] {
+            appearance: textfield;
+          }
+
+          /* Style for the Generate BOQ button */
+          .generate-boq-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+          }
+
+          .generate-boq-button:hover {
+            background-color: #0056b3;
+          }
+        `}
+      </style>
       <AreaInput
         setTotalArea={handleSetTotalArea}
         builtArea={builtArea}
         availableArea={availableArea}
         resetAll={resetAll}
       />
-      <div className=" --content">
+      <div className="--content">
         <Treemap
           totalArea={totalArea}
           builtArea={builtArea}
@@ -164,9 +215,9 @@ const App = () => {
             onVariantChange={handleVariantChange}
           />
           <Cabins areas={areas} updateAreas={updateAreas} />
-          <SupportSpaces areas={areas} updateAreas={updateAreas} />
-          <PublicSpaces areas={areas} updateAreas={updateAreas} />
           <MeetingRooms areas={areas} updateAreas={updateAreas} />
+          <PublicSpaces areas={areas} updateAreas={updateAreas} />
+          <SupportSpaces areas={areas} updateAreas={updateAreas} />
         </div>
       </div>
       {showModal && (
@@ -176,10 +227,13 @@ const App = () => {
       )}
       {error && (
         <div className="error">
-            🚨 Oops! The area exceeded the allowed limits. Please check your input and try again!
+          🚨 Oops! The area exceeded the allowed limits. Please check your input and try again!
         </div>
       )}
       <Tooltip />
+      <button className="generate-boq-button" onClick={handleGenerateBOQ}>
+        Generate BOQ
+      </button>
     </div>
   );
 };
