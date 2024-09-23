@@ -24,7 +24,7 @@ const initialAreaValues = {
   reception: 160,
   lounge: 150,
   sales: 80,
-  phoneBooth: 250,
+  phoneBooth: 25,
   discussionRoom: 380,
   interviewRoom: 100,
   conferenceRoom: 250,
