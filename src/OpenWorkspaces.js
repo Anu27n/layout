@@ -55,15 +55,15 @@ const OpenWorkspaces = ({ areas, updateAreas, variant, onVariantChange }) => {
               <div className="workspace-description">{workspaceDescriptions[type]}</div>
             </div>
             <div className="control-btn-box">
-              {type === "linear" && (
-                <Radio selectedValue={selectedSize} onChange={handleSizeChange} />
-              )}
               <Counter
                 value={areas[type] || 0}
                 onIncrement={() => handleIncrement(type)}
                 onDecrement={() => handleDecrement(type)}
                 onChange={(value) => handleInputChange(type, value)}
               />
+              {type === "linear" && (
+                <Radio selectedValue={selectedSize} onChange={handleSizeChange} />
+              )}
               <div className="value-display">
                 {type.charAt(0).toUpperCase() + type.slice(1)} Workstations: <span>{areas[type] || 0}</span>
               </div>

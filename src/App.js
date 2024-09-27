@@ -185,6 +185,7 @@ const App = () => {
   const availableArea = totalArea - builtArea;
 
   const handleGenerateBOQ = () => {
+    // Add your logic to generate BOQ here
     alert("Generate BOQ button clicked!");
   };
 
@@ -225,6 +226,24 @@ const App = () => {
       <Tooltip />
       <button className="generate-boq-button" onClick={handleGenerateBOQ}>
         Generate BOQ
+        <svg className="star-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z"/>
+        </svg>
+        <svg className="star-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z"/>
+        </svg>
+        <svg className="star-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z"/>
+        </svg>
+        <svg className="star-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z"/>
+        </svg>
+        <svg className="star-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z"/>
+        </svg>
+        <svg className="star-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z"/>
+        </svg>
       </button>
       <button className="save-button" onClick={handleSave}>
         Save
