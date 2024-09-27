@@ -7,10 +7,11 @@ import PublicSpaces from "./PublicSpaces";
 import MeetingRooms from "./MeetingRooms";
 import { Tooltip } from "react-tooltip";
 import Treemap from "./Treemap";
-import Modal from "./Modal"; // Ensure Modal is imported correctly
-import Card from "./Card";   // Ensure Card is imported correctly
-import "./styles.css"; // Ensure this path is correct
-import "./fixes.css";  // Ensure this path is correct
+import Modal from "./Modal";
+import Card from "./Card";
+import "./styles.css";
+import "./fixes.css";
+import { supabase } from './supabaseClient';
 
 const initialAreaValues = {
   linear: 20,
@@ -67,7 +68,8 @@ const App = () => {
   const [areaValues, setAreaValues] = useState(initialAreaValues);
   const [variant, setVariant] = useState("medium");
   const [error, setError] = useState(false);
-  const [showModal, setShowModal] = useState(false); // Modal visibility control
+  const [showModal, setShowModal] = useState(false);
+  const [finalData, setFinalData] = useState(null);
 
   const updateAreas = (type, value) => {
     if (value < 0) {
@@ -79,20 +81,20 @@ const App = () => {
       ...areas,
       [type]: value,
     };
+
     const builtArea = Object.keys(newAreas).reduce(
       (acc, key) => acc + newAreas[key] * areaValues[key],
       0
     );
 
-    // Check if built area exceeds total available area
     if (builtArea <= totalArea) {
       setAreas(newAreas);
       setError(false);
-      setShowModal(false); // Hide modal when within the limit
+      setShowModal(false);
     } else {
       console.log("Built area exceeds the available space, showing modal");
-      setError(true); // Trigger error when area exceeds the limit
-      setShowModal(true); // Show modal if limit is exceeded
+      setError(true);
+      setShowModal(true);
     }
   };
 
@@ -105,15 +107,10 @@ const App = () => {
     if (value >= MIN_AREA && value <= MAX_AREA) {
       setTotalArea(value);
       setError(false);
-      setShowModal(false); // Hide modal if within valid area range
-    } else if (value > MAX_AREA) {
-      console.log("Total area exceeds the max limit, showing modal");
-      setTotalArea(value); // Set the area even if it's beyond the limit
-      setError(true);      // Trigger error due to exceeding max limit
-      setShowModal(true);  // Show modal if area exceeds max limit
+      setShowModal(false);
     } else {
-      setError(true);      // Trigger error for invalid area (too small)
-      setShowModal(true);  // Show modal for invalid area
+      setError(true);
+      setShowModal(true);
     }
   };
 
@@ -121,7 +118,7 @@ const App = () => {
     setTotalArea(0);
     setAreas(initialAreas);
     setError(false);
-    setShowModal(false); // Hide modal on reset
+    setShowModal(false);
   };
 
   const handleVariantChange = (newVariant) => {
@@ -142,6 +139,45 @@ const App = () => {
     setAreaValues(newAreaValues);
   };
 
+  const handleSave = async () => {
+    setFinalData(areas); // Store the data in finalData
+
+    try {
+      const { data, error } = await supabase
+        .from('areas')
+        .insert([{
+          linear: areas.linear,
+          ltype: areas.lType,
+          md: areas.md,
+          manager: areas.manager,
+          small: areas.small,
+          ups: areas.ups,
+          bms: areas.bms,
+          server: areas.server,
+          reception: areas.reception,
+          lounge: areas.lounge,
+          sales: areas.sales,
+          phonebooth: areas.phoneBooth,
+          discussionroom: areas.discussionRoom,
+          interviewroom: areas.interviewRoom,
+          conferenceroom: areas.conferenceRoom,
+          boardroom: areas.boardRoom,
+          meetingroom: areas.meetingRoom,
+          meetingroomlarge: areas.meetingRoomLarge,
+          hrroom: areas.hrRoom,
+          financeroom: areas.financeRoom,
+        }]);
+
+      if (error) {
+        console.error('Error inserting data:', error.message);
+      } else {
+        console.log('Data inserted successfully:', data);
+      }
+    } catch (error) {
+      console.error('Error saving data:', error);
+    }
+  };
+
   const builtArea = Object.keys(areas).reduce(
     (acc, key) => acc + areas[key] * areaValues[key],
     0
@@ -149,7 +185,8 @@ const App = () => {
   const availableArea = totalArea - builtArea;
 
   const handleGenerateBOQ = () => {
-    window.location.href = "https://lucky-kataifi-065416.netlify.app/";
+    // Add your logic to generate BOQ here
+    alert("Generate BOQ button clicked!");
   };
 
   return (
@@ -169,12 +206,7 @@ const App = () => {
           areaValues={areaValues}
         />
         <div className="--sections">
-          <OpenWorkspaces
-            areas={areas}
-            updateAreas={updateAreas}
-            variant={variant}
-            onVariantChange={handleVariantChange}
-          />
+          <OpenWorkspaces areas={areas} updateAreas={updateAreas} variant={variant} onVariantChange={handleVariantChange} />
           <Cabins areas={areas} updateAreas={updateAreas} />
           <MeetingRooms areas={areas} updateAreas={updateAreas} />
           <PublicSpaces areas={areas} updateAreas={updateAreas} />
@@ -183,7 +215,7 @@ const App = () => {
       </div>
       {showModal && (
         <Modal show={showModal} onClose={() => setShowModal(false)}>
-          <Card /> {/* Ensure this Card component is being displayed properly */}
+          <Card />
         </Modal>
       )}
       {error && (
@@ -212,6 +244,9 @@ const App = () => {
         <svg className="star-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z"/>
         </svg>
+      </button>
+      <button className="save-button" onClick={handleSave}>
+        Save
       </button>
     </div>
   );
