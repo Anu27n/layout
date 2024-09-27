@@ -996,34 +996,122 @@ span {
 
 /* Style for the Generate BOQ button */
 /* Style for the Generate BOQ button */
+/* Style for the Generate BOQ button */
 .generate-boq-button {
+  position: relative;
+  padding: 12px 35px;
+  background: #007bff; /* Changed to blue */
+  font-size: 17px;
+  font-weight: 500;
+  color: white; /* Changed to white for better contrast */
+  border: 3px solid #007bff; /* Changed to blue */
+  border-radius: 8px;
+  box-shadow: 0 0 0 #007bff8c; /* Changed to blue */
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
   display: block;
   width: 100%;
   max-width: 300px;
-  margin: 40px auto; /* Increased margin to position the button lower */
-  padding: 15px 20px;
-  font-size: 18px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  margin: 40px auto;
   text-align: center;
 }
 
+.generate-boq-button .star-1,
+.generate-boq-button .star-2,
+.generate-boq-button .star-3,
+.generate-boq-button .star-4,
+.generate-boq-button .star-5,
+.generate-boq-button .star-6 {
+  position: absolute;
+  filter: drop-shadow(0 0 0 #000000); /* Changed to black */
+  z-index: -5;
+  transition: all 1s cubic-bezier(0.05, 0.83, 0.43, 0.96);
+}
+
+.generate-boq-button .star-1 {
+  top: 20%;
+  left: 20%;
+  width: 25px;
+}
+
+.generate-boq-button .star-2 {
+  top: 45%;
+  left: 45%;
+  width: 15px;
+}
+
+.generate-boq-button .star-3 {
+  top: 40%;
+  left: 40%;
+  width: 5px;
+}
+
+.generate-boq-button .star-4 {
+  top: 20%;
+  left: 40%;
+  width: 8px;
+}
+
+.generate-boq-button .star-5 {
+  top: 25%;
+  left: 45%;
+  width: 15px;
+}
+
+.generate-boq-button .star-6 {
+  top: 5%;
+  left: 50%;
+  width: 5px;
+}
+
 .generate-boq-button:hover {
-  background-color: #0056b3;
+  background: transparent;
+  color: #007bff; /* Changed to blue */
+  box-shadow: 0 0 25px #007bff8c; /* Changed to blue */
 }
 
-/* Ensure the button is at the end of the page */
-.container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  padding-bottom: 60px; /* Add padding to push the button lower */
+.generate-boq-button:hover .star-1 {
+  top: -80%;
+  left: -30%;
+  filter: drop-shadow(0 0 10px #000000); /* Changed to black */
+  z-index: 2;
 }
 
-.container > .content {
-  flex: 1;
+.generate-boq-button:hover .star-2 {
+  top: -25%;
+  left: 10%;
+  filter: drop-shadow(0 0 10px #000000); /* Changed to black */
+  z-index: 2;
+}
+
+.generate-boq-button:hover .star-3 {
+  top: 55%;
+  left: 25%;
+  filter: drop-shadow(0 0 10px #000000); /* Changed to black */
+  z-index: 2;
+}
+
+.generate-boq-button:hover .star-4 {
+  top: 30%;
+  left: 80%;
+  filter: drop-shadow(0 0 10px #000000); /* Changed to black */
+  z-index: 2;
+}
+
+.generate-boq-button:hover .star-5 {
+  top: 25%;
+  left: 115%;
+  filter: drop-shadow(0 0 10px #000000); /* Changed to black */
+  z-index: 2;
+}
+
+.generate-boq-button:hover .star-6 {
+  top: 5%;
+  left: 60%;
+  filter: drop-shadow(0 0 10px #000000); /* Changed to black */
+  z-index: 2;
+}
+
+.fil0 {
+  fill: #000000; /* Changed to black */
 }

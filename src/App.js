@@ -149,50 +149,11 @@ const App = () => {
   const availableArea = totalArea - builtArea;
 
   const handleGenerateBOQ = () => {
-    // Add your logic to generate BOQ here
-    alert("Generate BOQ button clicked!");
+    window.location.href = "https://lucky-kataifi-065416.netlify.app/";
   };
 
   return (
     <div className="container">
-      <style>
-        {`
-          /* Hide spinners in Chrome, Safari, Edge, and Opera */
-          input[type="number"]::-webkit-outer-spin-button,
-          input[type="number"]::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-          }
-
-          /* Hide spinners in Firefox */
-          input[type="number"] {
-            -moz-appearance: textfield;
-          }
-
-          /* Additional styles to ensure spinners are hidden */
-          input[type="number"] {
-            appearance: textfield;
-          }
-
-          /* Style for the Generate BOQ button */
-          .generate-boq-button {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-          }
-
-          .generate-boq-button:hover {
-            background-color: #0056b3;
-          }
-        `}
-      </style>
       <AreaInput
         setTotalArea={handleSetTotalArea}
         builtArea={builtArea}
@@ -233,6 +194,24 @@ const App = () => {
       <Tooltip />
       <button className="generate-boq-button" onClick={handleGenerateBOQ}>
         Generate BOQ
+        <svg className="star-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z"/>
+        </svg>
+        <svg className="star-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z"/>
+        </svg>
+        <svg className="star-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z"/>
+        </svg>
+        <svg className="star-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z"/>
+        </svg>
+        <svg className="star-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z"/>
+        </svg>
+        <svg className="star-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z"/>
+        </svg>
       </button>
     </div>
   );
