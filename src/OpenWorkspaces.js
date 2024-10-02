@@ -8,6 +8,13 @@ const workspaceDescriptions = {
   lType: "This is an L-type workspace, providing a semi-private environment.",
 };
 
+const sizeMapping = {
+  medium: "3 X 21",
+  large: "3.5 X 2",
+  xl: "4 X 2",
+  lType: "5 X 4",
+};
+
 const OpenWorkspaces = ({ areas, updateAreas, variant, onVariantChange }) => {
   const [selectedSize, setSelectedSize] = useState(variant);
 
@@ -62,7 +69,17 @@ const OpenWorkspaces = ({ areas, updateAreas, variant, onVariantChange }) => {
                 onChange={(value) => handleInputChange(type, value)}
               />
               {type === "linear" && (
-                <Radio selectedValue={selectedSize} onChange={handleSizeChange} />
+                <>
+                  <Radio selectedValue={selectedSize} onChange={handleSizeChange} />
+                  <div className="size-display">
+                     <strong>Size:{sizeMapping[selectedSize]}</strong>
+                  </div>
+                </>
+              )}
+              {type === "lType" && (
+                <div className="size-display">
+                   <strong>Size:{sizeMapping.lType}</strong>
+                </div>
               )}
               <div className="value-display">
                 {type.charAt(0).toUpperCase() + type.slice(1)} Workstations: <span>{areas[type] || 0}</span>

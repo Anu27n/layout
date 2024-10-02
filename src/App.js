@@ -14,8 +14,8 @@ import "./fixes.css";  // Ensure this path is correct
 
 const initialAreaValues = {
   linear: 20,
-  lType: 28,
-  md: 140,
+  lType: 34,
+  md: 120,
   manager: 80,
   small: 80,
   ups: 90,
@@ -129,10 +129,10 @@ const App = () => {
     const newAreaValues = { ...areaValues };
     switch (newVariant) {
       case "large":
-        newAreaValues.linear = 25;
+        newAreaValues.linear = 24;
         break;
       case "xl":
-        newAreaValues.linear = 30;
+        newAreaValues.linear = 29;
         break;
       case "medium":
       default:

@@ -390,7 +390,8 @@ span {
 .set-area-input {
   width: 100%; /* Full width */
   padding: 10px 1rem; /* Updated padding */
-  font-size: 15px; /* Larger font size */
+  font-size: 25px; /* Larger font size */
+  font-weight:bolder;
   border: 0; /* Remove border */
   border-radius: 10px; /* Updated rounded corners */
   box-sizing: border-box; /* Include padding and border in width */
@@ -409,9 +410,9 @@ span {
 
 .calculator-icon {
   margin-right: 25px;
-  margin-left: -55px;
-  margin-bottom: -48px; /* Adjust the margin as needed */
-  font-size: 40px; /* Adjust the size as needed */
+  margin-left: -60px;
+  margin-bottom: -58px; /* Adjust the margin as needed */
+  font-size: 45px; /* Adjust the size as needed */
   color: #FFD43B; /* Adjust the color as needed */
   transition: transform 0.3s ease; /* Smooth transition for hover effect */
   border-radius: 10px;
