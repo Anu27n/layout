@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Counter from './Counter'; // Ensure the correct path to Counter.js
 import './styles.css'; // Import the updated CSS file
 
@@ -8,6 +8,7 @@ const publicSpaceDescriptions = {
   fitness: "This is the fitness area, equipped with gym facilities.",
   sales: "This is the sales area, designed for sales team activities.",
   phoneBooth: "This is the phone booth, providing a quiet space for calls.",
+  breakoutRoom: "This is the breakout room, a flexible space for small group discussions."
 };
 
 const PublicSpaces = ({ areas, updateAreas }) => {
@@ -38,10 +39,10 @@ const PublicSpaces = ({ areas, updateAreas }) => {
     <div className="section">
       <h3 className="section-heading">Public Spaces</h3>
       <div className="public-spaces-grid">
-        {["reception", "lounge", "sales", "phoneBooth"].map((type) => (
+        {["reception", "lounge", "sales", "phoneBooth", "breakoutRoom"].map((type) => (
           <div key={type} className="workspace">
             <div className="workspace-image-container">
-              <img src={`/images/${type}.png`} alt={`${type} Room`} className="workspace-image" />
+              <img src={`/images/${type === 'breakoutRoom' ? 'breakout' : type}.png`} alt={`${type} Room`} className="workspace-image" />
               <div className="workspace-description">{publicSpaceDescriptions[type]}</div>
             </div>
             <div className="control-btn-box">
