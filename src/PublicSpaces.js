@@ -12,6 +12,8 @@ const publicSpaceDescriptions = {
 };
 
 const PublicSpaces = ({ areas, updateAreas }) => {
+  const [description, setDescription] = useState(''); // Example usage of useState
+
   const handleIncrement = (type) => {
     const newValue = (areas[type] || 0) + 1;
     updateAreas(type, newValue);
