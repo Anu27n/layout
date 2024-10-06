@@ -17,12 +17,14 @@ const PublicSpaces = ({ areas, updateAreas }) => {
   const handleIncrement = (type) => {
     const newValue = (areas[type] || 0) + 1;
     updateAreas(type, newValue);
+    setDescription(publicSpaceDescriptions[type]); // Use setDescription
   };
 
   const handleDecrement = (type) => {
     const newValue = (areas[type] || 0) - 1;
     if (newValue >= 0) {
       updateAreas(type, newValue);
+      setDescription(publicSpaceDescriptions[type]); // Use setDescription
     } else {
       alert("Negative values are not allowed.");
     }
@@ -32,6 +34,7 @@ const PublicSpaces = ({ areas, updateAreas }) => {
     const parsedValue = parseInt(value, 10);
     if (parsedValue >= 0) {
       updateAreas(type, parsedValue);
+      setDescription(publicSpaceDescriptions[type]); // Use setDescription
     } else {
       alert("Negative values are not allowed.");
     }
@@ -60,6 +63,9 @@ const PublicSpaces = ({ areas, updateAreas }) => {
             </div>
           </div>
         ))}
+      </div>
+      <div className="description-display">
+        <p>{description}</p> {/* Display the description */}
       </div>
     </div>
   );
