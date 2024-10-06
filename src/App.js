@@ -33,7 +33,8 @@ const initialAreaValues = {
   meetingRoomLarge: 300,
   hrRoom: 80,
   financeRoom: 100,
-  breakoutRoom: 80, // Added breakoutRoom
+  breakoutRoom: 80, 
+  executiveWashroom:60
 };
 
 const initialAreas = {
@@ -57,7 +58,8 @@ const initialAreas = {
   meetingRoomLarge: 0,
   hrRoom: 0,
   financeRoom: 0,
-  breakoutRoom: 0, // Added breakoutRoom
+  breakoutRoom: 0, 
+  executiveWashroom:0,
 };
 
 const MAX_AREA = 25000;

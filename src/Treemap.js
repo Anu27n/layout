@@ -23,7 +23,9 @@ const fullNames = {
   meetingRoom: "Meeting Room",
   meetingRoomLarge: "Meeting Room (Large)",
   hrRoom: "HR Room",
-  financeRoom: "Finance Room"
+  financeRoom: "Finance Room",
+  executiveWashroom: "Executive Washroom",
+  breakoutRoom: "Breakout Room"
 };
 
 const Treemap = ({ totalArea = 4000, areas, areaValues }) => {

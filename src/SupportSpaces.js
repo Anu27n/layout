@@ -6,6 +6,7 @@ const supportSpaceDescriptions = {
   ups: "This is the UPS room, ensuring uninterrupted power supply.",
   bms: "This is the BMS room, managing building systems.",
   server: "This is the server room, housing critical IT infrastructure.",
+  executiveWashroom: "This is the Executive Washroom, providing premium facilities.",
 };
 
 const SupportSpaces = ({ areas, updateAreas }) => {
@@ -36,7 +37,7 @@ const SupportSpaces = ({ areas, updateAreas }) => {
     <div className="section">
       <h3 className="section-heading">Support Spaces</h3>
       <div className="support-spaces-grid">
-        {["ups", "bms", "server"].map((type) => (
+        {["ups", "bms", "server", "executiveWashroom"].map((type) => (
           <div key={type} className="workspace">
             <div className="workspace-image-container">
               <img src={`/images/${type}.png`} alt={`${type} Room`} className="workspace-image" />
