@@ -7,10 +7,10 @@ import PublicSpaces from "./PublicSpaces";
 import MeetingRooms from "./MeetingRooms";
 import { Tooltip } from "react-tooltip";
 import Treemap from "./Treemap";
-import Modal from "./Modal"; // Ensure Modal is imported correctly
-import Card from "./Card";   // Ensure Card is imported correctly
-import "./styles.css"; // Ensure this path is correct
-import "./fixes.css";  // Ensure this path is correct
+import Modal from "./Modal"; 
+import Card from "./Card";   
+import "./styles.css"; 
+import "./fixes.css";  
 
 const initialAreaValues = {
   linear: 20,
@@ -111,9 +111,8 @@ const App = () => {
   const [areaValues, setAreaValues] = useState(initialAreaValues);
   const [variant, setVariant] = useState("medium");
   const [error, setError] = useState(false);
-  const [showModal, setShowModal] = useState(false); // Modal visibility control
-  const [mdCabinSize, setMdCabinSize] = useState(initialAreaValues.md); // State to manage MD cabin size
-  const [totalMdCabinArea, setTotalMdCabinArea] = useState(0); // State to manage total MD cabin area
+  const [showModal, setShowModal] = useState(false);
+  const [mdCabinSize, setMdCabinSize] = useState(initialAreaValues.md); 
 
   useEffect(() => {
     const receptionArea = calculateReceptionArea(totalArea);
@@ -135,31 +134,29 @@ const App = () => {
       0
     );
 
-    // Check if built area exceeds total available area
     if (builtArea <= totalArea) {
       setAreas(newAreas);
       setError(false);
-      setShowModal(false); // Hide modal when within the limit
+      setShowModal(false); 
     } else {
       console.log("Built area exceeds the available space, showing modal");
-      setError(true); // Trigger error when area exceeds the limit
-      setShowModal(true); // Show modal if limit is exceeded
-    }
+      setError(true); 
+      setShowModal(true); 
   };
 
   const handleSetTotalArea = (value) => {
     if (value >= MIN_AREA && value <= MAX_AREA) {
       setTotalArea(value);
       setError(false);
-      setShowModal(false); // Hide modal if within valid area range
+      setShowModal(false); 
     } else if (value > MAX_AREA) {
       console.log("Total area exceeds the max limit, showing modal");
-      setTotalArea(value); // Set the area even if it's beyond the limit
+      setTotalArea(value); 
       setError(true);      // Trigger error due to exceeding max limit
       setShowModal(true);  // Show modal if area exceeds max limit
     } else {
-      setError(true);      // Trigger error for invalid area (too small)
-      setShowModal(true);  // Show modal for invalid area
+      setError(true);      
+      setShowModal(true);  
     }
   };
 
@@ -217,7 +214,7 @@ const App = () => {
           availableArea={availableArea}
           areas={areas}
           areaValues={areaValues}
-          totalMdCabinArea={totalMdCabinArea} // Pass the total MD cabin area to the Treemap component
+          totalMdCabinArea={totalMdCabinArea} 
         />
         <div className="--sections">
           <OpenWorkspaces
