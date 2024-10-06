@@ -11,6 +11,21 @@ const meetingRoomDescriptions = {
   meetingRoomLarge: "This is the large meeting room, accommodating larger groups.",
   hrRoom: "This is the HR room, designated for HR activities.",
   financeRoom: "This is the finance room, used for financial discussions.",
+  sales: "This is the sales area, designed for sales team activities.",
+  videoRecordingRoom: "This is the video recording room, designed for creating professional video content."
+};
+
+const SEATS_PER_ROOM = {
+  discussionRoom: 18,
+  interviewRoom: 4,
+  conferenceRoom: 10,
+  boardRoom: 16,
+  meetingRoom: 0, // Assuming no seats defined for meetingRoom
+  meetingRoomLarge: 0, // Assuming no seats defined for meetingRoomLarge
+  hrRoom: 0, // Assuming no seats defined for hrRoom
+  financeRoom: 0, // Assuming no seats defined for financeRoom
+  sales: 0, // Assuming no seats defined for sales
+  videoRecordingRoom: 0 // Assuming no seats defined for videoRecordingRoom
 };
 
 const MeetingRooms = ({ areas, updateAreas }) => {
@@ -24,7 +39,7 @@ const MeetingRooms = ({ areas, updateAreas }) => {
     if (newValue >= 0) {
       updateAreas(type, newValue);
     } else {
-      alert("Negative values are not allowed.");
+      //alert("Negative values are not allowed.");
     }
   };
 
@@ -33,7 +48,7 @@ const MeetingRooms = ({ areas, updateAreas }) => {
     if (parsedValue >= 0) {
       updateAreas(type, parsedValue);
     } else {
-      alert("Negative values are not allowed.");
+      //alert("Negative values are not allowed.");
     }
   };
 
@@ -49,7 +64,9 @@ const MeetingRooms = ({ areas, updateAreas }) => {
           "meetingRoom", 
           "meetingRoomLarge", 
           "hrRoom", 
-          "financeRoom"
+          "financeRoom",
+          "sales",
+          "videoRecordingRoom"
         ].map((type) => (
           <div key={type} className="workspace">
             <div className="workspace-image-container">
@@ -66,6 +83,11 @@ const MeetingRooms = ({ areas, updateAreas }) => {
               <div className="value-display">
                 {type.charAt(0).toUpperCase() + type.slice(1).replace(/([A-Z])/g, ' $1')}: <span>{areas[type] || 0}</span>
               </div>
+              {SEATS_PER_ROOM[type] > 0 && (
+                <div className="seats-description">
+                  <strong>1 {type.replace(/([A-Z])/g, ' $1').toLowerCase()} = {SEATS_PER_ROOM[type]} pax</strong>
+                </div>
+              )}
             </div>
           </div>
         ))}

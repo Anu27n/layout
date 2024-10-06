@@ -1116,3 +1116,46 @@ span {
 .fil0 {
   fill: #000000; /* Changed to black */
 }
+
+/* Other styles */
+
+.seats-display {
+  font-weight: bold;
+  font-size: 1.2em; /* Increase font size */
+  color: #333; /* Change text color */
+  margin-left: 10px; /* Add some margin to the left */
+  padding: 5px; /* Add some padding */
+  background-color: #f9f9f9; /* Light background color */
+  border-radius: 5px; /* Rounded corners */
+  display: inline-block; /* Keep it inline */
+}
+
+.slider-container {
+  margin-top: 10px;
+}
+
+.slider {
+  width: 100%;
+  margin-top: 5px;
+}
+
+.size-input-container {
+  margin-top: 10px;
+}
+
+.size-input {
+  width: 100%;
+  margin-top: 5px;
+}
+
+.dummy-display {
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #333;
+}
+
+.seats-description {
+  margin-top: 10px;
+  font-weight: bold;
+}

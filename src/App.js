@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AreaInput from "./AreaInput";
 import OpenWorkspaces from "./OpenWorkspaces";
 import Cabins from "./Cabins";
@@ -34,7 +34,8 @@ const initialAreaValues = {
   hrRoom: 80,
   financeRoom: 100,
   breakoutRoom: 80, 
-  executiveWashroom:60
+  executiveWashroom:60,
+  videoRecordingRoom:80,
 };
 
 const initialAreas = {
@@ -60,10 +61,49 @@ const initialAreas = {
   financeRoom: 0,
   breakoutRoom: 0, 
   executiveWashroom:0,
+  videoRecordingRoom:0,
 };
 
 const MAX_AREA = 25000;
 const MIN_AREA = 1500;
+
+const calculateReceptionArea = (totalArea) => {
+  if (totalArea >= 1500 && totalArea < 3500) {
+    return Math.round(totalArea * 0.08);
+  } else if (totalArea >= 3500 && totalArea < 4500) {
+    return Math.round(totalArea * 0.06);
+  } else if (totalArea >= 4500 && totalArea < 5500) {
+    return Math.round(totalArea * 0.05);
+  } else if (totalArea >= 5500 && totalArea < 6500) {
+    return Math.round(totalArea * 0.045);
+  } else if (totalArea >= 6500 && totalArea < 12000) {
+    return 300;
+  } else if (totalArea >= 12000 && totalArea < 18000) {
+    return 500;
+  } else if (totalArea >= 18000 && totalArea <= 25000) {
+    return 700;
+  } else {
+    return 0;
+  }
+};
+
+const calculateLoungeArea = (totalArea) => {
+  if (totalArea >= 1500 && totalArea < 2500) {
+    return Math.round(totalArea * 0.11);
+  } else if (totalArea >= 2500 && totalArea < 4500) {
+    return Math.round(totalArea * 0.06);
+  } else if (totalArea >= 4500 && totalArea < 6500) {
+    return Math.round(totalArea * 0.05);
+  } else if (totalArea >= 6500 && totalArea < 8500) {
+    return Math.round(totalArea * 0.045);
+  } else if (totalArea >= 8500 && totalArea <= 10000) {
+    return Math.round(totalArea * 0.04);
+  } else if (totalArea > 10000 && totalArea <= 25000) {
+    return Math.round(totalArea * 0.04);
+  } else {
+    return 0;
+  }
+};
 
 const App = () => {
   const [totalArea, setTotalArea] = useState(0);
@@ -72,13 +112,20 @@ const App = () => {
   const [variant, setVariant] = useState("medium");
   const [error, setError] = useState(false);
   const [showModal, setShowModal] = useState(false); // Modal visibility control
+  const [mdCabinSize, setMdCabinSize] = useState(initialAreaValues.md); // State to manage MD cabin size
+  const [totalMdCabinArea, setTotalMdCabinArea] = useState(0); // State to manage total MD cabin area
+
+  useEffect(() => {
+    const receptionArea = calculateReceptionArea(totalArea);
+    const loungeArea = calculateLoungeArea(totalArea);
+    setAreas((prevAreas) => ({
+      ...prevAreas,
+      reception: receptionArea / areaValues.reception,
+      lounge: loungeArea / areaValues.lounge,
+    }));
+  }, [totalArea, areaValues.reception, areaValues.lounge]);
 
   const updateAreas = (type, value) => {
-    if (value < 0) {
-      alert("Negative values are not allowed");
-      return;
-    }
-
     const newAreas = {
       ...areas,
       [type]: value,
@@ -101,11 +148,6 @@ const App = () => {
   };
 
   const handleSetTotalArea = (value) => {
-    if (value < 0) {
-      alert("Negative values are not allowed");
-      return;
-    }
-
     if (value >= MIN_AREA && value <= MAX_AREA) {
       setTotalArea(value);
       setError(false);
@@ -156,6 +198,10 @@ const App = () => {
     window.location.href = "https://lucky-kataifi-065416.netlify.app/";
   };
 
+  const handleMdCabinAreaChange = (newTotalMdCabinArea) => {
+    setTotalMdCabinArea(newTotalMdCabinArea);
+  };
+
   return (
     <div className="container">
       <AreaInput
@@ -171,6 +217,7 @@ const App = () => {
           availableArea={availableArea}
           areas={areas}
           areaValues={areaValues}
+          totalMdCabinArea={totalMdCabinArea} // Pass the total MD cabin area to the Treemap component
         />
         <div className="--sections">
           <OpenWorkspaces
@@ -179,7 +226,7 @@ const App = () => {
             variant={variant}
             onVariantChange={handleVariantChange}
           />
-          <Cabins areas={areas} updateAreas={updateAreas} />
+          <Cabins areas={areas} updateAreas={updateAreas} mdCabinSize={mdCabinSize} setMdCabinSize={setMdCabinSize} onMdCabinAreaChange={handleMdCabinAreaChange} />
           <MeetingRooms areas={areas} updateAreas={updateAreas} />
           <PublicSpaces areas={areas} updateAreas={updateAreas} />
           <SupportSpaces areas={areas} updateAreas={updateAreas} />

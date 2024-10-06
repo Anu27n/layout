@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Counter from './Counter'; // Ensure the correct path to Counter.js
 import './styles.css'; // Import the updated CSS file
 
@@ -9,6 +9,8 @@ const workspaceDescriptions = {
 };
 
 const Cabins = ({ areas, updateAreas }) => {
+  const [mdCabinSize, setMdCabinSize] = useState(0); // State to manage MD cabin size
+
   const handleIncrement = (type) => {
     const newValue = (areas[type] || 0) + 1;
     updateAreas(type, newValue);
@@ -19,7 +21,7 @@ const Cabins = ({ areas, updateAreas }) => {
     if (newValue >= 0) {
       updateAreas(type, newValue);
     } else {
-      alert("Negative values are not allowed.");
+      //alert("Negative values are not allowed.");
     }
   };
 
@@ -28,8 +30,13 @@ const Cabins = ({ areas, updateAreas }) => {
     if (parsedValue >= 0) {
       updateAreas(type, parsedValue);
     } else {
-      alert("Negative values are not allowed.");
+      //alert("Negative values are not allowed.");
     }
+  };
+
+  const handleSliderChange = (event) => {
+    const newSize = parseInt(event.target.value, 10);
+    setMdCabinSize(newSize);
   };
 
   return (
@@ -52,6 +59,25 @@ const Cabins = ({ areas, updateAreas }) => {
               <div className="value-display">
                 {type.charAt(0).toUpperCase() + type.slice(1)} Cabin: <span>{areas[type] || 0}</span>
               </div>
+              {type === "md" && (
+                <div className="slider-container">
+                  <label htmlFor="md-cabin-size">MD Cabin Size: {mdCabinSize} sq ft</label>
+                  <input
+                    type="range"
+                    id="md-cabin-size"
+                    min="0"
+                    max="200"
+                    value={mdCabinSize}
+                    onChange={handleSliderChange}
+                    className="slider"
+                  />
+                </div>
+              )}
+              {type === "small" && (
+                <div className="seats-description">
+                  <strong>1 small cabin = 4 pax</strong>
+                </div>
+              )}
             </div>
           </div>
         ))}

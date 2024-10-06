@@ -6,7 +6,6 @@ const publicSpaceDescriptions = {
   reception: "This is the reception area, the first point of contact for visitors.",
   lounge: "This is the lounge, a comfortable area for informal meetings.",
   fitness: "This is the fitness area, equipped with gym facilities.",
-  sales: "This is the sales area, designed for sales team activities.",
   phoneBooth: "This is the phone booth, providing a quiet space for calls.",
   breakoutRoom: "This is the breakout room, a flexible space for small group discussions."
 };
@@ -26,7 +25,7 @@ const PublicSpaces = ({ areas, updateAreas }) => {
       updateAreas(type, newValue);
       setDescription(publicSpaceDescriptions[type]); // Use setDescription
     } else {
-      alert("Negative values are not allowed.");
+      //alert("Negative values are not allowed.");
     }
   };
 
@@ -36,7 +35,7 @@ const PublicSpaces = ({ areas, updateAreas }) => {
       updateAreas(type, parsedValue);
       setDescription(publicSpaceDescriptions[type]); // Use setDescription
     } else {
-      alert("Negative values are not allowed.");
+      //alert("Negative values are not allowed.");
     }
   };
 
@@ -44,7 +43,7 @@ const PublicSpaces = ({ areas, updateAreas }) => {
     <div className="section">
       <h3 className="section-heading">Public Spaces</h3>
       <div className="public-spaces-grid">
-        {["reception", "lounge", "sales", "phoneBooth", "breakoutRoom"].map((type) => (
+        {["reception", "lounge", "phoneBooth", "breakoutRoom"].map((type) => (
           <div key={type} className="workspace">
             <div className="workspace-image-container">
               <img src={`/images/${type === 'breakoutRoom' ? 'breakout' : type}.png`} alt={`${type} Room`} className="workspace-image" />
@@ -52,13 +51,13 @@ const PublicSpaces = ({ areas, updateAreas }) => {
             </div>
             <div className="control-btn-box">
               <Counter
-                value={areas[type] || 0}
+                value={Math.round(areas[type] || 0)} // Round the value before displaying
                 onIncrement={() => handleIncrement(type)}
                 onDecrement={() => handleDecrement(type)}
                 onChange={(value) => handleInputChange(type, value)}
               />
               <div className="value-display">
-                {type.charAt(0).toUpperCase() + type.slice(1)}: <span>{areas[type] || 0}</span>
+                {type.charAt(0).toUpperCase() + type.slice(1)}: <span>{Math.round(areas[type] || 0)}</span> {/* Round the value before displaying */}
               </div>
             </div>
           </div>

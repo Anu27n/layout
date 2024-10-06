@@ -35,19 +35,19 @@ const OpenWorkspaces = ({ areas, updateAreas, variant, onVariantChange }) => {
 
   const handleDecrement = (type) => {
     const newValue = (areas[type] || 0) - 1;
-    if (newValue >= 0) {
+    if (newValue >= -1) {
       updateAreas(type, newValue);
     } else {
-      alert("Negative values are not allowed.");
+      //alert("Negative values are not allowed.");
     }
   };
 
   const handleInputChange = (type, value) => {
     const parsedValue = parseInt(value, 10);
-    if (parsedValue >= 0) {
+    if (parsedValue >= -1) {
       updateAreas(type, parsedValue);
     } else {
-      alert("Negative values are not allowed.");
+      //alert("Negative values are not allowed.");
     }
   };
 
@@ -72,13 +72,13 @@ const OpenWorkspaces = ({ areas, updateAreas, variant, onVariantChange }) => {
                 <>
                   <Radio selectedValue={selectedSize} onChange={handleSizeChange} />
                   <div className="size-display">
-                     <strong>Size:{sizeMapping[selectedSize]}</strong>
+                     <strong>Desk Size:{sizeMapping[selectedSize]}</strong>
                   </div>
                 </>
               )}
               {type === "lType" && (
                 <div className="size-display">
-                   <strong>Size:{sizeMapping.lType}</strong>
+                   <strong>Desk Size:{sizeMapping.lType}</strong>
                 </div>
               )}
               <div className="value-display">

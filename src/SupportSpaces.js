@@ -20,7 +20,7 @@ const SupportSpaces = ({ areas, updateAreas }) => {
     if (newValue >= 0) {
       updateAreas(type, newValue);
     } else {
-      alert("Negative values are not allowed.");
+      //alert("Negative values are not allowed.");
     }
   };
 
@@ -29,7 +29,7 @@ const SupportSpaces = ({ areas, updateAreas }) => {
     if (parsedValue >= 0) {
       updateAreas(type, parsedValue);
     } else {
-      alert("Negative values are not allowed.");
+      //alert("Negative values are not allowed.");
     }
   };
 
