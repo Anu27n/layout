@@ -125,6 +125,10 @@ const App = () => {
     }));
   }, [totalArea, areaValues.reception, areaValues.lounge]);
 
+  useEffect(() => {
+    setTotalMdCabinArea(mdCabinSize * areas.md);
+  }, [mdCabinSize, areas.md]);
+
   const updateAreas = (type, value) => {
     const newAreas = {
       ...areas,
@@ -198,8 +202,8 @@ const App = () => {
     window.location.href = "https://lucky-kataifi-065416.netlify.app/";
   };
 
-  const handleMdCabinAreaChange = (newTotalMdCabinArea) => {
-    setTotalMdCabinArea(newTotalMdCabinArea);
+  const handleMdCabinAreaChange = (newMdCabinSize) => {
+    setMdCabinSize(newMdCabinSize);
   };
 
   return (
@@ -226,7 +230,12 @@ const App = () => {
             variant={variant}
             onVariantChange={handleVariantChange}
           />
-          <Cabins areas={areas} updateAreas={updateAreas} mdCabinSize={mdCabinSize} setMdCabinSize={setMdCabinSize} onMdCabinAreaChange={handleMdCabinAreaChange} />
+          <Cabins
+            areas={areas}
+            updateAreas={updateAreas}
+            mdCabinSize={mdCabinSize}
+            setMdCabinSize={handleMdCabinAreaChange}
+          />
           <MeetingRooms areas={areas} updateAreas={updateAreas} />
           <PublicSpaces areas={areas} updateAreas={updateAreas} />
           <SupportSpaces areas={areas} updateAreas={updateAreas} />

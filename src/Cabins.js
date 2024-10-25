@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Counter from './Counter'; // Ensure the correct path to Counter.js
 import './styles.css'; // Import the updated CSS file
 
@@ -8,9 +8,7 @@ const workspaceDescriptions = {
   small: "This is a small cabin, suitable for individual work.",
 };
 
-const Cabins = ({ areas, updateAreas }) => {
-  const [mdCabinSize, setMdCabinSize] = useState(0); // State to manage MD cabin size
-
+const Cabins = ({ areas, updateAreas, mdCabinSize, setMdCabinSize }) => {
   const handleIncrement = (type) => {
     const newValue = (areas[type] || 0) + 1;
     updateAreas(type, newValue);
@@ -65,8 +63,8 @@ const Cabins = ({ areas, updateAreas }) => {
                   <input
                     type="range"
                     id="md-cabin-size"
-                    min="0"
-                    max="200"
+                    min="120"
+                    max="240"
                     value={mdCabinSize}
                     onChange={handleSliderChange}
                     className="slider"

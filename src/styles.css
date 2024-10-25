@@ -69,11 +69,23 @@ input[type="number"] {
 }
 
 section {
-  margin-bottom: 20px; /* Increased margin for more distinct sections */
-  padding: 10px 0; /* Adjusted padding */
-  border-bottom: 1px solid #ddd; /* Added bottom border */
+  margin-bottom: 10px; /* Reduced margin for less space between sections */
+  padding: 5px 0; /* Reduced padding */
+  border-bottom: 1px solid #ddd; /* Kept the bottom border */
   background-color: #f0f0f0; /* Grey background for section boxes */
-  border-radius: 5px; /* Rounded corners for section boxes */
+  border-radius: 3px; /* Reduced border radius for less rounded corners */
+  width: 100%; /* Ensure the section takes up the full width of its container */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+section * {
+  max-width: 100%; /* Ensure child elements do not exceed the width of the section */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+section img, section table {
+  max-width: 100%; /* Ensure images and tables do not exceed the width of the section */
+  height: auto; /* Maintain aspect ratio for images */
 }
 
 section h3 {
@@ -1158,4 +1170,31 @@ span {
 .seats-description {
   margin-top: 10px;
   font-weight: bold;
+}
+
+/* Add this CSS to style the seat control buttons and input */
+.seat-control {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.seat-control button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.seat-control input {
+  width: 50px;
+  text-align: center;
+  margin: 0 5px;
+  font-size: 16px;
+}
+
+.seat-control button:hover {
+  background-color: #0056b3;
 }
