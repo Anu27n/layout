@@ -41,7 +41,7 @@ const AreaInput = ({ setTotalArea, builtArea, availableArea, resetAll }) => {
           className="calculator-icon" 
           title="Calculator" 
           beatFade 
-          style={{ color: "#FFD43B" }}
+          style={{ color: "#FFD43B" }} 
         />
         <input 
           type="number" 
