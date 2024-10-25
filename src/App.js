@@ -113,6 +113,7 @@ const App = () => {
   const [error, setError] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [mdCabinSize, setMdCabinSize] = useState(initialAreaValues.md); 
+  const [totalMdCabinArea, setTotalMdCabinArea] = useState(0); // Define totalMdCabinArea
 
   useEffect(() => {
     const receptionArea = calculateReceptionArea(totalArea);
@@ -146,6 +147,7 @@ const App = () => {
       console.log("Built area exceeds the available space, showing modal");
       setError(true); 
       setShowModal(true); 
+    }
   };
 
   const handleSetTotalArea = (value) => {
