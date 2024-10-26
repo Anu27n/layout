@@ -1,10 +1,9 @@
-/* General Styles */
 body {
   font-family: Arial, sans-serif;
-  transform: scale(0.80); /* Scale down to 75% */
-  transform-origin: top left; /* Ensure scaling starts from the top left */
-  width: 133.33%;/* Compensate for the scaling to maintain full width */
-  overflow-x: hidden; /* Hide horizontal overflow */
+  transform: scale(0.80);
+  transform-origin: top left;
+  width: 133.33%;
+  overflow-x: hidden;
 }
 
 .button-container {
@@ -201,16 +200,12 @@ span {
 }
 
 /* Add flexbox properties to the content class */
-.content {
-  display: flex;
-  flex-wrap: wrap; /* Optional: allows children to wrap to the next line */
-  gap: 20px; /* Optional: adds space between children */
-}
+
 
 /* Specify width and height for the children of content */
 .content > * {
   flex: 1 1 45%; /* Adjust the flex-grow, flex-shrink, and flex-basis properties as needed */
-  height: 300px; /* Specify the height of the children */
+  height:100%; /* Specify the height of the children */
   box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
@@ -837,7 +832,8 @@ span {
 
 .public-spaces-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  grid-template-rows: repeat(2, auto); /* 2 rows */
   gap: 16px; /* Adjust the gap as needed */
 }
 
@@ -849,7 +845,8 @@ span {
 
 .meeting-rooms-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  grid-template-rows: repeat(2, auto); /* 2 rows */
   gap: 16px; /* Adjust the gap as needed */
 }
 
@@ -896,10 +893,10 @@ span {
   border: none;
   text-align: center;
 }
-
 .cabins-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  grid-template-rows: repeat(2, auto); /* 2 rows */
   gap: 16px; /* Adjust the gap as needed */
 }
 
@@ -917,7 +914,8 @@ span {
 
 .support-spaces-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  grid-template-rows: repeat(2, auto); /* 2 rows */
   gap: 16px; /* Adjust the gap as needed */
 }
 
@@ -927,7 +925,6 @@ span {
   align-items: center; /* Center horizontally */
   text-align: center;
 }
-
 .workspace-image-container {
   position: relative;
   display: inline-block;
@@ -1007,15 +1004,12 @@ span {
   }
 }
 
-/* Style for the Generate BOQ button */
-/* Style for the Generate BOQ button */
-/* Style for the Generate BOQ button */
 .generate-boq-button {
   position: relative;
   padding: 12px 35px;
   background: #007bff; /* Changed to blue */
   font-size: 17px;
-  font-weight: 500;
+  font-weight: 1500;
   color: white; /* Changed to white for better contrast */
   border: 3px solid #007bff; /* Changed to blue */
   border-radius: 8px;
@@ -1079,8 +1073,8 @@ span {
 
 .generate-boq-button:hover {
   background: transparent;
-  color: #007bff; /* Changed to blue */
-  box-shadow: 0 0 25px #007bff8c; /* Changed to blue */
+  color: #007bff; 
+  box-shadow: 0 0 25px #007bff8c; 
 }
 
 .generate-boq-button:hover .star-1 {

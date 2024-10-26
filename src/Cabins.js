@@ -32,11 +32,6 @@ const Cabins = ({ areas, updateAreas, mdCabinSize, setMdCabinSize }) => {
     }
   };
 
-  const handleSliderChange = (event) => {
-    const newSize = parseInt(event.target.value, 10);
-    setMdCabinSize(newSize);
-  };
-
   return (
     <div className="section">
       <h3 className="section-heading">Cabins</h3>
@@ -57,20 +52,6 @@ const Cabins = ({ areas, updateAreas, mdCabinSize, setMdCabinSize }) => {
               <div className="value-display">
                 {type.charAt(0).toUpperCase() + type.slice(1)} Cabin: <span>{areas[type] || 0}</span>
               </div>
-              {type === "md" && (
-                <div className="slider-container">
-                  <label htmlFor="md-cabin-size">MD Cabin Size: {mdCabinSize} sq ft</label>
-                  <input
-                    type="range"
-                    id="md-cabin-size"
-                    min="120"
-                    max="240"
-                    value={mdCabinSize}
-                    onChange={handleSliderChange}
-                    className="slider"
-                  />
-                </div>
-              )}
               {type === "small" && (
                 <div className="seats-description">
                   <strong>1 small cabin = 4 pax</strong>
