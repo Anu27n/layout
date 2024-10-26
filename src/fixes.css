@@ -2,7 +2,7 @@
   width: 100%;
   display: flex;
   gap: 0.2rem;
-  height: 100vh; /* Ensure the parent container has a height */
+  height: 110vh; /* Ensure the parent container has a height */
 }
 
 .--sections {
