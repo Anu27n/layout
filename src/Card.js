@@ -14,12 +14,11 @@ const Card = () => {
           <div className="brutalist-card__alert">Warning</div>
         </div>
         <div className="brutalist-card__message">
-           You have exceeded the available space limit for your office layout.
-           
-            <p>
+          You have exceeded the available space limit for your office layout.
+          <p>
             If you need assistance or expert guidance, feel free to{" "}
             <a href="mailto:support@experts.com">contact our space planning experts</a>.
-            </p>
+          </p>
         </div>
         <div className="brutalist-card__actions">
           <a
@@ -41,128 +40,113 @@ const Card = () => {
 };
 
 const StyledWrapper = styled.div`
-  .brutalist-card {
-  width: 320px;
-  border: 4px solid #000;
-  background-color: #fff;
-  padding: 1.5rem;
-  box-shadow: 10px 10px 0 #000;
-  font-family: "Arial", sans-serif;
-}
-
-.brutalist-card__header {
   display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
-  border-bottom: 2px solid #000;
-  padding-bottom: 1rem;
-}
-
-.brutalist-card__icon {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
   justify-content: center;
-  background-color: #000;
-  padding: 0.5rem;
-}
+  padding: 2rem;
 
-.brutalist-card__icon svg {
-  height: 1.5rem;
-  width: 1.5rem;
-  fill: #fff;
-}
+  .brutalist-card {
+    width: 320px;
+    border: 4px solid #000;
+    background-color: #fff;
+    padding: 1.5rem;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    font-family: "Arial", sans-serif;
+    transition: transform 0.3s;
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
 
-.brutalist-card__alert {
-  font-weight: 900;
-  color: #000;
-  font-size: 1.5rem;
-  text-transform: uppercase;
-}
+  .brutalist-card__header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #000;
+    padding-bottom: 1rem;
+  }
 
-.brutalist-card__message {
-  margin-top: 1rem;
-  color: #000;
-  font-size: 0.9rem;
-  line-height: 1.4;
-  border-bottom: 2px solid #000;
-  padding-bottom: 1rem;
-  font-weight: 600;
-}
+  .brutalist-card__icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+    &:hover {
+      background-color: #333;
+    }
+  }
 
-.brutalist-card__actions {
-  margin-top: 1rem;
-}
+  .brutalist-card__icon svg {
+    height: 1.5rem;
+    width: 1.5rem;
+    fill: #fff;
+  }
 
-.brutalist-card__button {
-  display: block;
-  width: 100%;
-  padding: 0.75rem;
-  text-align: center;
-  font-size: 1rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  border: 3px solid #000;
-  background-color: #fff;
-  color: #000;
-  position: relative;
-  transition: all 0.2s ease;
-  box-shadow: 5px 5px 0 #000;
-  overflow: hidden;
-  text-decoration: none;
-  margin-bottom: 1rem;
-}
+  .brutalist-card__alert {
+    font-weight: 900;
+    color: #000;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+  }
 
-.brutalist-card__button--read {
-  background-color: #000;
-  color: #fff;
-}
+  .brutalist-card__message {
+    margin-top: 1rem;
+    color: #000;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    border-bottom: 2px solid #000;
+    padding-bottom: 1rem;
+    font-weight: 600;
+  }
 
-.brutalist-card__button::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(255, 255, 255, 0.3),
-    transparent
-  );
-  transition: all 0.6s;
-}
+  .brutalist-card__actions {
+    margin-top: 1rem;
+  }
 
-.brutalist-card__button:hover::before {
-  left: 100%;
-}
+  .brutalist-card__button {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: 3px solid #000;
+    background-color: #fff;
+    color: #000;
+    position: relative;
+    transition: all 0.3s ease;
+    box-shadow: 3px 3px 0 #000;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    text-decoration: none;
 
-.brutalist-card__button:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 7px 7px 0 #000;
-}
+    &:hover {
+      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+      transform: translateY(-3px);
+    }
+  }
 
-.brutalist-card__button--mark:hover {
-  background-color: #296fbb;
-  border-color: #296fbb;
-  color: #fff;
-  box-shadow: 7px 7px 0 #004280;
-}
+  .brutalist-card__button--read {
+    background-color: #000;
+    color: #fff;
+    &:hover {
+      background-color: #444;
+    }
+  }
 
-.brutalist-card__button--read:hover {
-  background-color: #ff0000;
-  border-color: #ff0000;
-  color: #fff;
-  box-shadow: 7px 7px 0 #800000;
-}
-
-.brutalist-card__button:active {
-  transform: translate(5px, 5px);
-  box-shadow: none;
-}
-
+  .brutalist-card__button--mark {
+    background-color: #ffcc00;
+    color: #000;
+    &:hover {
+      background-color: #e6b800;
+    }
+  }
 `;
 
 export default Card;

@@ -1,0 +1,21 @@
+version: 2
+updates:
+  - package-ecosystem: "npm" # For Node.js projects using npm
+    directory: "/" # Location of package manifests (e.g., package.json)
+    schedule:
+      interval: "weekly" # Check for updates weekly
+  
+  - package-ecosystem: "rubygems" # For Ruby projects using Bundler
+    directory: "/" # Location of Gemfile
+    schedule:
+      interval: "weekly"
+      
+  - package-ecosystem: "maven" # For Java projects using Maven
+    directory: "/" # Location of pom.xml
+    schedule:
+      interval: "weekly"
+      
+  - package-ecosystem: "pip" # For Python projects using pip
+    directory: "/" # Location of requirements.txt
+    schedule:
+      interval: "weekly"

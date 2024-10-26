@@ -5,36 +5,18 @@ const Radio = ({ selectedValue, onChange }) => {
   return (
     <StyledWrapper>
       <div className="radio-inputs">
-        <label className="radio">
-          <input
-            type="radio"
-            name="size"
-            value="medium"
-            checked={selectedValue === "medium"}
-            onChange={onChange}
-          />
-          <span className="name">Medium</span>
-        </label>
-        <label className="radio">
-          <input
-            type="radio"
-            name="size"
-            value="large"
-            checked={selectedValue === "large"}
-            onChange={onChange}
-          />
-          <span className="name">Large</span>
-        </label>
-        <label className="radio">
-          <input
-            type="radio"
-            name="size"
-            value="xl"
-            checked={selectedValue === "xl"}
-            onChange={onChange}
-          />
-          <span className="name">X Large</span>
-        </label>
+        {['medium', 'large', 'xl'].map(size => (
+          <label className="radio" key={size}>
+            <input
+              type="radio"
+              name="size"
+              value={size}
+              checked={selectedValue === size}
+              onChange={onChange}
+            />
+            <span className="name">{size.charAt(0).toUpperCase() + size.slice(1)}</span>
+          </label>
+        ))}
       </div>
     </StyledWrapper>
   );
@@ -46,10 +28,9 @@ const StyledWrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
     border-radius: 0.5rem;
-    background-color: #eee;
-    box-sizing: border-box;
-    box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.06);
-    padding: 0.25rem;
+    background-color: #f0f0f0; // Slightly lighter background for better visibility
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); // Enhanced shadow for depth
+    padding: 0.5rem; // Increased padding for a more spacious layout
     width: 300px;
     font-size: 14px;
   }
@@ -70,14 +51,19 @@ const StyledWrapper = styled.div`
     justify-content: center;
     border-radius: 0.5rem;
     border: none;
-    padding: 0.5rem 0;
+    padding: 0.75rem; // Increased padding for a more clickable area
     color: rgba(51, 65, 85, 1);
-    transition: all 0.15s ease-in-out;
+    transition: all 0.2s ease-in-out; // Slightly longer transition for smoother effect
   }
 
   .radio-inputs .radio input:checked + .name {
     background-color: #fff;
-    font-weight: 600;
+    font-weight: bold; // Bold font for better visibility
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2); // Inner shadow effect when selected
+  }
+
+  .radio-inputs .radio:hover .name {
+    background-color: rgba(0, 0, 0, 0.05); // Subtle hover effect for better UX
   }
 `;
 

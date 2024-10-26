@@ -13,7 +13,7 @@
 ## Technologies Used
 
 - **Frontend**: ReactJS, CSS
-- **Backend**: Node.js, Express.js (if applicable)
+- **Backend**: Node.js, Express.js 
 - **Database**: MongoDB, Firebase, or Supabase
 - **Hosting**: Vercel, Netlify
 
