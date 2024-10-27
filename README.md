@@ -1,6 +1,6 @@
-# 603 Office Space Calculator
+#  Office Space Calculator
 
-**603 The Coworking Space's Office Space Calculator** helps users calculate office space requirements, generate area calculations, and produce a Bill of Quantities (BOQ) based on input specifications. This tool is designed for corporate clients seeking precise and efficient space planning.
+**Office Space Calculator** helps users calculate office space requirements, generate area calculations, and produce a Bill of Quantities (BOQ) based on input specifications. This tool is designed for corporate clients seeking precise and efficient space planning.
 
 ## Features
 
