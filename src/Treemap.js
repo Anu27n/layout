@@ -54,7 +54,7 @@ const Treemap = ({ totalArea = 4000, areas, areaValues }) => {
     'Available Space': '#D3D3D3'
   };
 
-  const validTotalArea = totalArea > 0 ? totalArea : 4000;
+  const validTotalArea = totalArea > 0 ? totalArea : 5000;
 
   const builtArea = Object.keys(areas).reduce((acc, key) => acc + areas[key] * areaValues[key], 0);
   const availableArea = validTotalArea - builtArea;

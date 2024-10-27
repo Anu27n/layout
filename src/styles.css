@@ -4,6 +4,7 @@ body {
   transform-origin: top left;
   width: 133.33%;
   overflow-x: hidden;
+  background-color:#f5fffa; 
 }
 
 .button-container {
