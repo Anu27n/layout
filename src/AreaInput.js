@@ -214,6 +214,7 @@ const AreaInput = ({
           <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z" />
         </svg>
       </button>
+      <button onClick={handleLogin}>Login</button>
       <div className="flexbox-container">
         <div className="flexbox-item available">
           Available Space: {availableArea} sq ft
