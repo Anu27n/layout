@@ -1,11 +1,11 @@
-* Specific styles for LoginForm component */
+/* Specific styles for LoginForm component */
 .login-form-container {
     max-width: 400px;
     margin: 0 auto;
     padding: 20px;
     border-radius: 8px;
     background-color: #f4f4f4;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgb(0 0 0 / 10%);
     margin-top: 10vh;
   }
   
@@ -40,7 +40,7 @@
   
   button.submit-button {
     padding: 12px;
-    background-color: #003366;
+    background-color: #036;
     color: white;
     border: none;
     border-radius: 5px;
@@ -66,7 +66,7 @@
   }
   
   /* Responsive styling for smaller screens */
-  @media (max-width: 768px) {
+  @media (width <= 768px) {
     .login-form-container {
       padding: 15px;
     }
@@ -84,4 +84,3 @@
       font-size: 14px;
     }
   }
-  
