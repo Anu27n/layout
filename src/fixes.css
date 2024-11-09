@@ -1,21 +1,47 @@
+*{
+  box-sizing: border-box !important;
+}
+
 .--content {
   width: 100%;
   display: flex;
-  gap: 0.2rem;
-  height: 110vh; /* Ensure the parent container has a height */
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  height: 80%; /* Ensure the parent container has a height */
 }
 
 .--sections {
-  width: 50%;
+  width: 55%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 2rem;
   overflow-y: auto; /* Ensure vertical scrollbar is present */
   scrollbar-width: none; /* Hide scrollbar in Firefox */
-  height: 100%; /* Ensure sections take full height of the parent */
+  height: 80%; /* Ensure sections take full height of the parent */
+  overflow-x:hidden;
+  padding: 0;
 }
 
 .--sections::-webkit-scrollbar {
   display: none; /* Hide scrollbar in WebKit browsers */
+}
+@media(max-width:1024px){
+  .--sections{
+    overflow-x: auto;
+  }
+}
+@media(max-width:768px){
+  .--sections{
+    height: 70%;
+    max-width: fit-content;
+    overflow-x: hidden;
+  }
+}
+@media(max-width:426px){
+  .--sections{
+    width: 100% !important;
+    overflow-x: hidden;
+    margin-top: 10%;
+  }
 }

@@ -1,14 +1,21 @@
+/* General Styles */
 body {
   font-family: Arial, sans-serif;
-  transform: scale(0.80);
-  transform-origin: top left;
-  width: 133.33%;
-  overflow-x: hidden;
-  background-color:#f5fffa; 
+  width: 100vw;/* Compensate for the scaling to maintain full width */
+  overflow-x: hidden; /* Hide horizontal overflow */
+  scale: 0.9;
+  /* overflow-y: hidden; */
 }
 
 .button-container {
-  display: flex;       
+  display:flex;  
+  justify-content: space-between; 
+  
+}
+.button-container-main{
+  display: flex;
+  justify-content: space-between;
+ 
 }
 /* Hide spinners in Chrome, Safari, Edge, and Opera */
 input[type="number"]::-webkit-outer-spin-button,
@@ -33,13 +40,13 @@ input[type="number"] {
 
 .container {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  height: 150dvh; /* Full viewport height */
-  width:50% ;
-  overflow: hidden; /* Prevent main scrollbar */
-  padding: 20px; /* Add padding to the container */
+  /* Full viewport height */
+  width:100% ;
+  height: 100vh;
+  padding-top: 10px;
   box-sizing: border-box;
+  position: relative;
 }
 
 /* Section Styles */
@@ -64,8 +71,9 @@ input[type="number"] {
   overflow: hidden; /* Hide both vertical and horizontal scrollbars */
   padding-right: 30px; /* Added right padding to create space for scrollbar */
   white-space: normal;  /* Allow line breaks */
-  width: 100%; /* Ensure it takes full width */
+  max-width: 100%; /* Ensure it takes full width */
   box-sizing: border-box; /* Include padding in width calculation */
+  overflow-x: hidden;
 }
 
 section {
@@ -74,9 +82,9 @@ section {
   border-bottom: 1px solid #ddd; /* Kept the bottom border */
   background-color: #f0f0f0; /* Grey background for section boxes */
   border-radius: 3px; /* Reduced border radius for less rounded corners */
-  width: 100%; /* Ensure the section takes up the full width of its container */
+  max-width: 100%; /* Ensure the section takes up the full width of its container */
   box-sizing: border-box; /* Include padding and border in the element's total width and height */
-  overflow-x: hidden; /* Prevent horizontal scrolling */
+  /* Prevent horizontal scrolling */
 }
 section * {
   max-width: 100%; /* Ensure child elements do not exceed the width of the section */
@@ -123,7 +131,7 @@ section h3 {
   display: flex;
   flex-wrap: nowrap; /* Prevent wrapping */
   overflow-x: auto; /* Enable horizontal scrolling */
-  padding-left: 20px; /* Add padding to shift workspaces to the right */
+  padding-left: 20px;/* Add padding to shift workspaces to the right */
 }
 
 
@@ -132,7 +140,7 @@ section h3 {
   flex-direction: column; /* Stack children vertically */
   align-items: center; /* Center children horizontally */
   margin-bottom: 30px; 
-  margin-right: 20px; /* Adjust the margin as needed */
+  margin-right: 10px;/*  Adjust the margin as needed */
 }
 
 .workspace img {
@@ -154,7 +162,10 @@ section h3 {
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
+.size-display span{
+  font-weight: bold;
+  font-size: 16px;
+}
 .value-input {
   margin-top: 10px;
   padding: 5px;
@@ -168,6 +179,12 @@ section h3 {
   margin-top: 10px;
   font-weight: bold;
   color: black;
+  /* display: flex; */
+  align-items: center;
+  justify-content: space-between; 
+  position: relative;
+  text-align: center;
+  width: 100%; 
 }
 
 .control-btn {
@@ -195,18 +212,21 @@ span {
   font-weight: bold;
 }
 
-/* Flexbox Container Styles */
-.container {
-  padding: 20px;
-}
+
+
 
 /* Add flexbox properties to the content class */
-
+.content {
+  display: flex;
+  flex-wrap: wrap; /* Optional: allows children to wrap to the next line */
+  gap: 20px; /* Optional: adds space between children */
+  margin-top: 80px;
+}
 
 /* Specify width and height for the children of content */
 .content > * {
   flex: 1 1 45%; /* Adjust the flex-grow, flex-shrink, and flex-basis properties as needed */
-  height:100%; /* Specify the height of the children */
+  height: 300px; /* Specify the height of the children */
   box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
@@ -214,17 +234,16 @@ span {
 #chart {
   width: 40%; /* Adjust width as needed */
   aspect-ratio: 1;
-  padding: 20px; /* Add padding if needed */
+  padding: 10px 0; /* Add padding if needed */
   box-sizing: border-box; /* Include padding in width/height */
 }
 .flexbox-container {
   display: flex;
-  justify-content: flex-start; /* Align items to the start */
+  justify-content: flex-start;   /* Align items to the start */
   align-items: center;
-  position: absolute; /* Absolute position */
-  left: 75px; /* Align to the left */
-  bottom: 0; /* Align to the bottom of the parent container */
-  margin-bottom: 200px;
+  position: absolute;/* Absolute position */
+  left: 0px;  /* Align to the left */
+  top: 130px;
   box-sizing: border-box;
   gap: 1rem; 
 }
@@ -235,26 +254,26 @@ span {
   display: inline-flex;
   align-items: center;
   justify-content: center; /* Center text horizontally */
-  background: #40B3A2;
+  background: #003366;
   min-width: 200px;
   border: 0;
   border-radius: 4px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, .1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
-  padding: 16px 20px;
-  color: #000; /* Change text color to black */
+  padding: 13px 15px;
+  color: #ffff; /* Change text color to black */
   font-size: 16px; /* Increase font size for better readability */
-  font-weight: 700; /* Make text bold */
+  font-weight: 500; /* Make text bold */
   letter-spacing: 1.2px;
-  text-transform: uppercase;
+  text-transform: capitalize;
   overflow: hidden;
-  cursor: pointer;
+  cursor:default;
   text-align: center; /* Center text */
   transition: background-color 0.3s ease; /* Smooth transition for background color */
 }
 
 .flexbox-item:hover {
-  opacity: .95;
+  opacity: 0.95;
 }
 
 .flexbox-item .animation {
@@ -264,11 +283,15 @@ span {
 
 @keyframes ripple {
   0% {
-    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.1), 0 0 0 20px rgba(255, 255, 255, 0.1), 0 0 0 40px rgba(255, 255, 255, 0.1), 0 0 0 60px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.1),
+      0 0 0 20px rgba(255, 255, 255, 0.1), 0 0 0 40px rgba(255, 255, 255, 0.1),
+      0 0 0 60px rgba(255, 255, 255, 0.1);
   }
 
   100% {
-    box-shadow: 0 0 0 20px rgba(255, 255, 255, 0.1), 0 0 0 40px rgba(255, 255, 255, 0.1), 0 0 0 60px rgba(255, 255, 255, 0.1), 0 0 0 80px rgba(255, 255, 255, 0);
+    box-shadow: 0 0 0 20px rgba(255, 255, 255, 0.1),
+      0 0 0 40px rgba(255, 255, 255, 0.1), 0 0 0 60px rgba(255, 255, 255, 0.1),
+      0 0 0 80px rgba(255, 255, 255, 0);
   }
 }
 /* Built Available Area Styles */
@@ -295,7 +318,11 @@ span {
   margin-top: 1px;
   display: flex;
   align-items: center;
-  
+  position: absolute;
+  top: 10px; 
+  background: white;
+  font-size: 13px;
+  left: 25%;
 }
 .container {
   display: flex;
@@ -398,17 +425,21 @@ span {
 .set-area-input {
   width: 100%; /* Full width */
   padding: 10px 1rem; /* Updated padding */
-  font-size: 25px; /* Larger font size */
+  font-size: 20px; /* Larger font size */
   font-weight:bolder;
   border: 0; /* Remove border */
   border-radius: 10px; /* Updated rounded corners */
   box-sizing: border-box; /* Include padding and border in width */
   margin-bottom: 10px; /* Space below the input box */
-  outline: 2px solid #FEBF00; /* Outline */
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; /* Font family */
+  outline: 2px solid #febf00; /* Outline */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; /* Font family */
   background-color: #f2efef; /* Background color */
   outline-offset: 3px; /* Outline offset */
   transition: 0.25s; /* Transition */
+}
+.area-input{
+  width: 60%;
 }
 
 .set-area-input:focus {
@@ -419,9 +450,9 @@ span {
 .calculator-icon {
   margin-right: 25px;
   margin-left: -60px;
-  margin-bottom: -58px; /* Adjust the margin as needed */
-  font-size: 45px; /* Adjust the size as needed */
-  color: #FFD43B; /* Adjust the color as needed */
+  margin-bottom: -60px; /* Adjust the margin as needed */
+  font-size: 60px; /* Adjust the size as needed */
+  color: #ffd43b; /* Adjust the color as needed */
   transition: transform 0.3s ease; /* Smooth transition for hover effect */
   border-radius: 10px;
   border: 0;
@@ -436,31 +467,30 @@ span {
 
 .set-area-input.error {
   border: 1px solid red; /* Red border for error state */
-  animation: shake 0.3s; /* Shake animation */
 }
 
-@keyframes shake {
+/* @keyframes shake {
   0% { transform: translateX(0); }
   25% { transform: translateX(-5px); }
   50% { transform: translateX(5px); }
   75% { transform: translateX(-5px); }
   100% { transform: translateX(0); }
-}
+} */
 
 
 /* Button Styles */
-.area-input button {
+.button-container button {
   padding: 10px 20px; /* Increased padding */
   font-size: 16px; /* Larger font size */
   background-color: #4caf50; /* Green background */
   color: white; /* White text */
   border: none; /* Remove border */
-  border-radius: 5px; /* Rounded corners */
+  border-radius: 15px; /* Rounded corners */
   cursor: pointer; /* Pointer cursor on hover */
   transition: background-color 0.3s; /* Smooth transition */
 }
 
-.area-input button:hover {
+.button-container button:hover {
   background-color: #45a049; /* Darker green on hover */
 }
 
@@ -469,7 +499,7 @@ span {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 1em 0em 1em 1em;
+  padding: 1em 3em !important;
   background-color: yellow;
   cursor: pointer;
   box-shadow: 4px 6px 0px black;
@@ -480,11 +510,13 @@ span {
   z-index: 100;
   transition: box-shadow 250ms, transform 250ms, filter 50ms;
   margin-left: 605px;
+  font-weight: bold;
 }
 
 .reset-btn:hover {
   transform: translate(2px, 2px);
   box-shadow: 2px 3px 0px black;
+  color: #000;
 }
 
 .reset-btn:active {
@@ -565,6 +597,7 @@ span {
   vertical-align: middle;
 }
 
+
 /* New Button Styles */
 .set-area-button, .toggle-unit-button {
   background-color: #ff0000; /* Red background for toggle button */
@@ -575,7 +608,8 @@ span {
   transition: background-color 0.3s ease;
 }
 
-.set-area-button:hover, .toggle-unit-button:hover {
+.set-area-button:hover,
+.toggle-unit-button:hover {
   background-color: #cc0000; /* Darker red on hover */
 }
 
@@ -686,12 +720,28 @@ span {
   margin-bottom: 20px; /* Space between subsections */
 }
 
+@media (min-width: 768px) {
+  .legend-container {
+    position: absolute;
+    top: 360px !important;
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
 /* Media Queries for Responsiveness */
+@media (max-width:1024px){
+  .grid{
+    /* grid-template-columns: repeat(2, 1fr) !important;  */
+  }
+}
+
 @media (max-width: 768px) {
   .container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100vw;
   }
 
   .sections {
@@ -701,14 +751,21 @@ span {
     width: 100%;
     height: auto; /* Adjust height to fit content */
     overflow-y: auto; /* Enable vertical scrolling within sections */
-    padding: 10px; /* Add padding to sections */
+    /* Add padding to sections */
     box-sizing: border-box;
   }
 
   .flexbox-container {
-    width: 100%; /* Full width on small devices */
-    margin: 0 auto; /* Center the container */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    width: 50%; /* Half width on small devices */
+    top: 100px;
+    /* left: 0px; */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .flexbox-item{
+    height: 35px;
   }
 
   .built-available-area, .dynamic-text {
@@ -724,12 +781,20 @@ span {
     padding: 10px 20px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    width: 30%;
   }
 
   .set-area-button:hover {
     background-color: #0056b3;
   }
 
+  .button-container{
+    display: flex;
+    flex-direction: row !important;
+    margin-bottom: 20px;
+    width: 50%;
+  }
+ 
   .unit-toggle {
     margin-top: 10px;
   }
@@ -796,7 +861,70 @@ span {
   .warning-icon {
     margin-right: 5px;
   }
+  .apexcharts-title-text{
+    font-size: 16px;
+  }
+  .grid {
+    display: flex;
+    /* grid-template-columns: repeat(2, 1fr); 2 columns */
+    gap: 16px; /* Adjust the gap as needed */
+  }
+  .section-heading{
+    font-size: 17px;
+  }
+  /*Open Workspace Tablet view CSS*/
+  .workspace{
+    height: 200px;
+    width: 200px;
+  }
+  .workspace img{
+    height: 130px;
+    width: 150px;
+  }
+  .counter{
+    width: 100%;
+  }
+  .value-display {
+    margin-top: 5px;
+    font-weight: bold;
+    color: black;
+    font-size: 13px;
+  }
+  .radio-inputs{
+    width: 100% !important;
+  }
+  .radio-inputs .radio .name{
+    font-size: 13px;
+    padding: 10px !important;
+  }
+  .value-display span{
+    font-size: 13px;
+  }
+  .size-display span{
+    font-size: 13px;
+  }
+
+  /*Cabins Tablet view CSS*/
+  .cabins-grid{
+    margin-bottom: 20px;
+    gap: 50px !important;
+  }
+ 
+  .md-cabin-size{
+    font-size: 13px !important;
+  }
+  .seats-description{
+    font-size: 13px;
+  }
+
+  /*Bottom Dots*/
+  .legend-container{
+    width: 100vw;
+  }
+  
 }
+
+
 
 /* Treemap Styles */
 .treemap-container {
@@ -833,8 +961,7 @@ span {
 
 .public-spaces-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 columns */
-  grid-template-rows: repeat(2, auto); /* 2 rows */
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px; /* Adjust the gap as needed */
 }
 
@@ -846,8 +973,7 @@ span {
 
 .meeting-rooms-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 columns */
-  grid-template-rows: repeat(2, auto); /* 2 rows */
+  grid-template-columns: repeat(3, 1fr) ;
   gap: 16px; /* Adjust the gap as needed */
 }
 
@@ -859,7 +985,7 @@ span {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  grid-template-columns: repeat(2, 1fr) !important; /* 2 columns */
   gap: 16px; /* Adjust the gap as needed */
 }
 .counter {
@@ -894,10 +1020,10 @@ span {
   border: none;
   text-align: center;
 }
+
 .cabins-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 columns */
-  grid-template-rows: repeat(2, auto); /* 2 rows */
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
   gap: 16px; /* Adjust the gap as needed */
 }
 
@@ -908,15 +1034,10 @@ span {
   text-align: center;
 }
 
-.cabins-grid .workspace img {
-  width: 220px; /* Increased size */
-  height: 190px; /* Space between image and other elements */
-}
 
 .support-spaces-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 columns */
-  grid-template-rows: repeat(2, auto); /* 2 rows */
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
   gap: 16px; /* Adjust the gap as needed */
 }
 
@@ -926,6 +1047,7 @@ span {
   align-items: center; /* Center horizontally */
   text-align: center;
 }
+
 .workspace-image-container {
   position: relative;
   display: inline-block;
@@ -949,7 +1071,7 @@ span {
   bottom: 100%; /* Position above the image */
   left: 50%;
   transform: translateX(-50%);
-  z-index: 11;
+  z-index: 99;
   opacity: 0;
   transition: opacity 0.3s;
 }
@@ -964,27 +1086,37 @@ span {
   justify-content: space-around;
   gap: 20px;
 }
+.generate-boq-button{
+  left: 35% !important;
+}
 
 
 /* Mobile S (320px) */
-@media (max-width: 320px) {
-  .container {
-    padding: 10px;
+@media (max-width: 321px) {
+  .cabins-grid{
+    display: flex !important;
+    width: 100%;
+    margin-bottom: 0;
+    gap: 0px !important;
   }
+  .error-message {
+    left: 7px !important;
+  }
+}
 
-  .btn {
-    padding: 8px 16px;
-    font-size: 12px;
-    width: 100%; /* Full width on small mobile */
-  }
+.md-cabin-btn{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.slider-button{
+  margin: 0 10px;
+  width: 25px;
+  height: 25px;
 }
 
 /* Mobile M (375px) */
 @media (max-width: 375px) {
-  .container {
-    padding: 15px;
-  }
-
   .btn {
     padding: 10px 18px;
     font-size: 14px;
@@ -993,26 +1125,170 @@ span {
 }
 
 /* Mobile L (425px) */
-@media (max-width: 425px) {
-  .container {
-    padding: 20px;
+@media (max-width: 426px) {
+  .size-input-container {
+    width: 100% !important;
+  }
+  .area-input {
+    width: 100%;
+  }
+  .reset-cross {
+    font-size: 20px !important;
+    top: 15px !important;
   }
 
-  .btn {
-    padding: 12px 20px;
-    font-size: 15px;
-    width: 100%; /* Full width on large mobile */
+  .set-area-input::placeholder{
+    font-size: 15px !important;
+  }
+  .area-input{
+    width: 75%;
+  }
+  .error-message {
+    font-size: 9px;
+    left: 0;
+    top: 9px;
+    font-weight: normal;
+    left: 10%;
+  }
+  .warning-icon {
+    font-size: 9px;
+  }
+  .flexbox-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column !important;
+  }
+  .flexbox-item{
+    font-size: 12px;
+  }
+  .generate-boq-button{
+    font-size: 12px !important;
+    width: 100% !important;
+    top: 450px !important;
+    left: 0 !important;
+  }
+  
+  #chart{
+    width: 100%;
+    height: 100% !important;
+  }
+  /*grid mobile view*/
+
+  
+  
+  /*Open workspace mobile view css*/
+  .workspace{
+    height: auto;
+    width: 40%;
+  }
+  .workspace img{
+    height: 100px;
+    width: 100%;
+  }
+  .counter{
+    width: 100%;
+  }
+  .counter-value{
+    font-size: 13px;
+  }
+  .counter-btn{
+    font-size: 13px;
+  }
+  .value-display {
+    margin-top: 5px;
+    font-weight: bold;
+    color: black;
+    font-size: 10px;
+  }
+  .radio-inputs{
+    width: 100% !important;
+  }
+  .radio-inputs .radio .name{
+    font-size: 12px;
+    padding: 5px 2px !important;
+  }
+  .value-display span{
+    font-size: 12px;
+  }
+  .size-display span{
+    font-size: 12px;
+  }
+
+  /*Cabins Mobile view CSS*/
+  .grid{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0;
+  }
+
+  .cabins-grid.workspace{
+    height: 150px;
+    width: 40%;
+  }
+  .cabins-grid.workspace img{
+    height: 100px;
+    width: 100%;
+  }
+  .md-cabin-size{
+    font-size: 12px !important;
+  }
+  .seats-description{
+    font-size: 12px;
+  }
+
+  .other-area-input input{
+    width: 90%;
+  }
+  .other-area-input input::placeholder{
+    font-size: 11px;
+  }
+  .other-area-input{
+    font-size: 12px;
+  }
+
+  /*Meeting room mobile view css*/
+ 
+  .meeting-rooms-grid.workspace{
+    height: 150px;
+    width: 40%;
+  }
+  .meeting-rooms-grid.workspace img{
+    height: 100px;
+    width: 100%;
+  }
+  .legend-container {
+    height: 320px;
+    overflow-y: auto;
+    position: absolute;
+    top: 10%;
+    left: -100%; /* Start off the screen to the left */
+    background: #fff;
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .legend-item{
+    margin: 20px;
+  }
+  .legend-item span {
+    /* height: 10px; */
+    width: 10px;
   }
 }
 
+/* Style for the Generate BOQ button */
+/* Style for the Generate BOQ button */
+/* Style for the Generate BOQ button */
 .generate-boq-button {
   position: relative;
-  padding: 12px 35px;
-  background: #007bff; /* Changed to blue */
-  font-size: 17px;
-  font-weight: 1500;
+  padding: 15px 35px;
+  background: #003366; /* Changed to blue */
+  font-size: 16px;
+  font-weight: 700;
   color: white; /* Changed to white for better contrast */
-  border: 3px solid #007bff; /* Changed to blue */
+  border: 2px solid #007bff; /* Changed to blue */
   border-radius: 8px;
   box-shadow: 0 0 0 #007bff8c; /* Changed to blue */
   transition: all 0.3s ease-in-out;
@@ -1020,8 +1296,9 @@ span {
   display: block;
   width: 100%;
   max-width: 300px;
-  margin: 40px auto;
+  margin: 30px auto;
   text-align: center;
+  top: 15px;
 }
 
 .generate-boq-button .star-1,
@@ -1074,8 +1351,8 @@ span {
 
 .generate-boq-button:hover {
   background: transparent;
-  color: #007bff; 
-  box-shadow: 0 0 25px #007bff8c; 
+  color: #007bff; /* Changed to blue */
+  box-shadow: 0 0 25px #007bff8c; /* Changed to blue */
 }
 
 .generate-boq-button:hover .star-1 {
@@ -1192,4 +1469,42 @@ span {
 
 .seat-control button:hover {
   background-color: #0056b3;
+}
+.input-wrapper{
+  display:inline-block;
+  position: relative;
+  width: 100%;
+}
+.reset-cross {
+  position: absolute;
+  right: 20px;
+  font-family: "FontAwesome";
+  font-size: 35px;
+  cursor: pointer;
+  top: 10px;
+  opacity: 50%;
+  color:#333;
+}
+.reset-cross:hover{
+  opacity: 100%;
+}
+.info-button{
+  border-radius: 50%;
+  border: 1px solid ;
+  cursor: pointer;
+}
+@keyframes blink {
+  0% {
+    scale: 1;
+  }
+  50% {
+    scale: 1.2;
+  }
+  100% {
+    scale: 1;
+  }
+}
+
+.blink {
+  animation: blink 1s infinite;
 }

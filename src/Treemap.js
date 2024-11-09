@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactApexChart from 'react-apexcharts';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import './styles.css';
 
 const fullNames = {
@@ -25,10 +27,15 @@ const fullNames = {
   hrRoom: "HR Room",
   financeRoom: "Finance Room",
   executiveWashroom: "Executive Washroom",
-  breakoutRoom: "Breakout Room"
+  breakoutRoom: "Breakout Room",
+  videoRecordingRoom: "Video Recording Room",
+  other: "Other" // Add new category here
 };
 
-const Treemap = ({ totalArea = 4000, areas, areaValues }) => {
+const Treemap = ({ totalArea, areas, areaValues }) => {
+  const [hoveredArea, setHoveredArea] = useState(null);
+  const [isLegendVisible, setIsLegendVisible]=useState(false);
+
   const colors = {
     'Linear Workspace': '#6495ED',
     'L-Type Workspace': '#4169E1',
@@ -47,26 +54,31 @@ const Treemap = ({ totalArea = 4000, areas, areaValues }) => {
     'Interview Room': '#32CD32',
     'Conference Room': '#FFD700',
     'Board Room': '#FFE4B5',
-    'Meeting Room': '#FFDAB9',
+    'Meeting Room': '#FA8072',
     'Meeting Room (Large)': '#FFDAB9',
     'HR Room': '#90EE90',
     'Finance Room': '#5F9EA0',
-    'Available Space': '#D3D3D3'
+    'Executive Washroom': '#097969',
+    'Available Space': '#D3D3D3',
+    'Other': '#FF69B4' // Color for the "Other" category
   };
 
-  const validTotalArea = totalArea > 0 ? totalArea : 5000;
-
+  const validTotalArea = totalArea > 0 ? totalArea : 4000;
   const builtArea = Object.keys(areas).reduce((acc, key) => acc + areas[key] * areaValues[key], 0);
   const availableArea = validTotalArea - builtArea;
 
   const series = [
-    ...Object.keys(areas).map(key => ({
-      x: fullNames[key] || key,
-      y: areas[key] * areaValues[key],
-      fillColor: colors[fullNames[key]] || '#000000'
-    })),
+    ...Object.keys(areas).map(key => {
+      const areaOccupied = areas[key] * areaValues[key];
+      const percentage = ((areaOccupied / validTotalArea) * 100).toFixed(2);
+      return {
+        x: `${fullNames[key] || key}: ${percentage}%`,
+        y: areaOccupied,
+        fillColor: colors[fullNames[key]] || '#000000'
+      };
+    }),
     {
-      x: 'Available Space',
+      x: `Available Space: ${((availableArea / validTotalArea) * 100).toFixed(2)}%`,
       y: availableArea,
       fillColor: colors['Available Space']
     }
@@ -75,28 +87,19 @@ const Treemap = ({ totalArea = 4000, areas, areaValues }) => {
   const options = {
     chart: {
       type: 'treemap',
-      height: '100%', // Responsive height
+      height: 350,
       toolbar: {
         show: true
       },
-      animations: {
-        enabled: true,
-        easing: 'easeinout',
-        speed: 800,
-        animateGradually: {
-          enabled: true,
-          delay: 150
+      events: {
+        dataPointMouseEnter: (event, chartContext, config) => {
+          const hoveredLabel = config.w.config.series[0].data[config.dataPointIndex].x;
+          setHoveredArea(hoveredLabel);
         },
-        dynamicAnimation: {
-          enabled: true,
-          speed: 350
+        dataPointMouseLeave: () => {
+          setHoveredArea(null);
         }
       }
-    },
-    legend: {
-      show: true,
-      position: 'bottom',
-      horizontalAlign: 'center'
     },
     title: {
       text: 'Area Distribution of Workspaces',
@@ -110,20 +113,12 @@ const Treemap = ({ totalArea = 4000, areas, areaValues }) => {
     plotOptions: {
       treemap: {
         distributed: true,
-        enableShades: false,
-        hover: {
-          // Hover effect
-          enabled: true,
-          opacity: 0.7
-        }
+        enableShades: false
       }
     },
     tooltip: {
       y: {
-        formatter: function (value) {
-          const percentage = ((value / validTotalArea) * 100).toFixed(2);
-          return `${percentage}% of total area`;
-        }
+        formatter: (value) => `${value} sq ft`
       }
     },
     dataLabels: {
@@ -133,21 +128,102 @@ const Treemap = ({ totalArea = 4000, areas, areaValues }) => {
         fontWeight: 'bold',
         colors: ['#FFFFFF']
       },
-      formatter: function (val, opts) {
+      formatter: (val, opts) => {
         if (typeof val === 'number') {
           const percentage = ((val / validTotalArea) * 100).toFixed(2);
-          return `${opts.w.globals.labels[opts.dataPointIndex]}: ${percentage}%`;
+          return `${opts.w.globals.labels[opts.dataPointIndex]} (${percentage}%)`;
         }
         return `${opts.w.globals.labels[opts.dataPointIndex]}: ${val}`;
       }
     }
   };
 
+  const generateLegendItems = () => {
+    return series
+      .filter(item => item.y > 0)
+      .map(item => (
+        <div
+          key={item.x}
+          className={`legend-item ${hoveredArea === item.x ? 'blink' : ''}`}
+          style={{
+            display: 'flex',
+            justifyContent: 'space-evenly',
+            alignItems: 'center',
+            marginBottom: '4px'
+          }}
+          onMouseEnter={() => setHoveredArea(item.x)}
+          onMouseLeave={() => setHoveredArea(null)}
+        >
+          <span
+            className={`legend-color ${hoveredArea === item.x ? 'blink' : ''}`}
+            style={{
+              backgroundColor: item.fillColor,
+              width: '10px',
+              height: '10px',
+              marginRight: '10px',
+              borderRadius: '50%'
+            }}
+          ></span>
+          <span className="legend-label" style={{ fontSize: '13px' }}>
+            {item.x}
+          </span>
+        </div>
+      ));
+  };
+  const toggleLegend = () => {
+    setIsLegendVisible(!isLegendVisible);
+  }
+
+  useEffect(()=>{
+    const handleResize=()=>{
+      if(window.innerWidth>426){
+        setIsLegendVisible(true);
+      }else{
+        setIsLegendVisible(false);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    return()=>{
+    window.addEventListener('resize', handleResize);
+    };
+  },[]);
+
   return (
-    <div id="chart" aria-labelledby="treemap-title">
-      <h2 id="treemap-title" style={{ display: 'none' }}>Area Distribution of Workspaces</h2>
-      <ReactApexChart options={options} series={[{ data: series }]} type="treemap" height={550} />
-    </div>
+    <div id="chart" style={{ position: 'relative' }}>
+    <ReactApexChart options={options} series={[{ data: series }]} type="treemap" height={350} />
+    <button
+      className="arrow-button"
+      onClick={() => toggleLegend(!isLegendVisible)}
+      style={{
+        position: 'absolute',
+        left: '-10px',
+        top: '200px',
+        opacity:'50%',
+        zIndex: 1,
+        display: window.innerWidth <= 425 ? 'block' : 'none',
+      }}
+    >
+      <FontAwesomeIcon icon={isLegendVisible ? faChevronLeft : faChevronRight} />
+    </button>
+    <div
+        className="legend-container"
+        style={{
+          transform: isLegendVisible ? 'translateX(0)' : 'translateX(-100%)', // Start hidden and slide in
+          transition: 'transform 1s ease-in-out',
+          position: 'absolute',
+          top: '10%',
+          left: '0',
+          background: '#fff',
+          padding: '10px',
+          boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
+          visibility: isLegendVisible ? 'visible' : 'hidden', // Fully hide off-screen
+        }}
+      >
+        {generateLegendItems()}
+      </div>
+  </div>
   );
 };
 
