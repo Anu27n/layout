@@ -1,15 +1,27 @@
 import React, { useState } from 'react';
 import { Tooltip } from 'react-tooltip';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalculator } from '@fortawesome/free-solid-svg-icons';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faCalculator, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { supabase } from './supabaseClient';
 import './styles.css';
 import Modal from './Modal';
 import Card from './Card';
-import './LoginForm'
+import './LoginForm';
 
-const AreaInput = ({totalArea, setTotalArea, areaValues ,builtArea, availableArea, resetAll, areas, setFinalData, showModal, setShowModal, isOtherSelected, setShowLoginForm }) => {
+const AreaInput = ({
+  totalArea,
+  setTotalArea,
+  areaValues,
+  builtArea,
+  availableArea,
+  resetAll,
+  areas,
+  setFinalData,
+  showModal,
+  setShowModal,
+  isOtherSelected,
+  setShowLoginForm
+}) => {
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState(false);
 
@@ -29,8 +41,7 @@ const AreaInput = ({totalArea, setTotalArea, areaValues ,builtArea, availableAre
       } else if (area === 0 || area === undefined) {
         setError(false);
         resetAll();
-      }
-      else {
+      } else {
         setError(true); // Set error state if area is out of range
         resetAll();
       }
@@ -139,10 +150,10 @@ const AreaInput = ({totalArea, setTotalArea, areaValues ,builtArea, availableAre
     window.location.href = 'https://lucky-kataifi-065416.netlify.app/';
   };
 
-  const handleLogin =()=>{
+  const handleLogin = () => {
     setShowLoginForm(true);
-  }
-  
+  };
+
   return (
     <div className="area-input">
       <div className="input-container">
@@ -164,12 +175,15 @@ const AreaInput = ({totalArea, setTotalArea, areaValues ,builtArea, availableAre
             className={`set-area-input ${error ? 'error' : ''}`}
             aria-label="Total Area Input"
             data-tip="Enter the total area in square feet"
-          /><FontAwesomeIcon icon={faXmark}
+          />
+          <FontAwesomeIcon
+            icon={faXmark}
             className='reset-cross'
             onClick={handleReset}
             title="Click to reset the area input"
             aria-label="Reset Area Button"
-            data-tip="Click to reset the area input" />
+            data-tip="Click to reset the area input"
+          />
         </div>
         {error && (
           <div className="error-message" aria-live="polite">
@@ -178,8 +192,8 @@ const AreaInput = ({totalArea, setTotalArea, areaValues ,builtArea, availableAre
           </div>
         )}
       </div>
-      
-      <button className="generate-boq-button" onClick={()=>handleLogin()}>
+
+      <button className="generate-boq-button" onClick={handleGenerateBOQ}>
         Generate BOQ
         <svg className="star-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z" />

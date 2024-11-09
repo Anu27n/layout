@@ -359,7 +359,7 @@ const App = () => {
       lounge: Math.round(loungeArea / areaValues.lounge),
       other: otherArea / areaValues.other,
     }));
-  }, [totalArea]);
+  }, [totalArea,areaValues]);
 
   // Calculate builtArea and set it to state
   useEffect(() => {
