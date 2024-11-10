@@ -1,6 +1,8 @@
 import React from 'react';
 import Counter from './Counter'; // Ensure the correct path to Counter.js
 import './styles.css'; // Import the updated CSS file
+import Tooltip from './ToolTip';
+import InteractiveInputSlider from './InteractiveInputSlider';
 
 const meetingRoomDescriptions = {
   discussionRoom: "This is the discussion room, ideal for small group discussions.",
@@ -28,7 +30,9 @@ const SEATS_PER_ROOM = {
   videoRecordingRoom: 0 // Assuming no seats defined for videoRecordingRoom
 };
 
-const MeetingRooms = ({ areas, updateAreas }) => {
+const MeetingRooms = ({ areas, updateAreas, hrRoomConfig, salesRoomConfig, financeRoomConfig, areaInfo, initialAreaValues, videoRecordingRoomSize, setVideoRecordingRoomSize }) => {
+  const { totalArea, builtArea } = areaInfo;
+
   const handleIncrement = (type) => {
     const newValue = (areas[type] || 0) + 1;
     updateAreas(type, newValue);
@@ -52,18 +56,31 @@ const MeetingRooms = ({ areas, updateAreas }) => {
     }
   };
 
+  const sizeArea = {
+    discussionRoom: 380,
+    interviewRoom: 100,
+    conferenceRoom: 250,
+    boardRoom: 325,
+    meetingRoom: 100,
+    meetingRoomLarge: 120,
+    hrRoom: 80,
+    financeRoom: 100,
+    sales: 80,
+    videoRecordingRoom: 80
+  };
+
   return (
     <div className="section">
       <h3 className="section-heading">Meeting Rooms</h3>
-      <div className="meeting-rooms-grid">
+      <div className="meeting-rooms-grid grid">
         {[
-          "discussionRoom", 
-          "interviewRoom", 
-          "conferenceRoom", 
-          "boardRoom", 
-          "meetingRoom", 
-          "meetingRoomLarge", 
-          "hrRoom", 
+          "discussionRoom",
+          "interviewRoom",
+          "conferenceRoom",
+          "boardRoom",
+          "meetingRoom",
+          "meetingRoomLarge",
+          "hrRoom",
           "financeRoom",
           "sales",
           "videoRecordingRoom"
@@ -82,12 +99,91 @@ const MeetingRooms = ({ areas, updateAreas }) => {
               />
               <div className="value-display">
                 {type.charAt(0).toUpperCase() + type.slice(1).replace(/([A-Z])/g, ' $1')}: <span>{areas[type] || 0}</span>
+
+                {SEATS_PER_ROOM[type] > 0 && (
+                  <div className="seats-description">
+                    <strong>1 {type.replace(/([A-Z])/g, ' $1').toLowerCase()} = {SEATS_PER_ROOM[type]} pax</strong>
+                  </div>
+                )}
+                {type !== "videoRecordingRoom" && (
+                  <Tooltip text={`Size: ${sizeArea[type]} sq ft`}>
+                    <button className="info-button">i</button>
+                  </Tooltip>
+                )}
+                {type === "hrRoom" && (
+                  <div className="seats-description">
+                    <Tooltip text={`Size: ${hrRoomConfig.roomSize} sq ft \nCabin: ${4+hrRoomConfig.seatCount} seats`}>
+                      <button className="info-button">i</button>
+                    </Tooltip>
+                    <InteractiveInputSlider
+                      name={"Seat Count"}
+                      value={hrRoomConfig.seatCount}
+                      onChange={hrRoomConfig.setSeatCount}
+                      min2={0} max2={24} step2={2}
+                      cabinSize={hrRoomConfig.roomSize}
+                      setCabinSize={hrRoomConfig.setRoomSize}
+                      totalArea={totalArea}
+                      builtArea={builtArea}
+                      type={type}
+                      initialAreaValues={initialAreaValues}
+                    />
+                  </div>
+                )}
+                {type === "sales" && (
+                  <div className="seats-description">
+                    <Tooltip text={`Size: ${salesRoomConfig.roomSize} sq ft \nCabin: ${4+salesRoomConfig.seatCount} seats`}>
+                      <button className="info-button">i</button>
+                    </Tooltip>
+                    <InteractiveInputSlider
+                      name={"Seat Count"}
+                      value={salesRoomConfig.seatCount}
+                      onChange={salesRoomConfig.setSeatCount}
+                      min2={0} max2={24} step2={2}
+                      cabinSize={salesRoomConfig.roomSize}
+                      setCabinSize={salesRoomConfig.setRoomSize}
+                      totalArea={totalArea}
+                      builtArea={builtArea}
+                      type={type}
+                      initialAreaValues={initialAreaValues}
+                    />
+                  </div>
+                )}
+                {type === "financeRoom" && (
+                  <div className="seats-description">
+                    <Tooltip text={`Size: ${financeRoomConfig.roomSize} sq ft \nCabin: ${4+financeRoomConfig.seatCount} seats`}>
+                      <button className="info-button">i</button>
+                    </Tooltip>
+                    <InteractiveInputSlider
+                      name={"Seat Count"}
+                      value={financeRoomConfig.seatCount}
+                      onChange={financeRoomConfig.setSeatCount}
+                      min2={0} max2={24} step2={2}
+                      cabinSize={financeRoomConfig.roomSize}
+                      setCabinSize={financeRoomConfig.setRoomSize}
+                      totalArea={totalArea}
+                      builtArea={builtArea}
+                      type={type}
+                      initialAreaValues={initialAreaValues}
+                    />
+                  </div>
+                )}
+                {/* {type === "videoRecordingRoom" && (
+                  <div className="slider-container seats-description">
+                    <InteractiveInputSlider
+                      name={"Video Recording Room Size"}
+                      value={videoRecordingRoomSize}
+                      onChange={setVideoRecordingRoomSize}
+                      min2={80} max2={160} step2={5}
+                      cabinSize={videoRecordingRoomSize}
+                      setCabinSize={setVideoRecordingRoomSize}
+                      totalArea={totalArea}
+                      builtArea={builtArea}
+                      type={type}
+                      initialAreaValues={initialAreaValues}
+                    />
+                  </div>
+                )} */}
               </div>
-              {SEATS_PER_ROOM[type] > 0 && (
-                <div className="seats-description">
-                  <strong>1 {type.replace(/([A-Z])/g, ' $1').toLowerCase()} = {SEATS_PER_ROOM[type]} pax</strong>
-                </div>
-              )}
             </div>
           </div>
         ))}

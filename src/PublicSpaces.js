@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Counter from './Counter'; // Ensure the correct path to Counter.js
 import './styles.css'; // Import the updated CSS file
+import Tooltip from './ToolTip';
+
 
 const publicSpaceDescriptions = {
   reception: "This is the reception area, the first point of contact for visitors.",
@@ -10,20 +12,17 @@ const publicSpaceDescriptions = {
   breakoutRoom: "This is the breakout room, a flexible space for small group discussions."
 };
 
-const PublicSpaces = ({ areas, updateAreas }) => {
-  const [description, setDescription] = useState(''); // Example usage of useState
+const PublicSpaces = ({ areas, updateAreas, breakoutRoomSize, setBreakoutRoomSize, totalArea, builtArea, initialAreaValues }) => {
 
   const handleIncrement = (type) => {
     const newValue = (areas[type] || 0) + 1;
     updateAreas(type, newValue);
-    setDescription(publicSpaceDescriptions[type]); // Use setDescription
   };
 
   const handleDecrement = (type) => {
     const newValue = (areas[type] || 0) - 1;
     if (newValue >= 0) {
       updateAreas(type, newValue);
-      setDescription(publicSpaceDescriptions[type]); // Use setDescription
     } else {
       //alert("Negative values are not allowed.");
     }
@@ -33,7 +32,6 @@ const PublicSpaces = ({ areas, updateAreas }) => {
     const parsedValue = parseInt(value, 10);
     if (parsedValue >= 0) {
       updateAreas(type, parsedValue);
-      setDescription(publicSpaceDescriptions[type]); // Use setDescription
     } else {
       //alert("Negative values are not allowed.");
     }
@@ -42,7 +40,7 @@ const PublicSpaces = ({ areas, updateAreas }) => {
   return (
     <div className="section">
       <h3 className="section-heading">Public Spaces</h3>
-      <div className="public-spaces-grid">
+      <div className="public-spaces-grid grid">
         {["reception", "lounge", "phoneBooth", "breakoutRoom"].map((type) => (
           <div key={type} className="workspace">
             <div className="workspace-image-container">
@@ -58,13 +56,32 @@ const PublicSpaces = ({ areas, updateAreas }) => {
               />
               <div className="value-display">
                 {type.charAt(0).toUpperCase() + type.slice(1)}: <span>{Math.round(areas[type] || 0)}</span> {/* Round the value before displaying */}
+
+                {type === "phoneBooth" && (
+                  <Tooltip text={`Size: 25 sq ft`}>
+                    <button className="info-button">i</button>
+                  </Tooltip>
+                )}
               </div>
+              {/* {type === "breakoutRoom" && (
+                <div className="slider-container seats-description">
+                  <InteractiveInputSlider
+                    name={"Breakout Room Size"}
+                    value={breakoutRoomSize}
+                    onChange={setBreakoutRoomSize}
+                    min2={80} max2={160} step2={5}
+                    cabinSize={breakoutRoomSize}
+                    setCabinSize={setBreakoutRoomSize}
+                    totalArea={totalArea}
+                    builtArea={builtArea}
+                    type={type}
+                    initialAreaValues={initialAreaValues}
+                  />
+                </div>
+              )} */}
             </div>
           </div>
         ))}
-      </div>
-      <div className="description-display">
-        <p>{description}</p> {/* Display the description */}
       </div>
     </div>
   );

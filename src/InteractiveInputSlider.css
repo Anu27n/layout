@@ -1,0 +1,51 @@
+.interactive-slider-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+    max-width: 100%;
+    font-family: Arial, sans-serif;
+  }
+  .interactive-slider-counter{
+    display: flex;
+    font-size: 15px;
+  }
+  .interactive-slider-counter input{
+    font-size: 12px;
+  }
+  
+  .slider-button {
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #003366;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .slider-button:hover {
+    background-color: #388E3C;
+  }
+  
+  .slider-input {
+    width: 60px;
+    font-size: 18px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+    outline: none;
+  }
+
+  @media(max-width:768px){
+    .interactive-slider-container label{
+      font-size: 10px;
+    }
+    
+  }
+  

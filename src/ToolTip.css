@@ -1,0 +1,27 @@
+.tooltip-container {
+    position: absolute;
+    right: 0; /* Positions tooltip on the extreme right */
+    top: 0;
+  }
+  
+  .tooltip {
+    visibility: hidden;
+    width: 120px; /* Adjust width as needed */
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%; /* Position above the button */
+    left: 50%;
+    margin-left: -100px; /* Center the tooltip */
+    opacity: 0;
+    transition: opacity 0.3s; /* Fade effect */
+  }
+  
+  .tooltip-container:hover .tooltip {
+    visibility: visible;
+    opacity: 1; /* Show the tooltip on hover */
+  }
