@@ -1,86 +1,129 @@
 /* Specific styles for LoginForm component */
 .login-form-container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border-radius: 8px;
-    background-color: #f4f4f4;
-    box-shadow: 0 4px 8px rgb(0 0 0 / 10%);
-    margin-top: 10vh;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f4f4f4;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 5vh;
+}
+
+h2 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.form-group label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  width: 50%;
+}
+
+input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  width: 100%;
+  margin-top: 3px; /* Add a slight margin for spacing between input and label/error */
+}
+
+button.submit-button {
+  padding: 12px;
+  background-color: #003366;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+button.submit-button:hover {
+  background-color: #014d98;
+}
+
+.toggle-link {
+  text-align: center;
+  color: #4CAF50;
+  cursor: pointer;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.toggle-link:hover {
+  text-decoration: underline;
+}
+
+/* Responsive styling for smaller screens */
+@media (max-width: 768px) {
+  .login-form-container {
+    padding: 15px;
   }
-  
+
   h2 {
-    text-align: center;
-    font-size: 24px;
-    margin-bottom: 20px;
+    font-size: 20px;
   }
-  
-  .login-form {
-    display: flex;
+
+  input {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  button.submit-button {
+    font-size: 14px;
+  }
+}
+
+/* Inline error message style */
+.error-message {
+  color: red;
+  font-size: 0.85em;
+  margin-left: 8px;
+  white-space: nowrap; /* Keeps error message inline with label */
+  position: absolute;
+  left: 100px;
+  top: -10px;
+}
+@media(max-width:426px){
+  .login-form-container{
+    width: 80vw;
+  }
+  label{
+    width: 100%;
+    font-size: 12px;
+  }
+  .form-group{
     flex-direction: column;
   }
-  
-  .form-group {
-    margin-bottom: 15px;
+  h2 {
+    font-size: 15px;
   }
-  
-  label {
-    font-size: 14px;
-    margin-bottom: 5px;
-    color: #333;
-  }
-  
   input {
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-    width: 100%;
+    font-size: 12px;
+    padding: 5px;
   }
-  
   button.submit-button {
-    padding: 12px;
-    background-color: #036;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 10px;
+    font-size: 12px;
   }
-  
-  button.submit-button:hover {
-    background-color: #014d98;
+  .error-message{
+    top: 0;
   }
-  
-  .toggle-link {
-    text-align: center;
-    color: #4CAF50;
-    cursor: pointer;
-    margin-top: 15px;
-    font-size: 14px;
-  }
-  
-  .toggle-link:hover {
-    text-decoration: underline;
-  }
-  
-  /* Responsive styling for smaller screens */
-  @media (width <= 768px) {
-    .login-form-container {
-      padding: 15px;
-    }
-  
-    h2 {
-      font-size: 20px;
-    }
-  
-    input {
-      font-size: 14px;
-      padding: 8px;
-    }
-  
-    button.submit-button {
-      font-size: 14px;
-    }
-  }
+}

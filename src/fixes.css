@@ -16,34 +16,32 @@
   flex-direction: column;
   justify-content: space-between;
   gap: 2rem;
-  overflow: hidden auto; /* Ensure vertical scrollbar is present */
+  overflow-y: auto; /* Ensure vertical scrollbar is present */
   scrollbar-width: none; /* Hide scrollbar in Firefox */
   height: 80%; /* Ensure sections take full height of the parent */
+  overflow-x:hidden;
   padding: 0;
 }
 
 .--sections::-webkit-scrollbar {
   display: none; /* Hide scrollbar in WebKit browsers */
 }
-
-@media(width <=1024px){
+@media(max-width:1024px){
   .--sections{
     overflow-x: auto;
   }
 }
-
-@media(width <=768px){
+@media(max-width:768px){
   .--sections{
     height: 70%;
     max-width: fit-content;
     overflow-x: hidden;
   }
 }
-
-@media(width <=426px){
+@media(max-width:426px){
   .--sections{
     width: 100% !important;
     overflow-x: hidden;
-    margin-top: 10%;
+    margin-top: 5vh;
   }
 }
