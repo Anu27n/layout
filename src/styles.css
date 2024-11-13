@@ -4,7 +4,6 @@ body {
   width: 100vw;/* Compensate for the scaling to maintain full width */
   overflow-x: hidden; /* Hide horizontal overflow */
   scale: 0.9;
-
   /* overflow-y: hidden; */
 }
 
@@ -13,23 +12,21 @@ body {
   justify-content: space-between; 
   
 }
-
 .button-container-main{
   display: flex;
   justify-content: space-between;
  
 }
-
 /* Hide spinners in Chrome, Safari, Edge, and Opera */
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
-  appearance: none;
+  -webkit-appearance: none;
   margin: 0;
 }
 
 /* Hide spinners in Firefox */
 input[type="number"] {
-  appearance: textfield;
+  -moz-appearance: textfield;
 }
 
 /* Additional styles to ensure spinners are hidden */
@@ -44,7 +41,6 @@ input[type="number"] {
 .container {
   display: flex;
   align-items: center;
-
   /* Full viewport height */
   width:100% ;
   height: 100vh;
@@ -55,9 +51,12 @@ input[type="number"] {
 
 /* Section Styles */
 .section-heading {
-  position: sticky; /* For Safari */
+  position: -webkit-sticky; /* For Safari */
   position: sticky;
-  top: 0;/* Grey with 50% transparency */ /* Optional: to make the text more readable */
+  top: 0;/* Grey with 50% transparency */
+  padding: 10px;
+  border-radius: 25px;
+  color: rgba(18, 8, 8, 0.882); /* Optional: to make the text more readable */
   background-color: #F5F5F5; /* Light grey background */
   padding: 10px 15px;        /* Adjust padding as needed */
   font-size: 1.2rem;         /* Customize font size */
@@ -85,10 +84,8 @@ section {
   border-radius: 3px; /* Reduced border radius for less rounded corners */
   max-width: 100%; /* Ensure the section takes up the full width of its container */
   box-sizing: border-box; /* Include padding and border in the element's total width and height */
-
   /* Prevent horizontal scrolling */
 }
-
 section * {
   max-width: 100%; /* Ensure child elements do not exceed the width of the section */
   box-sizing: border-box; /* Include padding and border in the element's total width and height */
@@ -163,14 +160,12 @@ section h3 {
   padding: 5px;
   width:100%;
   border-radius: 5px;
-  box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
 .size-display span{
   font-weight: bold;
   font-size: 16px;
 }
-
 .value-input {
   margin-top: 10px;
   padding: 5px;
@@ -184,7 +179,6 @@ section h3 {
   margin-top: 10px;
   font-weight: bold;
   color: black;
-
   /* display: flex; */
   align-items: center;
   justify-content: space-between; 
@@ -241,15 +235,14 @@ span {
   width: 40%; /* Adjust width as needed */
   aspect-ratio: 1;
   padding: 10px 0; /* Add padding if needed */
-  box-sizing: border-box; /* Include padding in width/height */
+  box-sizing: border-box; /* Include padding in width/height */
 }
-
 .flexbox-container {
   display: flex;
   justify-content: flex-start;   /* Align items to the start */
   align-items: center;
   position: absolute;/* Absolute position */
-  left: 0;  /* Align to the left */
+  left: 0px;  /* Align to the left */
   top: 130px;
   box-sizing: border-box;
   gap: 1rem; 
@@ -261,11 +254,11 @@ span {
   display: inline-flex;
   align-items: center;
   justify-content: center; /* Center text horizontally */
-  background: #036;
+  background: #003366;
   min-width: 200px;
   border: 0;
   border-radius: 4px;
-  box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
   padding: 13px 15px;
   color: #ffff; /* Change text color to black */
@@ -290,18 +283,17 @@ span {
 
 @keyframes ripple {
   0% {
-    box-shadow: 0 0 0 0 rgb(255 255 255 / 10%),
-      0 0 0 20px rgb(255 255 255 / 10%), 0 0 0 40px rgb(255 255 255 / 10%),
-      0 0 0 60px rgb(255 255 255 / 10%);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.1),
+      0 0 0 20px rgba(255, 255, 255, 0.1), 0 0 0 40px rgba(255, 255, 255, 0.1),
+      0 0 0 60px rgba(255, 255, 255, 0.1);
   }
 
   100% {
-    box-shadow: 0 0 0 20px rgb(255 255 255 / 10%),
-      0 0 0 40px rgb(255 255 255 / 10%), 0 0 0 60px rgb(255 255 255 / 10%),
-      0 0 0 80px rgb(255 255 255 / 0%);
+    box-shadow: 0 0 0 20px rgba(255, 255, 255, 0.1),
+      0 0 0 40px rgba(255, 255, 255, 0.1), 0 0 0 60px rgba(255, 255, 255, 0.1),
+      0 0 0 80px rgba(255, 255, 255, 0);
   }
 }
-
 /* Built Available Area Styles */
 .built-available-area {
   margin-top: 20px;
@@ -332,7 +324,6 @@ span {
   font-size: 13px;
   left: 25%;
 }
-
 .container {
   display: flex;
   flex-direction: column;
@@ -411,7 +402,6 @@ span {
 .snap-start {
   scroll-snap-align: start;
 }
-
 .sections-inner::-webkit-scrollbar {
   width: 8px; /* Custom scrollbar width */
 }
@@ -444,12 +434,10 @@ span {
   outline: 2px solid #febf00; /* Outline */
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; /* Font family */
-
   background-color: #f2efef; /* Background color */
   outline-offset: 3px; /* Outline offset */
   transition: 0.25s; /* Transition */
 }
-
 .area-input{
   width: 60%;
 }
@@ -514,7 +502,7 @@ span {
   padding: 1em 3em !important;
   background-color: yellow;
   cursor: pointer;
-  box-shadow: 4px 6px 0 black;
+  box-shadow: 4px 6px 0px black;
   border: 4px solid;
   border-radius: 15px;
   position: relative;
@@ -527,7 +515,7 @@ span {
 
 .reset-btn:hover {
   transform: translate(2px, 2px);
-  box-shadow: 2px 3px 0 black;
+  box-shadow: 2px 3px 0px black;
   color: #000;
 }
 
@@ -612,7 +600,7 @@ span {
 
 /* New Button Styles */
 .set-area-button, .toggle-unit-button {
-  background-color: #f00; /* Red background for toggle button */
+  background-color: #ff0000; /* Red background for toggle button */
   color: white;
   border: none;
   padding: 10px 20px;
@@ -622,7 +610,7 @@ span {
 
 .set-area-button:hover,
 .toggle-unit-button:hover {
-  background-color: #c00; /* Darker red on hover */
+  background-color: #cc0000; /* Darker red on hover */
 }
 
 /* From Uiverse.io by Subaashbala */
@@ -630,11 +618,11 @@ span {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 1em 0 1em 1em;
+  padding: 1em 0em 1em 1em;
   background-color: yellow;
   color: black; /* Ensure text color is visible */
   cursor: pointer;
-  box-shadow: 4px 6px 0 black;
+  box-shadow: 4px 6px 0px black;
   border: 4px solid;
   border-radius: 15px;
   position: relative;
@@ -645,7 +633,7 @@ span {
 
 .set-area-button:hover {
   transform: translate(2px, 2px);
-  box-shadow: 2px 3px 0 black;
+  box-shadow: 2px 3px 0px black;
 }
 
 .set-area-button:active {
@@ -732,7 +720,7 @@ span {
   margin-bottom: 20px; /* Space between subsections */
 }
 
-@media (width >= 768px) {
+@media (min-width: 768px) {
   .legend-container {
     position: absolute;
     top: 360px !important;
@@ -742,13 +730,13 @@ span {
 }
 
 /* Media Queries for Responsiveness */
-@media (width <=1024px){
+@media (max-width:1024px){
   .grid{
     /* grid-template-columns: repeat(2, 1fr) !important;  */
   }
 }
 
-@media (width <= 768px) {
+@media (max-width: 768px) {
   .container {
     display: flex;
     flex-direction: column;
@@ -763,7 +751,6 @@ span {
     width: 100%;
     height: auto; /* Adjust height to fit content */
     overflow-y: auto; /* Enable vertical scrolling within sections */
-
     /* Add padding to sections */
     box-sizing: border-box;
   }
@@ -771,7 +758,6 @@ span {
   .flexbox-container {
     width: 50%; /* Half width on small devices */
     top: 100px;
-
     /* left: 0px; */
     display: flex;
     flex-direction: column;
@@ -830,7 +816,7 @@ span {
   }
 
   .toggle-unit-button {
-    background-color: #f00; /* Red background for toggle button */
+    background-color: #ff0000; /* Red background for toggle button */
     color: white;
     border: none;
     padding: 10px 20px;
@@ -839,7 +825,7 @@ span {
   }
 
   .toggle-unit-button:hover {
-    background-color: #c00; /* Darker red on hover */
+    background-color: #cc0000; /* Darker red on hover */
   }
 
   .button-container {
@@ -875,62 +861,50 @@ span {
   .warning-icon {
     margin-right: 5px;
   }
-
   .apexcharts-title-text{
     font-size: 16px;
   }
-
   .grid {
     display: flex;
-
     /* grid-template-columns: repeat(2, 1fr); 2 columns */
     gap: 16px; /* Adjust the gap as needed */
   }
-
   .section-heading{
     font-size: 17px;
   }
-
-  /* Open Workspace Tablet view CSS */
+  /*Open Workspace Tablet view CSS*/
   .workspace{
     height: 200px;
     width: 200px;
   }
-
   .workspace img{
     height: 130px;
     width: 150px;
   }
-
   .counter{
     width: 100%;
   }
-
   .value-display {
     margin-top: 5px;
     font-weight: bold;
     color: black;
     font-size: 13px;
   }
-
   .radio-inputs{
     width: 100% !important;
   }
-
   .radio-inputs .radio .name{
     font-size: 13px;
     padding: 10px !important;
   }
-
   .value-display span{
     font-size: 13px;
   }
-
   .size-display span{
     font-size: 13px;
   }
 
-  /* Cabins Tablet view CSS */
+  /*Cabins Tablet view CSS*/
   .cabins-grid{
     margin-bottom: 20px;
     gap: 50px !important;
@@ -939,12 +913,11 @@ span {
   .md-cabin-size{
     font-size: 13px !important;
   }
-
   .seats-description{
     font-size: 13px;
   }
 
-  /* Bottom Dots */
+  /*Bottom Dots*/
   .legend-container{
     width: 100vw;
   }
@@ -1015,7 +988,6 @@ span {
   grid-template-columns: repeat(2, 1fr) !important; /* 2 columns */
   gap: 16px; /* Adjust the gap as needed */
 }
-
 .counter {
   display: flex;
   align-items: center;
@@ -1043,6 +1015,7 @@ span {
   font-size: 16px; /* Reduced font size */
   font-weight: bold;
   color: #333;
+  text-align: center;
   min-width: 40px; /* Reduced min-width */
   border: none;
   text-align: center;
@@ -1089,7 +1062,7 @@ span {
 .workspace-description {
   visibility: hidden;
   width: 220px; /* Match the width of the image */
-  background-color: rgb(0 0 0 / 75%); /* Semi-transparent background */
+  background-color: rgba(0, 0, 0, 0.75); /* Semi-transparent background */
   color: #fff; /* White text */
   text-align: center;
   padding: 10px;
@@ -1113,21 +1086,19 @@ span {
   justify-content: space-around;
   gap: 20px;
 }
-
 .generate-boq-button{
   left: 35% !important;
 }
 
 
 /* Mobile S (320px) */
-@media (width <= 321px) {
+@media (max-width: 321px) {
   .cabins-grid{
     display: flex !important;
     width: 100%;
     margin-bottom: 0;
-    gap: 0 !important;
+    gap: 0px !important;
   }
-
   .error-message {
     left: 7px !important;
   }
@@ -1145,7 +1116,7 @@ span {
 }
 
 /* Mobile M (375px) */
-@media (width <= 375px) {
+@media (max-width: 375px) {
   .btn {
     padding: 10px 18px;
     font-size: 14px;
@@ -1154,15 +1125,13 @@ span {
 }
 
 /* Mobile L (425px) */
-@media (width <= 426px) {
+@media (max-width: 426px) {
   .size-input-container {
     width: 100% !important;
   }
-
   .area-input {
     width: 100%;
   }
-
   .reset-cross {
     font-size: 20px !important;
     top: 15px !important;
@@ -1171,32 +1140,27 @@ span {
   .set-area-input::placeholder{
     font-size: 15px !important;
   }
-
   .area-input{
     width: 75%;
   }
-
   .error-message {
     font-size: 9px;
+    left: 0;
     top: 9px;
     font-weight: normal;
     left: 10%;
   }
-
   .warning-icon {
     font-size: 9px;
   }
-
   .flexbox-container{
     width: 100%;
     display: flex;
     flex-direction: column !important;
   }
-
   .flexbox-item{
     font-size: 12px;
   }
-
   .generate-boq-button{
     font-size: 12px !important;
     width: 100% !important;
@@ -1208,59 +1172,49 @@ span {
     width: 100%;
     height: 100% !important;
   }
-
-  /* grid mobile view */
+  /*grid mobile view*/
 
   
   
-  /* Open workspace mobile view css */
+  /*Open workspace mobile view css*/
   .workspace{
     height: auto;
     width: 40%;
   }
-
   .workspace img{
     height: 100px;
     width: 100%;
   }
-
   .counter{
     width: 100%;
   }
-
   .counter-value{
     font-size: 13px;
   }
-
   .counter-btn{
     font-size: 13px;
   }
-
   .value-display {
     margin-top: 5px;
     font-weight: bold;
     color: black;
     font-size: 10px;
   }
-
   .radio-inputs{
     width: 100% !important;
   }
-
   .radio-inputs .radio .name{
     font-size: 12px;
     padding: 5px 2px !important;
   }
-
   .value-display span{
     font-size: 12px;
   }
-
   .size-display span{
     font-size: 12px;
   }
 
-  /* Cabins Mobile view CSS */
+  /*Cabins Mobile view CSS*/
   .grid{
     display: flex;
     flex-wrap: wrap;
@@ -1272,16 +1226,13 @@ span {
     height: 150px;
     width: 40%;
   }
-
   .cabins-grid.workspace img{
     height: 100px;
     width: 100%;
   }
-
   .md-cabin-size{
     font-size: 12px !important;
   }
-
   .seats-description{
     font-size: 12px;
   }
@@ -1289,27 +1240,23 @@ span {
   .other-area-input input{
     width: 90%;
   }
-
   .other-area-input input::placeholder{
     font-size: 11px;
   }
-
   .other-area-input{
     font-size: 12px;
   }
 
-  /* Meeting room mobile view css */
+  /*Meeting room mobile view css*/
  
   .meeting-rooms-grid.workspace{
     height: 150px;
     width: 40%;
   }
-
   .meeting-rooms-grid.workspace img{
     height: 100px;
     width: 100%;
   }
-
   .legend-container {
     height: 320px;
     overflow-y: auto;
@@ -1318,15 +1265,13 @@ span {
     left: -100%; /* Start off the screen to the left */
     background: #fff;
     padding: 10px;
-    box-shadow: 0 4px 8px rgb(0 0 0 / 20%);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     display: grid;
     grid-template-columns: repeat(2, 1fr);
   }
-
   .legend-item{
     margin: 20px;
   }
-
   .legend-item span {
     /* height: 10px; */
     width: 10px;
@@ -1334,14 +1279,12 @@ span {
 }
 
 /* Style for the Generate BOQ button */
-
 /* Style for the Generate BOQ button */
-
 /* Style for the Generate BOQ button */
 .generate-boq-button {
   position: relative;
   padding: 15px 35px;
-  background: #036; /* Changed to blue */
+  background: #003366; /* Changed to blue */
   font-size: 16px;
   font-weight: 700;
   color: white; /* Changed to white for better contrast */
@@ -1365,7 +1308,7 @@ span {
 .generate-boq-button .star-5,
 .generate-boq-button .star-6 {
   position: absolute;
-  filter: drop-shadow(0 0 0 #000); /* Changed to black */
+  filter: drop-shadow(0 0 0 #000000); /* Changed to black */
   z-index: -5;
   transition: all 1s cubic-bezier(0.05, 0.83, 0.43, 0.96);
 }
@@ -1415,47 +1358,47 @@ span {
 .generate-boq-button:hover .star-1 {
   top: -80%;
   left: -30%;
-  filter: drop-shadow(0 0 10px #000); /* Changed to black */
+  filter: drop-shadow(0 0 10px #000000); /* Changed to black */
   z-index: 2;
 }
 
 .generate-boq-button:hover .star-2 {
   top: -25%;
   left: 10%;
-  filter: drop-shadow(0 0 10px #000); /* Changed to black */
+  filter: drop-shadow(0 0 10px #000000); /* Changed to black */
   z-index: 2;
 }
 
 .generate-boq-button:hover .star-3 {
   top: 55%;
   left: 25%;
-  filter: drop-shadow(0 0 10px #000); /* Changed to black */
+  filter: drop-shadow(0 0 10px #000000); /* Changed to black */
   z-index: 2;
 }
 
 .generate-boq-button:hover .star-4 {
   top: 30%;
   left: 80%;
-  filter: drop-shadow(0 0 10px #000); /* Changed to black */
+  filter: drop-shadow(0 0 10px #000000); /* Changed to black */
   z-index: 2;
 }
 
 .generate-boq-button:hover .star-5 {
   top: 25%;
   left: 115%;
-  filter: drop-shadow(0 0 10px #000); /* Changed to black */
+  filter: drop-shadow(0 0 10px #000000); /* Changed to black */
   z-index: 2;
 }
 
 .generate-boq-button:hover .star-6 {
   top: 5%;
   left: 60%;
-  filter: drop-shadow(0 0 10px #000); /* Changed to black */
+  filter: drop-shadow(0 0 10px #000000); /* Changed to black */
   z-index: 2;
 }
 
 .fil0 {
-  fill: #000; /* Changed to black */
+  fill: #000000; /* Changed to black */
 }
 
 /* Other styles */
@@ -1527,43 +1470,36 @@ span {
 .seat-control button:hover {
   background-color: #0056b3;
 }
-
 .input-wrapper{
   display:inline-block;
   position: relative;
   width: 100%;
 }
-
 .reset-cross {
   position: absolute;
   right: 20px;
-  font-family: FontAwesome;
+  font-family: "FontAwesome";
   font-size: 35px;
   cursor: pointer;
   top: 10px;
-  opacity: 0.5;
+  opacity: 50%;
   color:#333;
 }
-
 .reset-cross:hover{
-  opacity: 1;
+  opacity: 100%;
 }
-
 .info-button{
   border-radius: 50%;
   border: 1px solid ;
   cursor: pointer;
 }
-
 @keyframes blink {
   0% {
     scale: 1;
   }
-
   50% {
     scale: 1.2;
   }
-
   100% {
     scale: 1;
   }
