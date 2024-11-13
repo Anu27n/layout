@@ -18,7 +18,7 @@
   gap: 2rem;
   overflow-y: auto; /* Ensure vertical scrollbar is present */
   scrollbar-width: none; /* Hide scrollbar in Firefox */
-  height: 80%; /* Ensure sections take full height of the parent */
+  height: 100%; /* Ensure sections take full height of the parent */
   overflow-x:hidden;
   padding: 0;
 }
@@ -43,5 +43,8 @@
     width: 100% !important;
     overflow-x: hidden;
     margin-top: 5vh;
+  }
+  .--content{
+    gap: 2rem;
   }
 }

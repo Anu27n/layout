@@ -192,7 +192,7 @@ const Treemap = ({ totalArea, areas, areaValues }) => {
 
   return (
     <div id="chart" style={{ position: 'relative' }}>
-    <ReactApexChart options={options} series={[{ data: series }]} type="treemap" height={350} />
+    <ReactApexChart options={options} series={[{ data: series }]} type="treemap" height={"100%"} className='distribution-chart'/>
     <button
       className="arrow-button"
       onClick={() => toggleLegend(!isLegendVisible)}

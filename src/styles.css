@@ -44,7 +44,7 @@ input[type="number"] {
   /* Full viewport height */
   width:100% ;
   height: 100vh;
-  padding-top: 10px;
+  /* padding-top: 10px; */
   box-sizing: border-box;
   position: relative;
 }
@@ -236,6 +236,7 @@ span {
   aspect-ratio: 1;
   padding: 10px 0; /* Add padding if needed */
   box-sizing: border-box; /* Include padding in width/height */
+  height: 350px;
 }
 .flexbox-container {
   display: flex;
@@ -730,9 +731,12 @@ span {
 }
 
 /* Media Queries for Responsiveness */
-@media (max-width:1024px){
-  .grid{
-    /* grid-template-columns: repeat(2, 1fr) !important;  */
+@media(min-width:1400px){
+  #chart{
+    height: 450px;
+  }
+  .legend-container{
+    top: 100% !important;
   }
 }
 
@@ -1088,6 +1092,7 @@ span {
 }
 .generate-boq-button{
   left: 35% !important;
+top: 10px !important;
 }
 
 
@@ -1106,7 +1111,8 @@ span {
 
 .md-cabin-btn{
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .slider-button{
@@ -1126,6 +1132,10 @@ span {
 
 /* Mobile L (425px) */
 @media (max-width: 426px) {
+  .container{
+    padding: 0 !important;
+    margin: 0;
+  }
   .size-input-container {
     width: 100% !important;
   }
@@ -1170,8 +1180,9 @@ span {
   
   #chart{
     width: 100%;
-    height: 100% !important;
+    height: 55svh !important;
   }
+
   /*grid mobile view*/
 
   
