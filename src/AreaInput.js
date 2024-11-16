@@ -5,12 +5,10 @@ import { faCalculator, faXmark } from '@fortawesome/free-solid-svg-icons';
 import './styles.css';
 import Modal from './Modal';
 import Card from './Card';
-import LoginForm from './LoginForm';
 
-const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableArea, resetAll, areas, showModal, setShowModal, isOtherSelected, onAuthorize }) => {
+const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableArea, resetAll, areas, showModal, setShowModal, isOtherSelected, setShowLoginForm }) => {
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState(false);
-  const [showLoginForm, setShowLoginForm] = useState(false); // State to control login form visibility
 
   const handleInputChange = (e) => {
     if (e.target.value.length <= 5) {
@@ -43,7 +41,7 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
     resetAll(); // Call the resetAll function passed from the parent component
   };
 
-  const handleLogin = () => {
+  const handleGenerateBOQ = () => {
     setShowLoginForm(true); // Show the login form
   };
 
@@ -86,7 +84,7 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
         )}
       </div>
 
-      <button className="generate-boq-button" onClick={handleLogin}>
+      <button className="generate-boq-button" onClick={handleGenerateBOQ}>
         Generate BOQ
         <svg className="star-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z" />
@@ -119,7 +117,6 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
         <Card /> {/* Ensure this Card component is displayed properly */}
       </Modal>
       <Tooltip />
-      {showLoginForm && <LoginForm />} {/* Conditionally render the LoginForm */}
     </div>
   );
 };
