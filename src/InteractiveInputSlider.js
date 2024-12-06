@@ -13,7 +13,7 @@ const InteractiveInputSlider = ({ name, value, onChange, min2, max2, step2, cabi
             onChange(value + step);
             if (type === 'financeRoom'  ) {
                 setCabinSize(cabinSize + 50)
-            } else if (type === 'md') {
+            } else if (type === 'md' || type === 'manager' || type==="reception" || type==="lounge") {
                 setCabinSize(cabinSize + 5)
             } else {
                 setCabinSize(cabinSize + 40)
@@ -26,7 +26,7 @@ const InteractiveInputSlider = ({ name, value, onChange, min2, max2, step2, cabi
             onChange(value - step);
             if (type === 'financeRoom' ) {
                 setCabinSize(cabinSize - 50)
-            } else if (type === 'md') {
+            } else if (type === 'md' || type === 'manager' || type==="reception" || type==="lounge") {
                 setCabinSize(cabinSize - 5)
             } else {
                 setCabinSize(cabinSize - 40)

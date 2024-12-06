@@ -11,7 +11,7 @@ import Modal from "./Modal";
 import Card from "./Card";
 import "./styles.css";
 import "./fixes.css";
-import LoginForm from "./LoginForm";
+// import LoginForm from "./LoginForm";
 
 const initialAreaValues = {
   linear: 24,
@@ -22,8 +22,8 @@ const initialAreaValues = {
   ups: 90,
   bms: 90,
   server: 40,
-  reception: 120,
-  lounge: 150,
+  reception: 80,
+  lounge: 80,
   sales: 80,
   phoneBooth: 25,
   discussionRoom: 380,
@@ -68,10 +68,10 @@ const initialAreas = {
 };
 
 const MAX_AREA = 25000;
-const MIN_AREA = 1500;
+const MIN_AREA = 1000;
 
 const calculateReceptionArea = (totalArea) => {
-  if (totalArea >= 1500 && totalArea < 3500) {
+  if (totalArea >= 1000 && totalArea < 3500) {
     return Math.round(totalArea * 0.08);
   } else if (totalArea >= 3500 && totalArea < 4500) {
     return Math.round(totalArea * 0.06);
@@ -91,7 +91,7 @@ const calculateReceptionArea = (totalArea) => {
 };
 
 const calculateLoungeArea = (totalArea) => {
-  if (totalArea >= 1500 && totalArea < 2500) {
+  if (totalArea >= 1000 && totalArea < 2500) {
     return Math.round(totalArea * 0.11);
   } else if (totalArea >= 2500 && totalArea < 4500) {
     return Math.round(totalArea * 0.06);
@@ -109,7 +109,7 @@ const calculateLoungeArea = (totalArea) => {
 };
 
 const calculateLinear = (totalArea) => {
-  if (totalArea >= 1500 && totalArea <= 25000) {
+  if (totalArea >= 1000 && totalArea <= 25000) {
     return Math.round(totalArea * 0.40);
   } else {
     return 0;
@@ -133,7 +133,7 @@ const calculateLType = (totalArea, areaValues) => {
 };
 
 const calculateMd = (totalArea, areaValues) => {
-  if (totalArea >= 1500 && totalArea < 6000) {
+  if (totalArea >= 1000 && totalArea < 6000) {
     return areaValues.md * 1;
   } else if (totalArea >= 6000 && totalArea < 9000) {
     return areaValues.md * 2;
@@ -175,7 +175,7 @@ const calculateManager = (totalArea, areaValues) => {
 };
 
 const calculateSmall = (totalArea, areaValues) => {
-  if (totalArea >= 1500 && totalArea < 3000) {
+  if (totalArea >= 1000 && totalArea < 3000) {
     return areaValues.small * 1;
   } else if (totalArea >= 3000 && totalArea < 6000) {
     return areaValues.small * 2;
@@ -229,7 +229,7 @@ const calculateBoardRoom = (totalArea, areaValues) => {
 };
 
 const calculateMeetingRoom = (totalArea, areaValues) => {
-  if (totalArea >= 1500 && totalArea < 3000) {
+  if (totalArea >= 1000 && totalArea < 3000) {
     return areaValues.meetingRoom * 1;
   } else if (totalArea >= 3000 && totalArea < 6000) {
     return areaValues.meetingRoom * 2;
@@ -273,7 +273,7 @@ const calculatePhoneBooth = (totalArea, areaValues) => {
 };
 
 const calculateServer = (totalArea, areaValues) => {
-  if (totalArea >= 1500 && totalArea < 6000) {
+  if (totalArea >= 1000 && totalArea < 6000) {
     return areaValues.server * 1;
   } else if (totalArea >= 6000 && totalArea < 12000) {
     return areaValues.server * 2;
@@ -294,7 +294,7 @@ const calculateExecutiveWashroom = (totalArea, areaValues) => {
   }
 };
 
-const App = () => {
+const App = ({ onAuthorize }) => {
   const [totalArea, setTotalArea] = useState(0);
   const [builtArea, setBuiltArea] = useState(0);
   const [availableArea, setAvailableArea] = useState(0);
@@ -314,9 +314,11 @@ const App = () => {
   const [hrRoomSeatCount, setHrRoomSeatCount] = useState(0);
   const [salesSeatCount, setSalesSeatCount] = useState(0);
   const [financeRoomSeatCount, setFinanceRoomSeatCount] = useState(0);
-  const [finalData, setFinalData] = useState(areas, areaValues, totalArea);
   const [isOtherSelected, setIsOtherSelected] = useState(false);
-  const [showLoginForm, setShowLoginForm] = useState(false);
+  const [managerCabinSize, setManagerCabinSize] = useState(areaValues.manager);
+  const [receptionSize, setReceptionSize] = useState(areaValues.reception);
+  const [loungeSize, setLoungeSize] = useState(areaValues.lounge)
+  // const [showLoginForm, setShowLoginForm] = useState(false);
 
   useEffect(() => {
     const linear = calculateLinear(totalArea);
@@ -361,6 +363,14 @@ const App = () => {
     }));
   }, [totalArea,areaValues]);
 
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const setErrorMessageHandler = (message) => {
+    setError(true);
+    setShowModal(true);
+    setErrorMessage(message);
+  };
+
   // Calculate builtArea and set it to state
   useEffect(() => {
     const calculatedBuiltArea = Object.keys(areas).reduce(
@@ -376,6 +386,14 @@ const App = () => {
   }, [totalArea, builtArea]);
 
   const updateAreas = (type, value) => {
+    if (!totalArea) {
+      setErrorMessageHandler(
+        "The input box for total area cannot be left empty.\n" +
+        "Please fill in the total area in square feet before making any changes."
+      );
+      return;
+    }
+
     const newAreas = {
       ...areas,
       [type]: value
@@ -396,8 +414,22 @@ const App = () => {
       setShowModal(false);
     } else {
       console.log("Built area exceeds the available space, showing modal");
-      setError(true);
-      setShowModal(true);
+      // setError(true);
+      // setShowModal(true);
+      if (calculatedBuiltArea <= usableArea) {
+        setBuiltArea(calculatedBuiltArea); // Only update builtArea and areas if valid
+        setAreas(newAreas);
+        setError(false);
+        setShowModal(false);
+      } else {
+        console.log("Built area exceeds the available space, showing modal");
+        // setError(true);
+        // setShowModal(true);
+        setErrorMessageHandler(
+          "The built area exceeds the available usable space.\n" +
+          "To resolve this, either increase the total area or adjust the number of rooms to ensure the built area fits within the usable space."
+        );
+      }
     }
   };
 
@@ -409,11 +441,19 @@ const App = () => {
     } else if (value > MAX_AREA) {
       console.log("Total area exceeds the max limit, showing modal");
       setTotalArea(value);
-      setError(true);      // Trigger error due to exceeding max limit
-      setShowModal(true);  // Show modal if area exceeds max limit
+      // setError(true);      // Trigger error due to exceeding max limit
+      // setShowModal(true);  // Show modal if area exceeds max limit
+      setErrorMessageHandler(
+        "The total area entered is below the minimum required limit.\n" +
+        "Please provide a value that meets the minimum space requirements."
+      );
     } else {
-      setError(true);
-      setShowModal(true);
+      // setError(true);
+      // setShowModal(true);
+      setErrorMessageHandler(
+        "The total area entered is below the minimum required limit.\n" +
+        "Please provide a value that meets the minimum space requirements."
+      );
     }
   };
 
@@ -461,6 +501,9 @@ const App = () => {
   const handleFinanceRoomAreaChange = handleRoomAreaChange("financeRoom", setFinanceRoomSize);
   const handleBreakoutRoomAreaChange = handleRoomAreaChange("breakoutRoom", setBreakoutRoomSize);
   const handleVideoRecordingRoomAreaChange = handleRoomAreaChange("videoRecordingRoom", setVideoRecordingRoomSize);
+  const handleManagerCabinSizeChange = handleRoomAreaChange("manager", setManagerCabinSize);
+  const handleReceptionSizeChange = handleRoomAreaChange("reception", setReceptionSize);
+  const handleLoungeSizeChange = handleRoomAreaChange("lounge", setLoungeSize);
 
   const handleSeatCountChange = (setter) => (newCount) => {
     setter(newCount);
@@ -507,11 +550,6 @@ const App = () => {
   return (
 
     <div className="container">
-      <div>
-        {showLoginForm && <LoginForm/>}
-      </div>
-      {!showLoginForm &&
-      <>
       <AreaInput
         setTotalArea={handleSetTotalArea}
         totalArea={totalArea}
@@ -520,12 +558,13 @@ const App = () => {
         availableArea={availableArea}
         resetAll={resetAll}
         areas={areas}
-        finalData={finalData}
-        setFinalData={setFinalData}
         showModal={showModal}
         setShowModal={setShowModal}
         isOtherSelected={isOtherSelected}
-        setShowLoginForm={setShowLoginForm}
+        onAuthorize={onAuthorize}
+        MAX_AREA={MAX_AREA}
+        MIN_AREA={MIN_AREA}
+      // setShowLoginForm={setShowLoginForm}
       />
       <div className="--content">
         <Treemap
@@ -546,6 +585,7 @@ const App = () => {
             mdCabinSize={mdCabinSize} setMdCabinSize={handleMdCabinAreaChange}
             smallCabinConfig={smallCabinConfig} totalArea={totalArea}
             builtArea={builtArea} initialAreaValues={initialAreaValues}
+            managerCabinSize={managerCabinSize} setManagerCabinSize={handleManagerCabinSizeChange}
           />
           <MeetingRooms areas={areas} updateAreas={updateAreas}
             hrRoomConfig={hrRoomConfig} salesRoomConfig={salesRoomConfig}
@@ -555,6 +595,8 @@ const App = () => {
           <PublicSpaces areas={areas} updateAreas={updateAreas}
             breakoutRoomSize={breakoutRoomSize} setBreakoutRoomSize={handleBreakoutRoomAreaChange}
             totalArea={totalArea} builtArea={builtArea} initialAreaValues={initialAreaValues}
+            receptionSize={receptionSize} setReceptionSize={handleReceptionSizeChange}
+            loungeSize={loungeSize} setLoungeSize={handleLoungeSizeChange}
           />
           <SupportSpaces areas={areas} updateAreas={updateAreas} areaValues={areaValues}
             isOtherSelected={isOtherSelected} setIsOtherSelected={setIsOtherSelected} />
@@ -562,7 +604,7 @@ const App = () => {
       </div>
       {showModal && (
         <Modal show={showModal} onClose={() => setShowModal(false)}>
-          <Card /> {/* Ensure this Card component is being displayed properly */}
+          <Card message={errorMessage} /> {/* Ensure this Card component is being displayed properly */}
         </Modal>
       )}
       {error && (
@@ -571,8 +613,6 @@ const App = () => {
         </div>
       )}
       <Tooltip />
-      </>
-    }
     </div>
   );
 };

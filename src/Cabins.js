@@ -10,7 +10,7 @@ const workspaceDescriptions = {
   small: "This is a small cabin, suitable for individual work.",
 };
 
-const Cabins = ({ areas, updateAreas, mdCabinSize, setMdCabinSize, smallCabinConfig, totalArea, builtArea, initialAreaValues }) => {
+const Cabins = ({ areas, updateAreas, mdCabinSize, setMdCabinSize, smallCabinConfig, totalArea, builtArea, initialAreaValues,managerCabinSize, setManagerCabinSize }) => {
 
   const handleIncrement = (type) => {
     const newValue = (areas[type] || 0) + 1;
@@ -56,9 +56,23 @@ const Cabins = ({ areas, updateAreas, mdCabinSize, setMdCabinSize, smallCabinCon
                 {type.charAt(0).toUpperCase() + type.slice(1)} Cabin: <span>{areas[type] || 0}</span>
 
                 {type === "manager" && (
+                  <div className='seats-description'>
                   <Tooltip text={`Size: 80 sq ft`}>
                     <button className="info-button">i</button>
                   </Tooltip>
+                  <InteractiveInputSlider
+                    name={"Manager Cabin Size"}
+                    value={managerCabinSize}
+                    cabinSize={managerCabinSize}
+                    setCabinSize={setManagerCabinSize}
+                    onChange={setManagerCabinSize}
+                    min2={50} max2={180} step2={5}
+                    totalArea={totalArea}
+                    builtArea={builtArea}
+                    type={type}
+                    initialAreaValues={initialAreaValues}
+                  />
+                  </div>
                 )}
                 {type === "small" && (
                   <div className="seats-description">
@@ -67,7 +81,7 @@ const Cabins = ({ areas, updateAreas, mdCabinSize, setMdCabinSize, smallCabinCon
                       <button className="info-button">i</button>
                     </Tooltip>
                     <InteractiveInputSlider
-                      name={"Seat Count"}
+                      name={"Add. Seat Count"}
                       value={smallCabinConfig.seatCount}
                       onChange={smallCabinConfig.setSeatCount}
                       min2={0} max2={24} step2={2}

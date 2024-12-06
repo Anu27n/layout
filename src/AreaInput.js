@@ -20,7 +20,7 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
   const handleSubmit = () => {
     const area = parseInt(inputValue, 10);
     if (!isNaN(area)) {
-      if (area >= 1500 && area <= 25000) {
+      if (area >= 1000 && area <= 25000) {
         setTotalArea(area);
         setError(false);
       } else if (area === 0 || area === undefined) {

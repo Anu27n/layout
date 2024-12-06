@@ -2,7 +2,7 @@ import React from 'react';
 import Counter from './Counter'; // Ensure the correct path to Counter.js
 import './styles.css'; // Import the updated CSS file
 import Tooltip from './ToolTip';
-
+import InteractiveInputSlider from './InteractiveInputSlider';
 
 const publicSpaceDescriptions = {
   reception: "This is the reception area, the first point of contact for visitors.",
@@ -12,7 +12,7 @@ const publicSpaceDescriptions = {
   breakoutRoom: "This is the breakout room, a flexible space for small group discussions."
 };
 
-const PublicSpaces = ({ areas, updateAreas, breakoutRoomSize, setBreakoutRoomSize, totalArea, builtArea, initialAreaValues }) => {
+const PublicSpaces = ({ areas, updateAreas, breakoutRoomSize, setBreakoutRoomSize, totalArea, builtArea, initialAreaValues, receptionSize, setReceptionSize, loungeSize, setLoungeSize }) => {
 
   const handleIncrement = (type) => {
     const newValue = (areas[type] || 0) + 1;
@@ -56,6 +56,38 @@ const PublicSpaces = ({ areas, updateAreas, breakoutRoomSize, setBreakoutRoomSiz
               />
               <div className="value-display">
                 {type.charAt(0).toUpperCase() + type.slice(1)}: <span>{Math.round(areas[type] || 0)}</span> {/* Round the value before displaying */}
+                {type==="reception"&&(
+                  <div className="slide-container">
+                    <InteractiveInputSlider
+                      name={"Reception Size"}
+                      value={receptionSize}
+                      onChange={setReceptionSize}
+                      min2={80} max2={700} step2={5} 
+                      cabinSize={receptionSize}
+                      setCabinSize={setReceptionSize}
+                      totalArea={totalArea}
+                      builtArea={builtArea}
+                      type={type}
+                      initialAreaValues={initialAreaValues}
+                    />
+                  </div>
+                )}
+                {type==="lounge"&&(
+                  <div className="slide-container">
+                    <InteractiveInputSlider
+                      name={"Lounge Size"}
+                      value={loungeSize}
+                      onChange={setLoungeSize}
+                      min2={80} max2={1000} step2={5}
+                      cabinSize={loungeSize}
+                      setCabinSize={setLoungeSize}
+                      totalArea={totalArea}
+                      builtArea={builtArea}
+                      type={type}
+                      initialAreaValues={initialAreaValues}
+                    />
+                  </div>
+                )}
 
                 {type === "phoneBooth" && (
                   <Tooltip text={`Size: 25 sq ft`}>
@@ -63,7 +95,7 @@ const PublicSpaces = ({ areas, updateAreas, breakoutRoomSize, setBreakoutRoomSiz
                   </Tooltip>
                 )}
               </div>
-              {/* {type === "breakoutRoom" && (
+              {type === "breakoutRoom" && (
                 <div className="slider-container seats-description">
                   <InteractiveInputSlider
                     name={"Breakout Room Size"}
@@ -78,7 +110,7 @@ const PublicSpaces = ({ areas, updateAreas, breakoutRoomSize, setBreakoutRoomSiz
                     initialAreaValues={initialAreaValues}
                   />
                 </div>
-              )} */}
+              )}
             </div>
           </div>
         ))}
