@@ -11,7 +11,7 @@ import Modal from "./Modal";
 import Card from "./Card";
 import "./styles.css";
 import "./fixes.css";
-// import LoginForm from "./LoginForm";
+import LoginForm from "./LoginForm";
 
 const initialAreaValues = {
   linear: 24,
