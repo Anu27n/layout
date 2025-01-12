@@ -1,7 +1,8 @@
-import React, { useState , useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Counter from './Counter';
 import './styles.css';
 import Tooltip from './ToolTip';
+import { InfoIcon } from 'lucide-react';
 
 const supportSpaceDescriptions = {
   ups: "This is the UPS room, ensuring uninterrupted power supply.",
@@ -11,7 +12,7 @@ const supportSpaceDescriptions = {
   other: "This is an additional space for miscellaneous purposes." // Description for "other"
 };
 
-const SupportSpaces = ({ areas, updateAreas, isOtherSelected, setIsOtherSelected }) => {
+const SupportSpaces = ({ areas, updateAreas, isOtherSelected, setIsOtherSelected }) => {    //, areaValues, comeBack
   const handleIncrement = (type) => {
     const newValue = (areas[type] || 0) + 1;
     updateAreas(type, newValue);
@@ -30,7 +31,8 @@ const SupportSpaces = ({ areas, updateAreas, isOtherSelected, setIsOtherSelected
       updateAreas(type, parsedValue);
     }
   };
-  const [otherArea,setOtherArea]=useState(0);
+
+  const [otherArea, setOtherArea] = useState(0);
 
   const sizeArea = {
     ups: 90,
@@ -39,6 +41,15 @@ const SupportSpaces = ({ areas, updateAreas, isOtherSelected, setIsOtherSelected
     executiveWashroom: 60,
     other: 1 // Size for "other"
   };
+
+  // useEffect(() => {
+  //   console.log('Before comeBack in support spaces', comeBack, areaValues.other);
+  //   if (comeBack && areaValues.other !== undefined) {
+  //     console.log('comeBack in support spaces', comeBack, areaValues.other);
+  //     setOtherArea(areaValues.other);
+  //   }
+  // }, [comeBack, areaValues.other]);
+
   useEffect(() => {
     if (areas.other !== undefined) {
       setOtherArea(areas.other);
@@ -69,7 +80,7 @@ const SupportSpaces = ({ areas, updateAreas, isOtherSelected, setIsOtherSelected
                     Other Area (sq ft):
                     <input
                       type="number"
-                      value={otherArea ? otherArea: ''}
+                      value={otherArea ? otherArea : ''}
                       onChange={handleOtherAreaChange}
                       min="0" // Prevent negative inputs
                       placeholder='Enter Area'
@@ -90,7 +101,7 @@ const SupportSpaces = ({ areas, updateAreas, isOtherSelected, setIsOtherSelected
                   <div className="value-display">
                     {type.charAt(0).toUpperCase() + type.slice(1)} Room: <span>{areas[type] || 0}</span>
                     <Tooltip text={`Size: ${sizeArea[type]} sq ft`}>
-                      <button className="info-button">i</button>
+                      <InfoIcon />
                     </Tooltip>
                   </div>
                 </>

@@ -238,6 +238,9 @@ span {
   box-sizing: border-box; /* Include padding in width/height */
   height: 350px;
 }
+.apexcharts-bar-area:hover {
+  fill: #FF0099 !important;
+}
 .flexbox-container {
   display: flex;
   justify-content: flex-start;   /* Align items to the start */
