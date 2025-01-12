@@ -2,13 +2,17 @@ import React, { useState } from 'react';
 import { Tooltip } from 'react-tooltip';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalculator, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { supabase } from './supabaseClient';
 import './styles.css';
 import Modal from './Modal';
 import Card from './Card';
+import LoginForm from './LoginForm'; // Correctly import LoginForm
 
-const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableArea, resetAll, areas, showModal, setShowModal, isOtherSelected, setShowLoginForm }) => {
+const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableArea, resetAll, areas, showModal,
+  setShowModal, setErrorMessage, isOtherSelected, onAuthorize, MIN_AREA, MAX_AREA, comeBack }) => {
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState(false);
+  const [showLoginForm, setShowLoginForm] = useState(false); // State to manage LoginForm visibility
 
   const handleInputChange = (e) => {
     if (e.target.value.length <= 5) {
@@ -17,10 +21,16 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
     }
   };
 
+  const handleKeyDown = (e) => {
+    if (['e', 'E', '+', '-', '.'].includes(e.key)) {
+      e.preventDefault(); // Prevent the default behavior
+    }
+  };
+
   const handleSubmit = () => {
     const area = parseInt(inputValue, 10);
     if (!isNaN(area)) {
-      if (area >= 1000 && area <= 25000) {
+      if (area >= MIN_AREA && area <= MAX_AREA) {
         setTotalArea(area);
         setError(false);
       } else if (area === 0 || area === undefined) {
@@ -41,9 +51,105 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
     resetAll(); // Call the resetAll function passed from the parent component
   };
 
-  const handleGenerateBOQ = () => {
-    setShowLoginForm(true); // Show the login form
+  const handleGenerateBOQ = async () => {
+    if (!totalArea) {
+      console.error("Please enter the total area before generating BOQ.");
+      setErrorMessage("Please enter the total area before generating BOQ.")
+      setShowModal(true);
+      return; // Stop execution if total area is not entered
+    }
+
+    try {
+      const { data: quantityData, error: quantityError } = await supabase
+        .from('quantity')
+        .insert([{
+          linear: areas.linear,
+          lType: areas.lType,
+          md: areas.md,
+          manager: areas.manager,
+          small: areas.small,
+          ups: areas.ups,
+          bms: areas.bms,
+          server: areas.server,
+          reception: areas.reception,
+          lounge: areas.lounge,
+          sales: areas.sales,
+          phoneBooth: areas.phoneBooth,
+          discussionRoom: areas.discussionRoom,
+          interviewRoom: areas.interviewRoom,
+          conferenceRoom: areas.conferenceRoom,
+          boardRoom: areas.boardRoom,
+          meetingRoom: areas.meetingRoom,
+          meetingRoomLarge: areas.meetingRoomLarge,
+          hrRoom: areas.hrRoom,
+          financeRoom: areas.financeRoom,
+          other: isOtherSelected ? areaValues.other : 0
+        }])
+        .select('id');
+
+      if (quantityError) {
+        console.error('Error inserting data into quantity:', quantityError.message);
+        return;
+      }
+      console.log('Data inserted into quantity successfully:', quantityData);
+
+      const sharedId = quantityData[0]?.id;
+
+      if (!sharedId) {
+        console.error('Shared ID not retrieved. Insert into quantity may have failed.');
+        return;
+      }
+
+      const { data: areasData, error: areasError } = await supabase
+        .from('areas')
+        .insert([{
+          id: sharedId,
+          quantity_id: sharedId,
+          linear: areaValues.linear,
+          lType: areaValues.lType,
+          md: areaValues.md,
+          manager: areaValues.manager,
+          small: areaValues.small,
+          ups: areaValues.ups,
+          bms: areaValues.bms,
+          server: areaValues.server,
+          reception: areaValues.reception,
+          lounge: areaValues.lounge,
+          sales: areaValues.sales,
+          phoneBooth: areaValues.phoneBooth,
+          discussionRoom: areaValues.discussionRoom,
+          interviewRoom: areaValues.interviewRoom,
+          conferenceRoom: areaValues.conferenceRoom,
+          boardRoom: areaValues.boardRoom,
+          meetingRoom: areaValues.meetingRoom,
+          meetingRoomLarge: areaValues.meetingRoomLarge,
+          hrRoom: areaValues.hrRoom,
+          financeRoom: areaValues.financeRoom,
+          other: areas.other,
+          totalArea: totalArea,
+        }]);
+
+      if (areasError) {
+        console.error('Error inserting data into areas:', areasError.message);
+        return;
+      }
+      console.log('Data inserted into areas successfully:', areasData);
+    } catch (error) {
+      console.error('Error saving data:', error);
+    }
+
+    window.location.href = 'https://lucky-kataifi-065416.netlify.app/'; // Redirect to the new page
   };
+
+  const handleLogin = () => {
+    if (!totalArea) {
+      console.error("Please enter the total area before generating BOQ.");
+      setErrorMessage("Please enter the total area before generating BOQ.");
+      setShowModal(true);
+      return; // Stop execution if total area is not entered
+    }
+    setShowLoginForm(true); // Show the LoginForm
+  }
 
   return (
     <div className="area-input">
@@ -58,28 +164,28 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
         <div className='input-wrapper'>
           <input
             type="number"
-            value={inputValue}
+            value={comeBack ? totalArea : inputValue}
             onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
             onKeyUp={handleSubmit}
             placeholder="Enter total area (sq ft)"
             title="Set the area value here"
             className={`set-area-input ${error ? 'error' : ''}`}
             aria-label="Total Area Input"
-            data-tip="Enter the total area in square feet"
-          />
+            data-tip="Enter the total area in square feet" />
+
           <FontAwesomeIcon
             icon={faXmark}
             className='reset-cross'
             onClick={handleReset}
             title="Click to reset the area input"
             aria-label="Reset Area Button"
-            data-tip="Click to reset the area input"
-          />
+            data-tip="Click to reset the area input" />
         </div>
         {error && (
           <div className="error-message" aria-live="polite">
             <span className="warning-icon">⚠️</span>
-            Invalid area value. Must be between 1500 and 25000 square feet.
+            Invalid area value. Must be between {MIN_AREA} and {MAX_AREA} square feet.
           </div>
         )}
       </div>
@@ -117,6 +223,7 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
         <Card /> {/* Ensure this Card component is displayed properly */}
       </Modal>
       <Tooltip />
+      {showLoginForm && <LoginForm />} {/* Conditionally render LoginForm */}
     </div>
   );
 };

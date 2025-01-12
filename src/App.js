@@ -11,7 +11,7 @@ import Modal from "./Modal";
 import Card from "./Card";
 import "./styles.css";
 import "./fixes.css";
- import LoginForm from "./LoginForm";
+import LoginForm from "./LoginForm";
 
 const initialAreaValues = {
   linear: 24,
@@ -320,7 +320,7 @@ const App = ({ onAuthorize }) => {
   const [loungeSize, setLoungeSize] = useState(areaValues.lounge)
   const [conferenceRoomSize, setConferenceRoomSize] = useState(areaValues.conferenceRoom);
   const [boardRoomSize, setBoardRoomSize] = useState(areaValues.boardRoom);
-  // const [showLoginForm, setShowLoginForm] = useState(false);
+  const [showLoginForm, setShowLoginForm] = useState(false);
 
   useEffect(() => {
     const linear = calculateLinear(totalArea);
@@ -568,7 +568,7 @@ const App = ({ onAuthorize }) => {
         onAuthorize={onAuthorize}
         MAX_AREA={MAX_AREA}
         MIN_AREA={MIN_AREA}
-      // setShowLoginForm={setShowLoginForm}
+        setShowLoginForm={setShowLoginForm}
       />
       <div className="--content">
         <Treemap
