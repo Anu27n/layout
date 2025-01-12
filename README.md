@@ -14,7 +14,7 @@
 
 - **Frontend**: ReactJS, CSS
 - **Backend**: Node.js, Express.js 
-- **Database**: MongoDB, Firebase, or Supabase
+- **Database**:  Supabase
 - **Hosting**: Vercel, Netlify
 
 
