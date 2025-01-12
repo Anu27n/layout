@@ -138,7 +138,7 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
       console.error('Error saving data:', error);
     }
 
-    window.location.href = 'https://lucky-kataifi-065416.netlify.app/'; // Redirect to the new page
+   // window.location.href = 'https://lucky-kataifi-065416.netlify.app/'; // Redirect to the new page
   };
 
   const handleLogin = () => {
