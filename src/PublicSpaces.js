@@ -3,6 +3,7 @@ import Counter from './Counter'; // Ensure the correct path to Counter.js
 import './styles.css'; // Import the updated CSS file
 import Tooltip from './ToolTip';
 import InteractiveInputSlider from './InteractiveInputSlider';
+import { InfoIcon } from 'lucide-react';
 
 const publicSpaceDescriptions = {
   reception: "This is the reception area, the first point of contact for visitors.",
@@ -56,13 +57,13 @@ const PublicSpaces = ({ areas, updateAreas, breakoutRoomSize, setBreakoutRoomSiz
               />
               <div className="value-display">
                 {type.charAt(0).toUpperCase() + type.slice(1)}: <span>{Math.round(areas[type] || 0)}</span> {/* Round the value before displaying */}
-                {type==="reception"&&(
-                  <div className="slide-container">
+                {type === "reception" && (
+                  <div className="slide-container" style={{ marginBottom: '20px' }}>
                     <InteractiveInputSlider
                       name={"Reception Size"}
                       value={receptionSize}
                       onChange={setReceptionSize}
-                      min2={80} max2={700} step2={5} 
+                      min2={80} max2={700} step2={5}
                       cabinSize={receptionSize}
                       setCabinSize={setReceptionSize}
                       totalArea={totalArea}
@@ -72,7 +73,7 @@ const PublicSpaces = ({ areas, updateAreas, breakoutRoomSize, setBreakoutRoomSiz
                     />
                   </div>
                 )}
-                {type==="lounge"&&(
+                {type === "lounge" && (
                   <div className="slide-container">
                     <InteractiveInputSlider
                       name={"Lounge Size"}
@@ -91,7 +92,7 @@ const PublicSpaces = ({ areas, updateAreas, breakoutRoomSize, setBreakoutRoomSiz
 
                 {type === "phoneBooth" && (
                   <Tooltip text={`Size: 25 sq ft`}>
-                    <button className="info-button">i</button>
+                    <InfoIcon />
                   </Tooltip>
                 )}
               </div>

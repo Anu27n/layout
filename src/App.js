@@ -11,7 +11,7 @@ import Modal from "./Modal";
 import Card from "./Card";
 import "./styles.css";
 import "./fixes.css";
-import LoginForm from "./LoginForm";
+ import LoginForm from "./LoginForm";
 
 const initialAreaValues = {
   linear: 24,
@@ -318,6 +318,8 @@ const App = ({ onAuthorize }) => {
   const [managerCabinSize, setManagerCabinSize] = useState(areaValues.manager);
   const [receptionSize, setReceptionSize] = useState(areaValues.reception);
   const [loungeSize, setLoungeSize] = useState(areaValues.lounge)
+  const [conferenceRoomSize, setConferenceRoomSize] = useState(areaValues.conferenceRoom);
+  const [boardRoomSize, setBoardRoomSize] = useState(areaValues.boardRoom);
   // const [showLoginForm, setShowLoginForm] = useState(false);
 
   useEffect(() => {
@@ -501,6 +503,8 @@ const App = ({ onAuthorize }) => {
   const handleFinanceRoomAreaChange = handleRoomAreaChange("financeRoom", setFinanceRoomSize);
   const handleBreakoutRoomAreaChange = handleRoomAreaChange("breakoutRoom", setBreakoutRoomSize);
   const handleVideoRecordingRoomAreaChange = handleRoomAreaChange("videoRecordingRoom", setVideoRecordingRoomSize);
+  const handleConferenceRoomAreaChange = handleRoomAreaChange("conferenceRoom", setConferenceRoomSize);
+  const handleBoardRoomAreaChange = handleRoomAreaChange("boardRoom", setBoardRoomSize);
   const handleManagerCabinSizeChange = handleRoomAreaChange("manager", setManagerCabinSize);
   const handleReceptionSizeChange = handleRoomAreaChange("reception", setReceptionSize);
   const handleLoungeSizeChange = handleRoomAreaChange("lounge", setLoungeSize);
@@ -591,6 +595,8 @@ const App = ({ onAuthorize }) => {
             hrRoomConfig={hrRoomConfig} salesRoomConfig={salesRoomConfig}
             financeRoomConfig={financeRoomConfig} areaInfo={areaInfo} initialAreaValues={initialAreaValues}
             videoRecordingRoomSize={videoRecordingRoomSize} setVideoRecordingRoomSize={handleVideoRecordingRoomAreaChange}
+            conferenceRoomSize={conferenceRoomSize} setConferenceRoomSize={handleConferenceRoomAreaChange}
+            boardRoomSize={boardRoomSize} setBoardRoomSize={handleBoardRoomAreaChange}
           />
           <PublicSpaces areas={areas} updateAreas={updateAreas}
             breakoutRoomSize={breakoutRoomSize} setBreakoutRoomSize={handleBreakoutRoomAreaChange}
