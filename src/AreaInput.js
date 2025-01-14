@@ -138,18 +138,9 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
       console.error('Error saving data:', error);
     }
 
-   // window.location.href = 'https://lucky-kataifi-065416.netlify.app/'; // Redirect to the new page
-  };
-
-  const handleLogin = () => {
-    if (!totalArea) {
-      console.error("Please enter the total area before generating BOQ.");
-      setErrorMessage("Please enter the total area before generating BOQ.");
-      setShowModal(true);
-      return; // Stop execution if total area is not entered
-    }
     setShowLoginForm(true); // Show the LoginForm
-  }
+    window.location.href = 'https://lucky-kataifi-065416.netlify.app/'; // Redirect to the new page
+  };
 
   return (
     <div className="area-input">
@@ -204,7 +195,7 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
         <svg className="star-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z" />
         </svg>
-        <svg className="star-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <svg className="star-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 24">
           <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z" />
         </svg>
         <svg className="star-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

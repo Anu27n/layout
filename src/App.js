@@ -568,7 +568,7 @@ const App = ({ onAuthorize }) => {
         onAuthorize={onAuthorize}
         MAX_AREA={MAX_AREA}
         MIN_AREA={MIN_AREA}
-        setShowLoginForm={setShowLoginForm}
+        //setShowLoginForm={setShowLoginForm}
       />
       <div className="--content">
         <Treemap
