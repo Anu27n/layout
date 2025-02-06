@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Joyride from 'react-joyride';
 import { Tooltip } from 'react-tooltip';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalculator, faXmark } from '@fortawesome/free-solid-svg-icons';
@@ -13,6 +14,7 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState(false);
   const [showLoginForm, setShowLoginForm] = useState(false); // State to manage LoginForm visibility
+  const [runTour] = useState(true); // State to control the tour
 
   const handleInputChange = (e) => {
     if (e.target.value.length <= 5) {
@@ -142,8 +144,39 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
     window.location.href = 'https://lucky-kataifi-065416.netlify.app/'; // Redirect to the new page
   };
 
+  const steps = [
+    {
+      target: '.set-area-input',
+      content: 'Enter the total area in square feet here.',
+    },
+    {
+      target: '.generate-boq-button',
+      content: 'Click here to generate the Bill of Quantities (BOQ).',
+    },
+    {
+      target: '.reset-cross',
+      content: 'Click here to reset the area input.',
+    },
+    {
+      target: '.flexbox-container',
+      content: 'Here you can see the available and built space.',
+    },
+  ];
+
   return (
     <div className="area-input">
+      <Joyride
+        steps={steps}
+        run={runTour}
+        continuous
+        showSkipButton
+        showProgress
+        styles={{
+          options: {
+            zIndex: 10000,
+          },
+        }}
+      />
       <div className="input-container">
         <FontAwesomeIcon
           icon={faCalculator}

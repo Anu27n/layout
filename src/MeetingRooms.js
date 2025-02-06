@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Joyride from 'react-joyride';
 import Counter from './Counter'; // Ensure the correct path to Counter.js
 import './styles.css'; // Import the updated CSS file
 import Tooltip from './ToolTip';
@@ -8,6 +9,7 @@ import { InfoIcon } from 'lucide-react';
 const MeetingRooms = ({ areas, updateAreas, hrRoomConfig, salesRoomConfig, financeRoomConfig, areaInfo, initialAreaValues,
   videoRecordingRoomSize, setVideoRecordingRoomSize, conferenceRoomSize, setConferenceRoomSize, boardRoomSize, setBoardRoomSize }) => {
   const { totalArea, builtArea } = areaInfo;
+  const [runTour] = useState(true); // State to control the tour
 
   const handleChange = (type, value) => {
     const parsedValue = parseInt(value, 10);
@@ -53,8 +55,39 @@ const MeetingRooms = ({ areas, updateAreas, hrRoomConfig, salesRoomConfig, finan
     </div>
   );
 
+  const steps = [
+    {
+      target: '.workspace-image-container',
+      content: 'This is the image of the room.',
+    },
+    {
+      target: '.control-btn-box',
+      content: 'Use these controls to adjust the number of rooms.',
+    },
+    {
+      target: '.seats-description',
+      content: 'This section shows the seat size and room size.',
+    },
+    {
+      target: '.value-display',
+      content: 'Here you can see the current number of rooms and their details.',
+    },
+  ];
+
   return (
     <div className="section">
+      <Joyride
+        steps={steps}
+        run={runTour}
+        continuous
+        showSkipButton
+        showProgress
+        styles={{
+          options: {
+            zIndex: 10000,
+          },
+        }}
+      />
       <h3 className="section-heading">Meeting Rooms</h3>
       <div className="meeting-rooms-grid grid">
         {[
@@ -94,63 +127,6 @@ const MeetingRooms = ({ areas, updateAreas, hrRoomConfig, salesRoomConfig, finan
                     <InfoIcon />
                   </Tooltip>
                 )}
-                {/* {type === "hrRoom" && (
-                  <div className="seats-description">
-                    <Tooltip text={`Size: ${hrRoomConfig.roomSize} sq ft \nCabin: ${4 + hrRoomConfig.seatCount} seats`}>
-                      <button className="info-button">i</button>
-                    </Tooltip>
-                    <InteractiveInputSlider
-                      name={"Add. Seat Count"}
-                      value={hrRoomConfig.seatCount}
-                      onChange={hrRoomConfig.setSeatCount}
-                      min2={0} max2={24} step2={2}
-                      cabinSize={hrRoomConfig.roomSize}
-                      setCabinSize={hrRoomConfig.setRoomSize}
-                      totalArea={totalArea}
-                      builtArea={builtArea}
-                      type={type}
-                      initialAreaValues={initialAreaValues}
-                    />
-                  </div>
-                )}
-                {type === "sales" && (
-                  <div className="seats-description">
-                    <Tooltip text={`Size: ${salesRoomConfig.roomSize} sq ft \nCabin: ${4 + salesRoomConfig.seatCount} seats`}>
-                      <button className="info-button">i</button>
-                    </Tooltip>
-                    <InteractiveInputSlider
-                      name={"Add. Seat Count"}
-                      value={salesRoomConfig.seatCount}
-                      onChange={salesRoomConfig.setSeatCount}
-                      min2={0} max2={24} step2={2}
-                      cabinSize={salesRoomConfig.roomSize}
-                      setCabinSize={salesRoomConfig.setRoomSize}
-                      totalArea={totalArea}
-                      builtArea={builtArea}
-                      type={type}
-                      initialAreaValues={initialAreaValues}
-                    />
-                  </div>
-                )}
-                {type === "financeRoom" && (
-                  <div className="seats-description">
-                    <Tooltip text={`Size: ${financeRoomConfig.roomSize} sq ft \nCabin: ${4 + financeRoomConfig.seatCount} seats`}>
-                      <button className="info-button">i</button>
-                    </Tooltip>
-                    <InteractiveInputSlider
-                      name={"Add. Seat Count"}
-                      value={financeRoomConfig.seatCount}
-                      onChange={financeRoomConfig.setSeatCount}
-                      min2={0} max2={24} step2={2}
-                      cabinSize={financeRoomConfig.roomSize}
-                      setCabinSize={financeRoomConfig.setRoomSize}
-                      totalArea={totalArea}
-                      builtArea={builtArea}
-                      type={type}
-                      initialAreaValues={initialAreaValues}
-                    />
-                  </div>
-                )} */}
                 {type === "hrRoom" && renderRoomSlider(type, hrRoomConfig)}
                 {type === "sales" && renderRoomSlider(type, salesRoomConfig)}
                 {type === "financeRoom" && renderRoomSlider(type, financeRoomConfig)}
