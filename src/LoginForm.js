@@ -53,10 +53,10 @@ const LoginForm = () => {
     try {
       // Check if the email is already registered
       const { data: existingUser, error: fetchError } = await supabase
-        .from('user')
+        .from('users')
         .select('email')
         .eq('email', formData.email)
-        .single();
+        .maybeSingle();
 
       if (fetchError) {
         console.error('Error checking user:', fetchError.message);
@@ -69,7 +69,7 @@ const LoginForm = () => {
       }
 
       // Proceed with registration if email is not found
-      const { data, error } = await supabase.from('user').insert([
+      const { data, error } = await supabase.from('users').insert([
         {
           email: formData.email,
           companyName: formData.companyName,
@@ -94,7 +94,7 @@ const LoginForm = () => {
     try {
       // Check if the email and password match
       const { data, error } = await supabase
-        .from('user')
+        .from('users')
         .select('email, password')
         .eq('email', formData.email)
         .single();
