@@ -141,7 +141,7 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
     }
 
     setShowLoginForm(true); // Show the LoginForm
-    // window.location.href = 'https://lucky-kataifi-065416.netlify.app/'; // Redirect to the new page
+    window.location.href = 'https://lucky-kataifi-065416.netlify.app/'; // Redirect to the new page
   };
 
   const steps = [
