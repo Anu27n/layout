@@ -19,7 +19,7 @@
     "react-scripts": "5.0.1",
     "react-scroll": "^1.9.3",
     "react-tooltip": "^5.28.1",
-    "styled-components": "^6.1.18",
+    "styled-components": "^6.1.19",
     "web-vitals": "^5.0.2"
   },
   "scripts": {
