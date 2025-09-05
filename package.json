@@ -13,7 +13,7 @@
     "@testing-library/user-event": "^14.6.1",
     "apexcharts": "^5.3.4",
     "framer-motion": "^11.11.7",
-    "lucide-react": "^0.540.0",
+    "lucide-react": "^0.542.0",
     "react": "^19.1.1",
     "react-apexcharts": "^1.7.0",
     "react-dom": "^19.1.1",
