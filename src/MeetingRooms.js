@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Joyride from 'react-joyride';
+import SimpleTour from './SimpleTour';
 import Counter from './Counter'; // Ensure the correct path to Counter.js
 import './styles.css'; // Import the updated CSS file
 import Tooltip from './ToolTip';
@@ -9,7 +9,7 @@ import { InfoIcon } from 'lucide-react';
 const MeetingRooms = ({ areas, updateAreas, hrRoomConfig, salesRoomConfig, financeRoomConfig, areaInfo, initialAreaValues,
   videoRecordingRoomSize, setVideoRecordingRoomSize, conferenceRoomSize, setConferenceRoomSize, boardRoomSize, setBoardRoomSize }) => {
   const { totalArea, builtArea } = areaInfo;
-  const [runTour] = useState(true); // State to control the tour
+  const [showTour, setShowTour] = useState(false);
 
   const handleChange = (type, value) => {
     const parsedValue = parseInt(value, 10);
@@ -57,36 +57,69 @@ const MeetingRooms = ({ areas, updateAreas, hrRoomConfig, salesRoomConfig, finan
 
   const steps = [
     {
-      target: '.workspace-image-container',
-      content: 'This is the image of the room.',
+      title: 'Room Images',
+      content: 'Each meeting room type is displayed with its visual representation. These help you understand the layout and capacity.',
     },
     {
-      target: '.control-btn-box',
-      content: 'Use these controls to adjust the number of rooms.',
+      title: 'Room Controls',
+      content: 'Use these intuitive controls to add or remove meeting rooms. The + and - buttons make it easy to adjust quantities.',
     },
     {
-      target: '.seats-description',
-      content: 'This section shows the seat size and room size.',
+      title: 'Room Details',
+      content: 'This shows the seating capacity and room size. You can adjust additional seats for flexible configurations.',
     },
     {
-      target: '.value-display',
-      content: 'Here you can see the current number of rooms and their details.',
+      title: 'Current Count',
+      content: 'Monitor the current number of rooms and their total area allocation in real-time.',
     },
   ];
 
+  const startTour = () => {
+    setShowTour(true);
+  };
+
+  const handleTourComplete = () => {
+    setShowTour(false);
+  };
+
+  const handleTourSkip = () => {
+    setShowTour(false);
+  };
+
   return (
     <div className="section">
-      <Joyride
-        steps={steps}
-        run={runTour}
-        continuous
-        showSkipButton
-        showProgress
-        styles={{
-          options: {
-            zIndex: 10000,
-          },
+      {/* Help Button */}
+      <button 
+        onClick={startTour}
+        className="help-tour-button"
+        title="Start guided tour"
+        style={{
+          position: 'absolute',
+          top: '10px',
+          right: '10px',
+          background: '#28a745',
+          color: 'white',
+          border: 'none',
+          borderRadius: '50%',
+          width: '35px',
+          height: '35px',
+          cursor: 'pointer',
+          fontSize: '16px',
+          zIndex: 100,
+          boxShadow: '0 2px 8px rgba(40,167,69,0.3)',
+          transition: 'all 0.3s ease'
         }}
+        onMouseEnter={(e) => e.target.style.transform = 'scale(1.1)'}
+        onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
+      >
+        ?
+      </button>
+
+      <SimpleTour
+        steps={steps}
+        isActive={showTour}
+        onComplete={handleTourComplete}
+        onSkip={handleTourSkip}
       />
       <h3 className="section-heading">Meeting Rooms</h3>
       <div className="meeting-rooms-grid grid">

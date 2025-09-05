@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Joyride from 'react-joyride';
+import SimpleTour from './SimpleTour';
 import { Tooltip } from 'react-tooltip';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalculator, faXmark } from '@fortawesome/free-solid-svg-icons';
@@ -13,8 +13,8 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
   setShowModal, setErrorMessage, isOtherSelected, onAuthorize, MIN_AREA, MAX_AREA, comeBack }) => {
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState(false);
-  const [showLoginForm, setShowLoginForm] = useState(false); // State to manage LoginForm visibility
-  const [runTour] = useState(true); // State to control the tour
+  const [showLoginForm, setShowLoginForm] = useState(false);
+  const [showTour, setShowTour] = useState(false);
 
   const handleInputChange = (e) => {
     if (e.target.value.length <= 5) {
@@ -146,36 +146,69 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
 
   const steps = [
     {
-      target: '.set-area-input',
-      content: 'Enter the total area in square feet here.',
+      title: 'Enter Total Area',
+      content: 'Start by entering the total area of your space in square feet. This will be used to calculate all other areas.',
     },
     {
-      target: '.generate-boq-button',
-      content: 'Click here to generate the Bill of Quantities (BOQ).',
+      title: 'Space Overview',
+      content: 'Monitor your available and built space in real-time as you make changes to your layout.',
     },
     {
-      target: '.reset-cross',
-      content: 'Click here to reset the area input.',
+      title: 'Generate BOQ',
+      content: 'Once you\'ve configured your layout, click here to generate your Bill of Quantities.',
     },
     {
-      target: '.flexbox-container',
-      content: 'Here you can see the available and built space.',
+      title: 'Reset Function',
+      content: 'Click the × button anytime to reset all values and start over with a fresh configuration.',
     },
   ];
 
+  const startTour = () => {
+    setShowTour(true);
+  };
+
+  const handleTourComplete = () => {
+    setShowTour(false);
+  };
+
+  const handleTourSkip = () => {
+    setShowTour(false);
+  };
+
   return (
     <div className="area-input">
-      <Joyride
-        steps={steps}
-        run={runTour}
-        continuous
-        showSkipButton
-        showProgress
-        styles={{
-          options: {
-            zIndex: 10000,
-          },
+      {/* Help Button */}
+      <button 
+        onClick={startTour}
+        className="help-tour-button"
+        title="Start guided tour"
+        style={{
+          position: 'absolute',
+          top: '10px',
+          right: '10px',
+          background: '#007bff',
+          color: 'white',
+          border: 'none',
+          borderRadius: '50%',
+          width: '35px',
+          height: '35px',
+          cursor: 'pointer',
+          fontSize: '16px',
+          zIndex: 100,
+          boxShadow: '0 2px 8px rgba(0,123,255,0.3)',
+          transition: 'all 0.3s ease'
         }}
+        onMouseEnter={(e) => e.target.style.transform = 'scale(1.1)'}
+        onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
+      >
+        ?
+      </button>
+
+      <SimpleTour
+        steps={steps}
+        isActive={showTour}
+        onComplete={handleTourComplete}
+        onSkip={handleTourSkip}
       />
       <div className="input-container">
         <FontAwesomeIcon
