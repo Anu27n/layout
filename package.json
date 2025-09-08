@@ -11,7 +11,7 @@
     "@testing-library/jest-dom": "^6.8.0",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
-    "apexcharts": "^5.3.4",
+    "apexcharts": "^5.3.5",
     "framer-motion": "^11.11.7",
     "lucide-react": "^0.542.0",
     "react": "^19.1.1",
