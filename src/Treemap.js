@@ -63,24 +63,29 @@ const Treemap = ({ totalArea, areas, areaValues }) => {
     'Other': '#FF69B4' // Color for the "Other" category
   };
 
-  const validTotalArea = totalArea > 0 ? totalArea : 4000;
-  const builtArea = Object.keys(areas).reduce((acc, key) => acc + areas[key] * areaValues[key], 0);
-  const availableArea = validTotalArea - builtArea;
+  // If user hasn't entered totalArea treat it as 0 (not 4000).
+  // Guard calculations to avoid division by zero and negative available area.
+  const validTotalArea = totalArea > 0 ? totalArea : 0;
+  const builtArea = Object.keys(areas).reduce((acc, key) => acc + (areas[key] || 0) * (areaValues[key] || 0), 0);
+  const availableArea = validTotalArea > 0 ? Math.max(validTotalArea - builtArea, 0) : 0;
 
   const series = [
     ...Object.keys(areas).map(key => {
-      const areaOccupied = areas[key] * areaValues[key];
-      const percentage = ((areaOccupied / validTotalArea) * 100).toFixed(2);
+  const areaOccupied = (areas[key] || 0) * (areaValues[key] || 0);
+  const percentage = validTotalArea > 0 ? ((areaOccupied / validTotalArea) * 100).toFixed(2) : '0.00';
       return {
         x: `${fullNames[key] || key}: ${percentage}%`,
         y: areaOccupied,
-        fillColor: colors[fullNames[key]] || '#000000'
+        fillColor: colors[fullNames[key]] || '#000000',
+        // keep the original short key so tooltip can look up the image
+        key: key
       };
     }),
     {
-      x: `Available Space: ${((availableArea / validTotalArea) * 100).toFixed(2)}%`,
+      x: `Available Space: ${validTotalArea > 0 ? ((availableArea / validTotalArea) * 100).toFixed(2) : '0.00'}%`,
       y: availableArea,
-      fillColor: colors['Available Space']
+      fillColor: colors['Available Space'],
+      key: 'Available Space'
     }
   ];
 
@@ -117,8 +122,34 @@ const Treemap = ({ totalArea, areas, areaValues }) => {
       }
     },
     tooltip: {
-      y: {
-        formatter: (value) => `${value} sq ft`
+      enabled: true,
+      // Use ApexCharts' custom tooltip HTML so we can show an image + value
+      custom: function ({ series, seriesIndex, dataPointIndex, w }) {
+        try {
+          const data = w.config.series[seriesIndex].data[dataPointIndex];
+          const key = data.key || data.x || '';
+          const value = data.y || 0;
+          const pct = validTotalArea > 0 ? ((value / validTotalArea) * 100).toFixed(2) : '0.00';
+          // Try both camelCase and lowercase filenames; fallback to generic icon
+          const imgPrimary = `/images/${key}.png`;
+          const imgFallback = `/images/${String(key).toLowerCase()}.png`;
+          const imgDefault = `/myicon.png`;
+
+          const title = fullNames[key] || (typeof data.x === 'string' ? data.x.split(':')[0] : key);
+
+          return (`<div class="custom-tooltip" style="display:flex;align-items:center;gap:12px;padding:8px;">
+                    <img src="${imgPrimary}"
+                         onerror="if(!this._triedLower){this._triedLower=true;this.src='${imgFallback}'}else{this.src='${imgDefault}'}"
+                         style="width:64px;height:64px;object-fit:cover;border-radius:6px;border:1px solid #e6e6e6"/>
+                    <div style="line-height:1.2">
+                      <div style="font-weight:700;margin-bottom:6px;color:#263238">${title}</div>
+                      <div style="font-size:14px;color:#37474F">${value} sq ft</div>
+                      <div style="font-size:12px;color:#607D8B">${pct}% of total</div>
+                    </div>
+                  </div>`);
+        } catch (err) {
+          return '';
+        }
       }
     },
     dataLabels: {
@@ -129,11 +160,12 @@ const Treemap = ({ totalArea, areas, areaValues }) => {
         colors: ['#FFFFFF']
       },
       formatter: (val, opts) => {
-        if (typeof val === 'number') {
+        const label = opts.w && opts.w.globals && opts.w.globals.labels ? opts.w.globals.labels[opts.dataPointIndex] : '';
+        if (typeof val === 'number' && validTotalArea > 0) {
           const percentage = ((val / validTotalArea) * 100).toFixed(2);
-          return `${opts.w.globals.labels[opts.dataPointIndex]} (${percentage}%)`;
+          return `${label} (${percentage}%)`;
         }
-        return `${opts.w.globals.labels[opts.dataPointIndex]}: ${val}`;
+        return `${label}: ${val}`;
       }
     }
   };

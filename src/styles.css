@@ -1522,3 +1522,18 @@ top: 10px !important;
 .blink {
   animation: blink 1s infinite;
 }
+
+/* Custom tooltip used by the Treemap component */
+.custom-tooltip {
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  padding: 8px;
+  border-radius: 6px;
+  color: #263238;
+  max-width: 320px;
+}
+
+.apexcharts-tooltip.custom-tooltip {
+  overflow: visible !important;
+}

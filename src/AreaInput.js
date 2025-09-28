@@ -8,6 +8,7 @@ import './styles.css';
 import Modal from './Modal';
 import Card from './Card';
 import LoginForm from './LoginForm'; // Correctly import LoginForm
+import BOQ from './BOQ';
 
 const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableArea, resetAll, areas, showModal,
   setShowModal, setErrorMessage, isOtherSelected, onAuthorize, MIN_AREA, MAX_AREA, comeBack }) => {
@@ -15,6 +16,7 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
   const [error, setError] = useState(false);
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [showTour, setShowTour] = useState(false);
+  const [showBOQ, setShowBOQ] = useState(false);
 
   const handleInputChange = (e) => {
     if (e.target.value.length <= 5) {
@@ -60,88 +62,9 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
       setShowModal(true);
       return; // Stop execution if total area is not entered
     }
-
-    try {
-      const { data: quantityData, error: quantityError } = await supabase
-        .from('quantity')
-        .insert([{
-          linear: areas.linear,
-          lType: areas.lType,
-          md: areas.md,
-          manager: areas.manager,
-          small: areas.small,
-          ups: areas.ups,
-          bms: areas.bms,
-          server: areas.server,
-          reception: areas.reception,
-          lounge: areas.lounge,
-          sales: areas.sales,
-          phoneBooth: areas.phoneBooth,
-          discussionRoom: areas.discussionRoom,
-          interviewRoom: areas.interviewRoom,
-          conferenceRoom: areas.conferenceRoom,
-          boardRoom: areas.boardRoom,
-          meetingRoom: areas.meetingRoom,
-          meetingRoomLarge: areas.meetingRoomLarge,
-          hrRoom: areas.hrRoom,
-          financeRoom: areas.financeRoom,
-          other: isOtherSelected ? areaValues.other : 0
-        }])
-        .select('id');
-
-      if (quantityError) {
-        console.error('Error inserting data into quantity:', quantityError.message);
-        return;
-      }
-      console.log('Data inserted into quantity successfully:', quantityData);
-
-      const sharedId = quantityData[0]?.id;
-
-      if (!sharedId) {
-        console.error('Shared ID not retrieved. Insert into quantity may have failed.');
-        return;
-      }
-
-      const { data: areasData, error: areasError } = await supabase
-        .from('areas')
-        .insert([{
-          id: sharedId,
-          quantity_id: sharedId,
-          linear: areaValues.linear,
-          lType: areaValues.lType,
-          md: areaValues.md,
-          manager: areaValues.manager,
-          small: areaValues.small,
-          ups: areaValues.ups,
-          bms: areaValues.bms,
-          server: areaValues.server,
-          reception: areaValues.reception,
-          lounge: areaValues.lounge,
-          sales: areaValues.sales,
-          phoneBooth: areaValues.phoneBooth,
-          discussionRoom: areaValues.discussionRoom,
-          interviewRoom: areaValues.interviewRoom,
-          conferenceRoom: areaValues.conferenceRoom,
-          boardRoom: areaValues.boardRoom,
-          meetingRoom: areaValues.meetingRoom,
-          meetingRoomLarge: areaValues.meetingRoomLarge,
-          hrRoom: areaValues.hrRoom,
-          financeRoom: areaValues.financeRoom,
-          other: areas.other,
-          totalArea: totalArea,
-        }]);
-
-      if (areasError) {
-        console.error('Error inserting data into areas:', areasError.message);
-        return;
-      }
-      console.log('Data inserted into areas successfully:', areasData);
-    } catch (error) {
-      console.error('Error saving data:', error);
-    }
-
-    setShowLoginForm(true); // Show the LoginForm
-    window.location.href = 'https://lucky-kataifi-065416.netlify.app/'; // Redirect to the new page
+    // Prepare BOQ data and open BOQ modal
+    // We keep database persistence separate; here we simply show the BOQ to user
+    setShowBOQ(true);
   };
 
   const steps = [
@@ -278,6 +201,9 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
       </div>
       <Modal show={showModal} onClose={() => setShowModal(false)}>
         <Card /> {/* Ensure this Card component is displayed properly */}
+      </Modal>
+      <Modal show={showBOQ} onClose={() => setShowBOQ(false)}>
+        <BOQ areas={areas} areaValues={areaValues} totalArea={totalArea} onClose={() => setShowBOQ(false)} />
       </Modal>
       <Tooltip />
       {showLoginForm && <LoginForm />} {/* Conditionally render LoginForm */}
