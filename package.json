@@ -12,7 +12,7 @@
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
     "apexcharts": "^5.3.5",
-    "framer-motion": "^11.11.7",
+    "framer-motion": "^12.23.22",
     "lucide-react": "^0.544.0",
     "react": "^19.1.1",
     "react-apexcharts": "^1.7.0",
