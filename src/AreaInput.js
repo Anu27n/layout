@@ -3,18 +3,15 @@ import SimpleTour from './SimpleTour';
 import { Tooltip } from 'react-tooltip';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalculator, faXmark } from '@fortawesome/free-solid-svg-icons';
-import { supabase } from './supabaseClient';
 import './styles.css';
 import Modal from './Modal';
 import Card from './Card';
-import LoginForm from './LoginForm'; // Correctly import LoginForm
 import BOQ from './BOQ';
 
 const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableArea, resetAll, areas, showModal,
   setShowModal, setErrorMessage, isOtherSelected, onAuthorize, MIN_AREA, MAX_AREA, comeBack }) => {
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState(false);
-  const [showLoginForm, setShowLoginForm] = useState(false);
   const [showTour, setShowTour] = useState(false);
   const [showBOQ, setShowBOQ] = useState(false);
 
@@ -206,7 +203,6 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
         <BOQ areas={areas} areaValues={areaValues} totalArea={totalArea} onClose={() => setShowBOQ(false)} />
       </Modal>
       <Tooltip />
-      {showLoginForm && <LoginForm />} {/* Conditionally render LoginForm */}
     </div>
   );
 };
