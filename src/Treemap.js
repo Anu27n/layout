@@ -170,37 +170,39 @@ const Treemap = ({ totalArea, areas, areaValues }) => {
     }
   };
 
+  // Prepare legend data (only items with non-zero values)
+  const legendData = series.filter(item => item.y > 0);
+  const hasLegend = legendData.length > 0;
+
   const generateLegendItems = () => {
-    return series
-      .filter(item => item.y > 0)
-      .map(item => (
-        <div
-          key={item.x}
-          className={`legend-item ${hoveredArea === item.x ? 'blink' : ''}`}
+    return legendData.map(item => (
+      <div
+        key={item.x}
+        className={`legend-item ${hoveredArea === item.x ? 'blink' : ''}`}
+        style={{
+          display: 'flex',
+          justifyContent: 'space-evenly',
+          alignItems: 'center',
+          marginBottom: '4px'
+        }}
+        onMouseEnter={() => setHoveredArea(item.x)}
+        onMouseLeave={() => setHoveredArea(null)}
+      >
+        <span
+          className={`legend-color ${hoveredArea === item.x ? 'blink' : ''}`}
           style={{
-            display: 'flex',
-            justifyContent: 'space-evenly',
-            alignItems: 'center',
-            marginBottom: '4px'
+            backgroundColor: item.fillColor,
+            width: '10px',
+            height: '10px',
+            marginRight: '10px',
+            borderRadius: '50%'
           }}
-          onMouseEnter={() => setHoveredArea(item.x)}
-          onMouseLeave={() => setHoveredArea(null)}
-        >
-          <span
-            className={`legend-color ${hoveredArea === item.x ? 'blink' : ''}`}
-            style={{
-              backgroundColor: item.fillColor,
-              width: '10px',
-              height: '10px',
-              marginRight: '10px',
-              borderRadius: '50%'
-            }}
-          ></span>
-          <span className="legend-label" style={{ fontSize: '13px' }}>
-            {item.x}
-          </span>
-        </div>
-      ));
+        ></span>
+        <span className="legend-label" style={{ fontSize: '13px' }}>
+          {item.x}
+        </span>
+      </div>
+    ));
   };
   const toggleLegend = () => {
     setIsLegendVisible(!isLegendVisible);
@@ -208,7 +210,8 @@ const Treemap = ({ totalArea, areas, areaValues }) => {
 
   useEffect(()=>{
     const handleResize=()=>{
-      if(window.innerWidth>426){
+      // Only show legend automatically on larger screens when there's legend data
+      if(window.innerWidth>426 && hasLegend){
         setIsLegendVisible(true);
       }else{
         setIsLegendVisible(false);
@@ -218,32 +221,38 @@ const Treemap = ({ totalArea, areas, areaValues }) => {
     handleResize();
 
     return()=>{
-    window.addEventListener('resize', handleResize);
+      // Clean up the resize listener correctly
+      window.removeEventListener('resize', handleResize);
     };
-  },[]);
+  },[hasLegend]);
 
   return (
     <div id="chart" style={{ position: 'relative' }}>
     <ReactApexChart options={options} series={[{ data: series }]} type="treemap" height={"100%"} className='distribution-chart'/>
-    <button
-      className="arrow-button"
-      onClick={() => toggleLegend(!isLegendVisible)}
-      style={{
-        position: 'absolute',
-        left: '-10px',
-        top: '200px',
-        opacity:'50%',
-        zIndex: 1,
-        display: window.innerWidth <= 425 ? 'block' : 'none',
-      }}
-    >
-      <FontAwesomeIcon icon={isLegendVisible ? faChevronLeft : faChevronRight} />
-    </button>
-    <div
+    {hasLegend && (
+      <button
+        className="arrow-button"
+        onClick={() => toggleLegend(!isLegendVisible)}
+        style={{
+          position: 'absolute',
+          left: '-10px',
+          top: '200px',
+          opacity:'50%',
+          zIndex: 1,
+          display: window.innerWidth <= 425 ? 'block' : 'none',
+        }}
+      >
+        <FontAwesomeIcon icon={isLegendVisible ? faChevronLeft : faChevronRight} />
+      </button>
+    )}
+    {hasLegend && (
+      <div
         className="legend-container"
         style={{
-          transform: isLegendVisible ? 'translateX(0)' : 'translateX(-100%)', // Start hidden and slide in
-          transition: 'transform 1s ease-in-out',
+          // Use translate3d to encourage GPU acceleration and smoother animations
+          transform: isLegendVisible ? 'translate3d(0,0,0)' : 'translate3d(-100%,0,0)',
+          transition: 'transform 450ms ease-in-out',
+          willChange: 'transform', // Hint to browser for optimization
           position: 'absolute',
           top: '10%',
           left: '0',
@@ -255,6 +264,7 @@ const Treemap = ({ totalArea, areas, areaValues }) => {
       >
         {generateLegendItems()}
       </div>
+    )}
   </div>
   );
 };
