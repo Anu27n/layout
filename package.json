@@ -18,7 +18,7 @@
     "react-apexcharts": "^1.7.0",
     "react-dom": "^19.2.0",
     "react-hot-toast": "^2.4.1",
-    "react-router-dom": "^7.9.1",
+    "react-router-dom": "^7.9.4",
     "react-scripts": "5.0.1",
     "react-scroll": "^1.9.3",
     "react-tooltip": "^5.29.1",
