@@ -369,6 +369,92 @@ span {
   margin: 100px 0;
 }
 
+/* ApexCharts legend responsive fixes to prevent overflow while animating/marquee */
+.apexcharts-legend {
+  box-sizing: border-box;
+  width: 100% !important; /* Ensure legend uses available width */
+  max-width: calc(100% - 40px); /* Leave room for paddings/margins */
+  overflow: hidden; /* Hide overflowing text */
+  padding: 10px 20px; /* Give some breathing room */
+}
+
+.apexcharts-legend .legend-mouseover, .apexcharts-legend .legend-text {
+  white-space: nowrap; /* Prevent inside wrapping by default */
+  text-overflow: ellipsis; /* Show ellipsis when truncated */
+  overflow: hidden; /* Hide overflow to keep it inside container */
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 100%;
+}
+
+/* Make legend items wrap on small screens but keep each item constrained */
+.apexcharts-legend .legend-series {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px; /* tighter gap between dot and text */
+  margin-right: 8px; /* reduce right spacing between legend items */
+  max-width: 220px; /* Limit individual legend item width */
+}
+
+@media (max-width: 900px) {
+  #chart { width: 100%; }
+  .flexbox-container { top: 230px; left: 10px; }
+  .dynamic-text { top: 420px; left: 10px; width: calc(100% - 20px); }
+  .apexcharts-legend { padding: 8px 12px; }
+  .apexcharts-legend .legend-series { max-width: 140px; margin-right: 8px; }
+  .apexcharts-legend .legend-text { font-size: 13px; }
+}
+
+  /* Generic legend container styles (for ApexCharts custom legend DOM with classes 'legend-container' etc.)
+     These override inline spacing and ensure labels don't overflow while the container translates. */
+  .legend-container {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: calc(100% - 40px); /* keep more padding from edges */
+    overflow: hidden; /* clip any content that moves outside */
+    background: transparent; /* leave existing background if inline style sets it */
+    padding: 14px 20px; /* inner padding to give breathing room */
+    border-radius: 6px; /* subtle rounding to match card style */
+  }
+
+  .legend-container .legend-item {
+    display: flex !important; /* ensure flex layout */
+    justify-content: flex-start !important; /* override inline space-evenly which expands items */
+    align-items: center !important;
+    gap: 4px; /* tighter gap between color and label */
+    margin-bottom: 4px; /* reduced vertical spacing to make list denser */
+    padding: 3px 12px; /* minimal padding inside each legend row */
+    box-sizing: border-box;
+    width: auto;
+    overflow: hidden; /* prevent children from visually overflowing */
+    white-space: nowrap; /* prevent wrapping inside label */
+  }
+
+  .legend-container .legend-color {
+    flex: 0 0 auto; /* do not stretch */
+    width: 10px !important;
+    height: 10px !important;
+    border-radius: 50%;
+    margin-right: 4px !important; /* reduce space between dot and label */
+  }
+
+  .legend-container .legend-label {
+    display: inline-block;
+    vertical-align: middle;
+    overflow: hidden;
+    text-overflow: ellipsis; /* show ... when truncated */
+    white-space: nowrap;
+    max-width: 240px; /* allow slightly more width for labels */
+    padding-right: 4px; /* reduce space between label and container edge */
+    font-size: 13px; /* keep consistent with inline */
+  }
+
+  @media (max-width: 900px) {
+    .legend-container .legend-label { max-width: 160px; font-size: 12px; }
+  }
+
+
+
 /* Scrollbar Styles */
 .relative {
   position: relative;
