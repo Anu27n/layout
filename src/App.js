@@ -11,6 +11,7 @@ import Modal from "./Modal";
 import Card from "./Card";
 import "./styles.css";
 import "./fixes.css";
+import { createLayout, getLayouts, updateLayout, deleteLayout } from "./services/api";
 //import LoginForm from "./LoginForm";
 
 const initialAreaValues = {
@@ -322,6 +323,12 @@ const App = ({ onAuthorize }) => {
   const [boardRoomSize, setBoardRoomSize] = useState(areaValues.boardRoom);
   //const [showLoginForm, setShowLoginForm] = useState(false);
 
+  // MongoDB CRUD state
+  const [savedLayouts, setSavedLayouts] = useState([]);
+  const [currentLayoutId, setCurrentLayoutId] = useState(null);
+  const [layoutName, setLayoutName] = useState("");
+  const [showLoadModal, setShowLoadModal] = useState(false);
+
   useEffect(() => {
     const linear = calculateLinear(totalArea);
     const lType = calculateLType(totalArea, areaValues);
@@ -363,7 +370,7 @@ const App = ({ onAuthorize }) => {
       lounge: Math.round(loungeArea / areaValues.lounge),
       other: otherArea / areaValues.other,
     }));
-  }, [totalArea,areaValues]);
+  }, [totalArea, areaValues]);
 
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -468,6 +475,7 @@ const App = ({ onAuthorize }) => {
     setAreas(initialAreas);
     setError(false);
     setShowModal(false); // Hide modal on reset
+    setCurrentLayoutId(null);
   };
 
   const handleVariantChange = (newVariant) => {
@@ -517,6 +525,88 @@ const App = ({ onAuthorize }) => {
   const handleHrRoomSeatCountChange = handleSeatCountChange(setHrRoomSeatCount);
   const handleSalesRoomSeatCountChange = handleSeatCountChange(setSalesSeatCount);
   const handleFinanceRoomSeatCountChange = handleSeatCountChange(setFinanceRoomSeatCount);
+
+  // MongoDB CRUD handlers
+  const fetchLayouts = async () => {
+    try {
+      const layouts = await getLayouts();
+      setSavedLayouts(layouts);
+    } catch (error) {
+      console.error('Error fetching layouts:', error);
+      setErrorMessageHandler('Failed to load saved layouts');
+    }
+  };
+
+  const handleSaveLayout = async () => {
+    const name = prompt('Enter a name for this layout:');
+    if (!name) return;
+
+    const layoutData = {
+      name,
+      totalArea,
+      variant,
+      areas: Object.fromEntries(Object.entries(areas)),
+      areaValues: Object.fromEntries(Object.entries(areaValues)),
+      seatCounts: {
+        smallCabin: smallCabinSeatCount,
+        hrRoom: hrRoomSeatCount,
+        sales: salesSeatCount,
+        financeRoom: financeRoomSeatCount
+      },
+      builtArea,
+      availableArea
+    };
+
+    try {
+      if (currentLayoutId) {
+        await updateLayout(currentLayoutId, layoutData);
+        alert('Layout updated successfully!');
+      } else {
+        const newLayout = await createLayout(layoutData);
+        setCurrentLayoutId(newLayout._id);
+        alert('Layout saved successfully!');
+      }
+      fetchLayouts();
+    } catch (error) {
+      console.error('Error saving layout:', error);
+      setErrorMessageHandler('Failed to save layout');
+    }
+  };
+
+  const handleLoadLayout = async (layout) => {
+    try {
+      setTotalArea(layout.totalArea);
+      setVariant(layout.variant);
+      setAreas(layout.areas);
+      setAreaValues(layout.areaValues);
+      setSmallCabinSeatCount(layout.seatCounts?.smallCabin || 0);
+      setHrRoomSeatCount(layout.seatCounts?.hrRoom || 0);
+      setSalesSeatCount(layout.seatCounts?.sales || 0);
+      setFinanceRoomSeatCount(layout.seatCounts?.financeRoom || 0);
+      setCurrentLayoutId(layout._id);
+      setShowLoadModal(false);
+      alert(`Layout "${layout.name}" loaded successfully!`);
+    } catch (error) {
+      console.error('Error loading layout:', error);
+      setErrorMessageHandler('Failed to load layout');
+    }
+  };
+
+  const handleDeleteLayout = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this layout?')) return;
+
+    try {
+      await deleteLayout(id);
+      alert('Layout deleted successfully!');
+      fetchLayouts();
+      if (currentLayoutId === id) {
+        setCurrentLayoutId(null);
+      }
+    } catch (error) {
+      console.error('Error deleting layout:', error);
+      setErrorMessageHandler('Failed to delete layout');
+    }
+  };
 
   const hrRoomConfig = {
     seatCount: hrRoomSeatCount,
@@ -568,7 +658,9 @@ const App = ({ onAuthorize }) => {
         onAuthorize={onAuthorize}
         MAX_AREA={MAX_AREA}
         MIN_AREA={MIN_AREA}
-        //setShowLoginForm={setShowLoginForm}
+        onSaveLayout={handleSaveLayout}
+        onLoadLayout={() => { fetchLayouts(); setShowLoadModal(true); }}
+      //setShowLoginForm={setShowLoginForm}
       />
       <div className="--content">
         <Treemap
@@ -617,6 +709,28 @@ const App = ({ onAuthorize }) => {
         <div className="error">
           🚨 Oops! The area exceeded the allowed limits. Please check your input and try again!
         </div>
+      )}
+      {showLoadModal && (
+        <Modal show={showLoadModal} onClose={() => setShowLoadModal(false)}>
+          <div style={{ padding: '20px' }}>
+            <h2>Saved Layouts</h2>
+            {savedLayouts.length === 0 ? (
+              <p>No saved layouts found.</p>
+            ) : (
+              <ul style={{ listStyle: 'none', padding: 0 }}>
+                {savedLayouts.map(layout => (
+                  <li key={layout._id} style={{ marginBottom: '10px', padding: '10px', border: '1px solid #ccc', borderRadius: '5px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span><strong>{layout.name}</strong> - {layout.totalArea} sq ft</span>
+                    <div>
+                      <button onClick={() => handleLoadLayout(layout)} style={{ marginLeft: '10px', padding: '5px 10px', cursor: 'pointer' }}>Load</button>
+                      <button onClick={() => handleDeleteLayout(layout._id)} style={{ marginLeft: '5px', background: '#ff4444', color: 'white', padding: '5px 10px', border: 'none', borderRadius: '3px', cursor: 'pointer' }}>Delete</button>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </Modal>
       )}
       <Tooltip />
     </div>

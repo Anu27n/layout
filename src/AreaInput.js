@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import SimpleTour from './SimpleTour';
 import { Tooltip } from 'react-tooltip';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalculator, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faCalculator, faXmark, faSave, faFolderOpen } from '@fortawesome/free-solid-svg-icons';
 import './styles.css';
 import Modal from './Modal';
 import Card from './Card';
 import BOQ from './BOQ';
 
 const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableArea, resetAll, areas, showModal,
-  setShowModal, setErrorMessage, isOtherSelected, onAuthorize, MIN_AREA, MAX_AREA, comeBack }) => {
+  setShowModal, setErrorMessage, isOtherSelected, onAuthorize, MIN_AREA, MAX_AREA, comeBack, onSaveLayout, onLoadLayout }) => {
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState(false);
   const [showTour, setShowTour] = useState(false);
@@ -98,7 +98,7 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
   return (
     <div className="area-input">
       {/* Help Button */}
-      <button 
+      <button
         onClick={startTour}
         className="help-tour-button"
         title="Start guided tour"
@@ -167,27 +167,50 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
         )}
       </div>
 
-      <button className="generate-boq-button" onClick={handleGenerateBOQ}>
-        Generate BOQ
-        <svg className="star-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z" />
-        </svg>
-        <svg className="star-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z" />
-        </svg>
-        <svg className="star-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z" />
-        </svg>
-        <svg className="star-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z" />
-        </svg>
-        <svg className="star-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 24">
-          <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z" />
-        </svg>
-        <svg className="star-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z" />
-        </svg>
-      </button>
+      <div className="action-buttons" style={{ display: 'flex', gap: '10px', marginTop: '15px', justifyContent: 'center' }}>
+        <button className="generate-boq-button" onClick={handleGenerateBOQ}>
+          Generate BOQ
+          <svg className="star-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z" />
+          </svg>
+          <svg className="star-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z" />
+          </svg>
+          <svg className="star-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z" />
+          </svg>
+          <svg className="star-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z" />
+          </svg>
+          <svg className="star-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 24">
+            <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z" />
+          </svg>
+          <svg className="star-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path className="fil0" d="M12 0l3.09 6.26L22 7.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 12.14 2 7.27l6.91-1.01L12 0z" />
+          </svg>
+        </button>
+
+        <button
+          onClick={onSaveLayout}
+          className="generate-boq-button"
+          style={{ background: '#28a745' }}
+          title="Save current layout"
+        >
+          <FontAwesomeIcon icon={faSave} style={{ marginRight: '5px' }} />
+          Save
+        </button>
+
+        <button
+          onClick={onLoadLayout}
+          className="generate-boq-button"
+          style={{ background: '#17a2b8' }}
+          title="Load saved layout"
+        >
+          <FontAwesomeIcon icon={faFolderOpen} style={{ marginRight: '5px' }} />
+          Load
+        </button>
+      </div>
+
       <div className="flexbox-container">
         <div className="flexbox-item available">
           Available Space: {availableArea} sq ft
@@ -208,5 +231,3 @@ const AreaInput = ({ totalArea, setTotalArea, areaValues, builtArea, availableAr
 };
 
 export default AreaInput;
-
-
