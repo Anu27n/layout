@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:5000/api/layouts';
+const API_URL = 'https://layout-qcdx.onrender.com/api/layouts';
 
 export const getLayouts = async () => {
     const response = await fetch(API_URL);
